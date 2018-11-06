@@ -10,7 +10,6 @@
         android:id="@+id/dayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Day 1"
         android:textSize="@dimen/font_larger"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,14 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="Day 1" />
+        tools:text="@string/main_view_day_number" />
 
     <TextView
         android:id="@+id/levelsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_tiny"
-        android:text="@string/main_view_levels_to_review"
         android:textSize="@dimen/font_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayTextView"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="to review: Level 2,1" />
+        tools:text="@string/main_view_levels_to_review" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/levelsListView"

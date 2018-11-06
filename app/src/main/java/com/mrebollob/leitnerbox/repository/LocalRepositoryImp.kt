@@ -3,25 +3,26 @@ package com.mrebollob.leitnerbox.repository
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.mrebollob.leitnerbox.model.Level
-import com.mrebollob.leitnerbox.model.Resource
 import com.mrebollob.leitnerbox.util.AppExecutors
 
 class LocalRepositoryImp(private val appExecutors: AppExecutors) : LocalRepository {
 
-    override fun getLevels(): LiveData<Resource<List<Level>>> {
 
-        val dateLiveData = MutableLiveData<Resource<List<Level>>>()
-        dateLiveData.postValue(Resource.loading(null))
+    override fun getCurrentNumberDay(): LiveData<Int> {
+        val currentDayLiveData = MutableLiveData<Int>()
+        currentDayLiveData.postValue(getCurrentDay())
+        return currentDayLiveData
+    }
 
-        appExecutors.diskIO().execute {
-            val levels = getMockLevels()
+    override fun getLevels(): LiveData<List<Level>> {
 
-            appExecutors.mainThread().execute {
-                dateLiveData.postValue(Resource.success(levels))
-            }
-        }
+        val levelsLiveData = MutableLiveData<List<Level>>()
+        levelsLiveData.postValue(getMockLevels())
+        return levelsLiveData
+    }
 
-        return dateLiveData
+    private fun getCurrentDay(): Int {
+        return 2
     }
 
     private fun getMockLevels(): List<Level> {
