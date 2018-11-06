@@ -1,38 +1,21 @@
 package com.mrebollob.leitnerbox.repository
 
-class LeitnerBox(private val levels: Int) {
+import com.mrebollob.leitnerbox.model.Level
 
-    private val intervals = mutableMapOf<Int, Int>()
+class LeitnerBox {
 
-    init {
-        var gap = INITIAL_GAP
+    fun getLevelsForDay(levelsCount: Int, dayNumber: Int): List<Level> {
 
-        for (level in 1..levels) {
-            intervals[level] = gap
-            println("level $level -> $gap")
-            gap *= 2
-        }
-    }
+        val levels = mutableListOf<Level>()
 
-    fun getLevelsForDay(dayNumber: Int): List<Int> {
-
-        val levelList = arrayListOf<Int>()
-
-        val testDay = dayNumber + 1
-
-        for (level in levels downTo 1) {
-
-            val interval = intervals[level] ?: 1
-
-            if (testDay % interval == 0) {
-                levelList.add(level)
-            }
+        for (index in 1..levelsCount) {
+            levels.add(Level(index, "$index", isActive(index, dayNumber)))
         }
 
-        return levelList
+        return levels
     }
 
-    companion object {
-        private const val INITIAL_GAP = 1
+    private fun isActive(index: Int, dayNumber: Int): Boolean {
+        return index % 3 == 0
     }
 }
