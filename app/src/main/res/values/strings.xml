@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Leitner Box</string>
+
+    <string name="main_view_levels_to_review">"to review: Level %1$s"</string>
 </resources>

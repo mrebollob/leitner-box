@@ -22,7 +22,14 @@ class MainActivity : BaseActivity() {
 
         mainViewModel.getLevels().observe(this, Observer { result ->
             when (result?.status) {
-                Status.SUCCESS -> result.data?.let { levelsAdapter.levels = it }
+                Status.SUCCESS -> {
+                    result.data?.let { levels ->
+                        levelsAdapter.levels = levels
+                        val names = levels.filter { it.active }.map { it.name }.reversed()
+                            .reduce { acc, string -> "$acc, $string" }
+                        levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
+                    }
+                }
                 Status.ERROR -> {
                 }
                 Status.LOADING -> {
