@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/default_margin"
     android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardBackgroundColor="@color/level_1"
+    card_view:cardBackgroundColor="@color/level_2"
     card_view:cardCornerRadius="@dimen/cardview_radius"
     card_view:cardElevation="@dimen/cardview_elevation">
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/level_1"
+            android:textColor="@color/level_2"
             android:textSize="@dimen/font_larger"
             tools:text="1" />
     </com.mrebollob.leitnerbox.util.view.SquareRelativeLayout>
