@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/default_margin"
     android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/level_1"
     card_view:cardCornerRadius="@dimen/cardview_radius"
     card_view:cardElevation="@dimen/cardview_elevation">
 
@@ -14,13 +15,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:background="@color/icons" />
+
         <TextView
             android:id="@+id/levelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/white_text"
+            android:textColor="@color/level_1"
             android:textSize="@dimen/font_larger"
             tools:text="1" />
     </com.mrebollob.leitnerbox.util.view.SquareRelativeLayout>

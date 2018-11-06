@@ -27,13 +27,13 @@ class LocalRepositoryImp(private val appExecutors: AppExecutors) : LocalReposito
     private fun getMockLevels(): List<Level> {
         val levels = mutableListOf<Level>()
 
-        levels.add(Level("1", true))
-        levels.add(Level("2"))
-        levels.add(Level("3"))
-        levels.add(Level("4", true))
-        levels.add(Level("5"))
-        levels.add(Level("6"))
-        levels.add(Level("7"))
+        levels.add(Level(1, "1", true))
+        levels.add(Level(2, "2"))
+        levels.add(Level(3, "3"))
+        levels.add(Level(4, "4", true))
+        levels.add(Level(5, "5"))
+        levels.add(Level(6, "6"))
+        levels.add(Level(7, "7"))
 
         return levels
     }
