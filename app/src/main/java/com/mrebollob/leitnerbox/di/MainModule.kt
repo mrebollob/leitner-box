@@ -8,13 +8,14 @@ import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.presentation.main.MainPresenter
 import com.mrebollob.leitnerbox.util.executor.AndroidExecutor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 
 val mainModule = module {
 
     factory { LeitnerBox() }
     single<Executor> { AndroidExecutor() }
-    single<LocalDataSource> { LocalDataSourceImp() }
+    single<LocalDataSource> { LocalDataSourceImp(androidContext()) }
     single<Repository> { RepositoryImp(get()) }
 
     factory {

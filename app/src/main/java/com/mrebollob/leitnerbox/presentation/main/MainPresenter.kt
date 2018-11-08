@@ -5,6 +5,7 @@ import com.mrebollob.leitnerbox.domain.LeitnerBox
 import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.repository.Repository
+import com.mrebollob.leitnerbox.domain.usecase.getCurrentDay
 import com.mrebollob.leitnerbox.domain.usecase.getLevels
 import com.mrebollob.leitnerbox.presentation.Presenter
 import kotlinx.coroutines.GlobalScope
@@ -20,7 +21,8 @@ class MainPresenter(
 
     override fun attachView(view: MainView) {
         this.view = view
-        getLevelList()
+        loadLevels()
+        loadCurrentDay()
     }
 
     override fun detachView() {
@@ -31,10 +33,16 @@ class MainPresenter(
         view?.goToSettingsScreen()
     }
 
-    private fun getLevelList() {
+    private fun loadLevels() {
         GlobalScope.launch(context = executor.main) {
             val levels = getLevels(repository, leitnerBox)
             view?.showLevels(levels)
+        }
+    }
+
+    private fun loadCurrentDay() {
+        GlobalScope.launch(context = executor.main) {
+            view?.showCurrentNumberDay(getCurrentDay(repository))
         }
     }
 }
