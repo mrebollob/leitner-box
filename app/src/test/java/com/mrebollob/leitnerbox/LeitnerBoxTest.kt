@@ -1,6 +1,6 @@
 package com.mrebollob.leitnerbox
 
-import com.mrebollob.leitnerbox.repository.LeitnerBox
+import com.mrebollob.leitnerbox.domain.LeitnerBox
 import org.junit.Assert
 import org.junit.Test
 

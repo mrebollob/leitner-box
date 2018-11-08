@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.ui
+package com.mrebollob.leitnerbox.presentation
 
 import android.annotation.SuppressLint
 import android.content.Context

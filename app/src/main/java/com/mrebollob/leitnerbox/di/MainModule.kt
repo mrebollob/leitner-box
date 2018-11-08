@@ -1,16 +1,27 @@
 package com.mrebollob.leitnerbox.di
 
-import com.mrebollob.leitnerbox.repository.LeitnerBox
-import com.mrebollob.leitnerbox.repository.LocalRepository
-import com.mrebollob.leitnerbox.repository.LocalRepositoryImp
-import com.mrebollob.leitnerbox.ui.main.MainViewModel
-import org.koin.android.viewmodel.ext.koin.viewModel
+import com.mrebollob.leitnerbox.data.datasource.LocalDataSource
+import com.mrebollob.leitnerbox.data.datasource.LocalDataSourceImp
+import com.mrebollob.leitnerbox.data.repository.RepositoryImp
+import com.mrebollob.leitnerbox.domain.LeitnerBox
+import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.domain.repository.Repository
+import com.mrebollob.leitnerbox.presentation.main.MainPresenter
+import com.mrebollob.leitnerbox.util.executor.AndroidExecutor
 import org.koin.dsl.module.module
 
 val mainModule = module {
 
-    single { LeitnerBox() }
-    single<LocalRepository> { LocalRepositoryImp(get()) }
+    factory { LeitnerBox() }
+    single<Executor> { AndroidExecutor() }
+    single<LocalDataSource> { LocalDataSourceImp() }
+    single<Repository> { RepositoryImp(get()) }
 
-    viewModel { MainViewModel(get()) }
+    factory {
+        MainPresenter(
+            executor = get(),
+            repository = get(),
+            leitnerBox = get()
+        )
+    }
 }

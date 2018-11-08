@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.model
+package com.mrebollob.leitnerbox.domain.model
 
 data class Level(
     val index: Int,

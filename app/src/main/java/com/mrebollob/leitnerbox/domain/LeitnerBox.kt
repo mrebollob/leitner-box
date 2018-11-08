@@ -1,6 +1,6 @@
-package com.mrebollob.leitnerbox.repository
+package com.mrebollob.leitnerbox.domain
 
-import com.mrebollob.leitnerbox.model.Level
+import com.mrebollob.leitnerbox.domain.model.Level
 
 class LeitnerBox {
 

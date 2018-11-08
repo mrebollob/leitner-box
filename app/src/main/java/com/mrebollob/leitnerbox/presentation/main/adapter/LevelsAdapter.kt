@@ -1,9 +1,9 @@
-package com.mrebollob.leitnerbox.ui.main.adapter
+package com.mrebollob.leitnerbox.presentation.main.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
-import com.mrebollob.leitnerbox.model.Level
+import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.util.extensions.inflate
 import kotlin.properties.Delegates
 
