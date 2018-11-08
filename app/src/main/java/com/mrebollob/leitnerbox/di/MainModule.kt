@@ -7,6 +7,7 @@ import com.mrebollob.leitnerbox.domain.LeitnerBox
 import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.presentation.main.MainPresenter
+import com.mrebollob.leitnerbox.presentation.settings.SettingsPresenter
 import com.mrebollob.leitnerbox.util.executor.AndroidExecutor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
@@ -23,6 +24,13 @@ val mainModule = module {
             executor = get(),
             repository = get(),
             leitnerBox = get()
+        )
+    }
+
+    factory {
+        SettingsPresenter(
+            executor = get(),
+            repository = get()
         )
     }
 }

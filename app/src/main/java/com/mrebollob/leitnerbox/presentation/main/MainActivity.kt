@@ -1,10 +1,13 @@
 package com.mrebollob.leitnerbox.presentation.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.main.adapter.LevelsAdapter
+import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
@@ -20,6 +23,23 @@ class MainActivity : BaseActivity(), MainView {
 
         initUI()
         presenter.attachView(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.navigate_to_settings -> {
+                presenter.onSettingsClicked()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     private fun initUI() {
@@ -39,7 +59,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun goToSettingsScreen() {
-        TODO("not implemented")
+        SettingsActivity.open(this)
     }
 
     private fun initRecyclerView() {
