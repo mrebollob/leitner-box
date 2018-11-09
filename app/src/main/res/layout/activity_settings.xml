@@ -8,11 +8,11 @@
     tools:context=".presentation.settings.SettingsActivity">
 
     <com.mrebollob.leitnerbox.util.view.SettingItemView
-        android:id="@+id/levelsNumber"
+        android:id="@+id/levelsNumberView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:settingsTitle="@string/settings_levels"
-        app:settingsValue="7" />
+        app:settingsValue="" />
 
     <View
         android:layout_width="match_parent"
@@ -20,11 +20,11 @@
         android:background="@color/divider" />
 
     <com.mrebollob.leitnerbox.util.view.SettingItemView
-        android:id="@+id/startDate"
+        android:id="@+id/startDateView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:settingsTitle="@string/settings_start_date"
-        app:settingsValue="12/12/12" />
+        app:settingsValue="" />
 
     <View
         android:layout_width="match_parent"

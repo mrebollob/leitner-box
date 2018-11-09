@@ -29,7 +29,7 @@ class MainPresenter(
 
     }
 
-    fun onSettingsClicked() {
+    fun onSettingsClick() {
         view?.goToSettingsScreen()
     }
 

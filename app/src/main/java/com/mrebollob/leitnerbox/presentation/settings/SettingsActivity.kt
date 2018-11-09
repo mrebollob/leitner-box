@@ -5,9 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.presentation.BaseActivity
-import com.mrebollob.leitnerbox.util.extensions.toast
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SettingsActivity : BaseActivity(), SettingsView {
 
@@ -22,14 +23,18 @@ class SettingsActivity : BaseActivity(), SettingsView {
     }
 
     private fun initUI() {
+        levelsNumberView.setOnClickListener { presenter.onSettingsLevelsClick() }
+        startDateView.setOnClickListener { presenter.onSettingsStartDateClick() }
+    }
 
-        levelsNumber.setOnClickListener {
-            toast("Hola")
-        }
+    override fun showStartDate(startDate: Date) {
+        // TODO extract format date and localize
+        val datestring = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startDate)
+        startDateView.setValue(datestring)
+    }
 
-        startDate.setOnClickListener {
-            toast("Hola")
-        }
+    override fun showLevelsCount(levelsCount: Int) {
+        levelsNumberView.setValue(levelsCount.toString())
     }
 
     companion object Navigator {
