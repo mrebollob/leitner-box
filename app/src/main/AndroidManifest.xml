@@ -21,7 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.settings.SettingsActivity" />
+        <activity
+            android:name=".presentation.settings.SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".presentation.main.MainActivity" />
     </application>
 
 </manifest>

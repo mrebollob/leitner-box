@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.settings.SettingsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.mrebollob.leitnerbox.util.view.SettingItemView
+        android:id="@+id/levelsNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingsTitle="@string/settings_levels"
+        app:settingsValue="7" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <com.mrebollob.leitnerbox.util.view.SettingItemView
+        android:id="@+id/startDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingsTitle="@string/settings_start_date"
+        app:settingsValue="12/12/12" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+</LinearLayout>

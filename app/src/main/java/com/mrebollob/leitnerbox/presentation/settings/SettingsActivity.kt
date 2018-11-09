@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.presentation.BaseActivity
+import com.mrebollob.leitnerbox.util.extensions.toast
+import kotlinx.android.synthetic.main.activity_settings.*
 import org.koin.android.ext.android.inject
 
 class SettingsActivity : BaseActivity(), SettingsView {
@@ -21,6 +23,13 @@ class SettingsActivity : BaseActivity(), SettingsView {
 
     private fun initUI() {
 
+        levelsNumber.setOnClickListener {
+            toast("Hola")
+        }
+
+        startDate.setOnClickListener {
+            toast("Hola")
+        }
     }
 
     companion object Navigator {

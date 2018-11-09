@@ -4,4 +4,6 @@
     <string name="main_view_day_number">"Day %1$d"</string>
     <string name="main_view_levels_to_review">"to review: Level %1$s"</string>
     <string name="settings">Settings</string>
+    <string name="settings_start_date">Start date</string>
+    <string name="settings_levels">Levels</string>
 </resources>
