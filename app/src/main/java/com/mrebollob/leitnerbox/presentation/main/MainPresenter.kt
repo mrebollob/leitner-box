@@ -10,6 +10,7 @@ import com.mrebollob.leitnerbox.domain.usecase.getLevels
 import com.mrebollob.leitnerbox.presentation.Presenter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainPresenter(
     private val executor: Executor,
@@ -35,14 +36,14 @@ class MainPresenter(
 
     private fun loadLevels() {
         GlobalScope.launch(context = executor.main) {
-            val levels = getLevels(repository, leitnerBox)
+            val levels = getLevels(repository, leitnerBox, Date())
             view?.showLevels(levels)
         }
     }
 
     private fun loadCurrentDay() {
         GlobalScope.launch(context = executor.main) {
-            view?.showCurrentNumberDay(getCurrentDay(repository))
+            view?.showCurrentNumberDay(getCurrentDay(repository, Date()))
         }
     }
 }
