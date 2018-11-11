@@ -48,7 +48,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showCurrentNumberDay(currentDay: Int) {
-        dayTextView.text = getString(R.string.main_view_day_number, currentDay + 1)
+        dayTextView.text = getString(R.string.main_view_day_number, currentDay)
     }
 
     override fun showLevels(levels: List<Level>) {

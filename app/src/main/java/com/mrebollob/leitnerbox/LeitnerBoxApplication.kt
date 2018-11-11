@@ -6,7 +6,8 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import org.koin.android.ext.android.startKoin
-
+import timber.log.Timber
+import timber.log.Timber.DebugTree
 
 class LeitnerBoxApplication : Application() {
 
@@ -15,6 +16,10 @@ class LeitnerBoxApplication : Application() {
 
         startKoin(this, listOf(mainModule))
         iniCalligraphy()
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
+        }
     }
 
     private fun iniCalligraphy() {

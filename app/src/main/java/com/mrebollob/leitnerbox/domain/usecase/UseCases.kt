@@ -18,7 +18,7 @@ suspend fun saveLevelsCount(repository: Repository, levelsCount: Int) =
     repository.saveLevelsCount(levelsCount)
 
 suspend fun getCurrentDay(repository: Repository, now: Date): Int =
-    repository.getStartDate().getDaysBetween(now)
+    repository.getStartDate().getDaysBetween(now) + 1
 
 
 suspend fun getLevels(repository: Repository, leitnerBox: LeitnerBox, now: Date): List<Level> {

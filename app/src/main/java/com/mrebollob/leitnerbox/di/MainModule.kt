@@ -1,5 +1,6 @@
 package com.mrebollob.leitnerbox.di
 
+import com.google.gson.Gson
 import com.mrebollob.leitnerbox.data.datasource.LocalDataSource
 import com.mrebollob.leitnerbox.data.datasource.LocalDataSourceImp
 import com.mrebollob.leitnerbox.data.repository.RepositoryImp
@@ -14,7 +15,8 @@ import org.koin.dsl.module.module
 
 val mainModule = module {
 
-    factory { LeitnerBox() }
+    factory { Gson() }
+    factory { LeitnerBox(get()) }
     single<Executor> { AndroidExecutor() }
     single<LocalDataSource> { LocalDataSourceImp(androidContext()) }
     single<Repository> { RepositoryImp(get()) }
