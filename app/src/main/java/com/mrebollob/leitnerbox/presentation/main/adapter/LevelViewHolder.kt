@@ -29,7 +29,7 @@ class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private fun funShowActive(active: Boolean, @ColorInt color: Int) {
         if (active) {
             emptyView.gone()
-            levelName.setTextColor(ContextCompat.getColor(getContext(), R.color.white_text))
+            levelName.setTextColor(ContextCompat.getColor(getContext(), R.color.primary))
         } else {
             emptyView.visible()
             levelName.setTextColor(color)
@@ -46,7 +46,8 @@ class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             "5" -> ContextCompat.getColor(getContext(), R.color.level_5)
             "6" -> ContextCompat.getColor(getContext(), R.color.level_6)
             "7" -> ContextCompat.getColor(getContext(), R.color.level_7)
-            else -> ContextCompat.getColor(getContext(), R.color.level_8)
+            "8" -> ContextCompat.getColor(getContext(), R.color.level_8)
+            else -> ContextCompat.getColor(getContext(), R.color.level_9)
         }
     }
 
