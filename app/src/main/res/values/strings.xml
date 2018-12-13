@@ -7,6 +7,7 @@
     <string name="settings_start_date">Start date</string>
     <string name="settings_levels">Levels</string>
     <string name="settings_version">Version</string>
+    <string name="about">About</string>
 
     <string-array name="levels_options">
         <item>3</item>

@@ -34,6 +34,10 @@ class MainPresenter(
         view?.goToSettingsScreen()
     }
 
+    fun onAboutClick() {
+        view?.goToAboutScreen()
+    }
+
     private fun loadLevels() {
         GlobalScope.launch(context = executor.main) {
             val levels = getLevels(repository, leitnerBox, Date())
@@ -52,4 +56,5 @@ interface MainView {
     fun showCurrentNumberDay(currentDay: Int)
     fun showLevels(levels: List<Level>)
     fun goToSettingsScreen()
+    fun goToAboutScreen()
 }

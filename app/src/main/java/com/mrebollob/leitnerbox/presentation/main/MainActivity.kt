@@ -6,6 +6,7 @@ import android.view.MenuItem
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.BaseActivity
+import com.mrebollob.leitnerbox.presentation.about.AboutActivity
 import com.mrebollob.leitnerbox.presentation.main.adapter.LevelsAdapter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +37,10 @@ class MainActivity : BaseActivity(), MainView {
                 presenter.onSettingsClick()
                 true
             }
+            R.id.navigate_to_about -> {
+                presenter.onAboutClick()
+                true
+            }
             else -> {
                 super.onOptionsItemSelected(item)
             }
@@ -60,6 +65,10 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun goToSettingsScreen() {
         SettingsActivity.open(this)
+    }
+
+    override fun goToAboutScreen() {
+        AboutActivity.open(this)
     }
 
     private fun initRecyclerView() {
