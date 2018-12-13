@@ -23,7 +23,9 @@
             android:name=".presentation.settings.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".presentation.main.MainActivity" />
-        <activity android:name=".presentation.about.AboutActivity"></activity>
+        <activity
+            android:name=".presentation.about.AboutActivity"
+            android:label="@string/about_title"
+            android:parentActivityName=".presentation.main.MainActivity" />
     </application>
-
 </manifest>

@@ -30,16 +30,4 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/divider" />
-
-    <com.mrebollob.leitnerbox.util.view.SettingItemView
-        android:id="@+id/appVersionView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:settingsTitle="@string/settings_version"
-        app:settingsValue="" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider" />
 </LinearLayout>
