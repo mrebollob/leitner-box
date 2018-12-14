@@ -36,7 +36,7 @@ class SettingsPresenter(
 
     }
 
-    fun onSettingsLevelsClick() {
+    fun onSetLevelsClick() {
         view?.showLevelsCountSelector(levelsCount)
     }
 
@@ -48,8 +48,12 @@ class SettingsPresenter(
         }
     }
 
-    fun onSettingsStartDateClick() {
+    fun onSetStartDateClick() {
         view?.showDateSelector(startDate)
+    }
+
+    fun onSetNotificationHourClick() {
+        view?.showTimeSelector(1, 54)
     }
 
     fun onSetStartDate(startDate: Date) {
@@ -59,11 +63,18 @@ class SettingsPresenter(
             saveStartDate(repository, startDate)
         }
     }
+
+    fun onSetStudyTime(hour: Int, minute: Int) {
+
+        view?.showStudyTime(hour, minute)
+    }
 }
 
 interface SettingsView {
     fun showStartDate(startDate: Date)
+    fun showStudyTime(hour: Int, minute: Int)
     fun showLevelsCount(levelsCount: Int)
     fun showLevelsCountSelector(levelsCount: Int)
     fun showDateSelector(startDate: Date)
+    fun showTimeSelector(hour: Int, minute: Int)
 }

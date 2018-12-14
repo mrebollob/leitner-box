@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".presentation.settings.SettingsActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:text="@string/settings_general_title"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/font_normal" />
+
     <com.mrebollob.leitnerbox.util.view.SettingItemView
         android:id="@+id/levelsNumberView"
         android:layout_width="match_parent"
@@ -25,6 +35,28 @@
         android:layout_height="wrap_content"
         app:settingsTitle="@string/settings_start_date"
         app:settingsValue="" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:text="@string/settings_notification_title"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/font_normal" />
+
+    <com.mrebollob.leitnerbox.util.view.SettingItemView
+        android:id="@+id/notificationHourView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingsTitle="@string/settings_notification_study_time"
+        app:settingsValue="12:28" />
 
     <View
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.mrebollob.leitnerbox.presentation.settings
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -26,8 +27,9 @@ class SettingsActivity : BaseActivity(), SettingsView {
     }
 
     private fun initUI() {
-        levelsNumberView.setOnClickListener { presenter.onSettingsLevelsClick() }
-        startDateView.setOnClickListener { presenter.onSettingsStartDateClick() }
+        levelsNumberView.setOnClickListener { presenter.onSetLevelsClick() }
+        startDateView.setOnClickListener { presenter.onSetStartDateClick() }
+        notificationHourView.setOnClickListener { presenter.onSetNotificationHourClick() }
     }
 
     override fun showLevelsCountSelector(levelsCount: Int) {
@@ -69,10 +71,22 @@ class SettingsActivity : BaseActivity(), SettingsView {
         datePickerDialog.show()
     }
 
+    override fun showTimeSelector(hour: Int, minute: Int) {
+        val timePickerDialog =
+            TimePickerDialog(this, { _, hourOfDay, minute ->
+                presenter.onSetStudyTime(hourOfDay, minute)
+            }, hour, minute, true)
+        timePickerDialog.show()
+    }
+
     override fun showStartDate(startDate: Date) {
         // TODO extract format date and localize
         val datestring = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(startDate)
         startDateView.setValue(datestring)
+    }
+
+    override fun showStudyTime(hour: Int, minute: Int) {
+        notificationHourView.setValue("$hour:$minute")
     }
 
     override fun showLevelsCount(levelsCount: Int) {
