@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.mrebollob.leitnerbox.BuildConfig
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -29,7 +28,6 @@ class SettingsActivity : BaseActivity(), SettingsView {
     private fun initUI() {
         levelsNumberView.setOnClickListener { presenter.onSettingsLevelsClick() }
         startDateView.setOnClickListener { presenter.onSettingsStartDateClick() }
-        appVersionView.setValue(BuildConfig.VERSION_NAME)
     }
 
     override fun showLevelsCountSelector(levelsCount: Int) {

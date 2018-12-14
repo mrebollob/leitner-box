@@ -1,16 +1,12 @@
 package com.mrebollob.leitnerbox.util.extensions
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 
 fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 }
-
-fun Context.toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 
 fun View.visible() {
     this.visibility = View.VISIBLE

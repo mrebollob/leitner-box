@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigate_to_about"
+        android:icon="@drawable/ic_about"
+        android:title="@string/about_title"
+        app:showAsAction="ifRoom" />
 </menu>

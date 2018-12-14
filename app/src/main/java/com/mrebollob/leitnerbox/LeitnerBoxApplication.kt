@@ -28,7 +28,7 @@ class LeitnerBoxApplication : Application() {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/PatrickHand-Regular.ttf")
+                            .setDefaultFontPath("fonts/Roboto-Regular.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )
