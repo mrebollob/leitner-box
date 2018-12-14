@@ -3,5 +3,6 @@
     <declare-styleable name="SettingItemView">
         <attr name="settingsTitle" format="string" />
         <attr name="settingsValue" format="string" />
+        <attr name="settingsEnabled" format="boolean" />
     </declare-styleable>
 </resources>

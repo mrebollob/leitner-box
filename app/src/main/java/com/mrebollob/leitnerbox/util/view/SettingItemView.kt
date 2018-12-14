@@ -1,6 +1,7 @@
 package com.mrebollob.leitnerbox.util.view
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
@@ -14,6 +15,8 @@ class SettingItemView(context: Context, attrs: AttributeSet) : LinearLayout(cont
     private val settingsContainer: LinearLayout
     private var title: String = ""
     private var value: String = ""
+    private var settingsEnabled: Boolean = true
+    private var listener: (View) -> Unit = {}
 
     init {
 
@@ -26,9 +29,12 @@ class SettingItemView(context: Context, attrs: AttributeSet) : LinearLayout(cont
             try {
                 title = getString(R.styleable.SettingItemView_settingsTitle) ?: ""
                 value = getString(R.styleable.SettingItemView_settingsValue) ?: ""
+                settingsEnabled = getBoolean(R.styleable.SettingItemView_settingsEnabled, true)
 
                 settingTitle.text = title
                 settingValue.text = value
+                settingsContainer.setOnClickListener(listener)
+                setSettingEnabled(settingsEnabled)
             } finally {
                 recycle()
             }
@@ -45,7 +51,20 @@ class SettingItemView(context: Context, attrs: AttributeSet) : LinearLayout(cont
         this.value = value
     }
 
+    fun setSettingEnabled(settingsEnabled: Boolean) {
+        if (settingsEnabled) {
+            settingTitle.setTextColor(ContextCompat.getColor(context, R.color.primary_text))
+            settingsContainer.setOnClickListener(listener)
+        } else {
+            settingTitle.setTextColor(ContextCompat.getColor(context, R.color.secondary_text))
+            settingsContainer.setOnClickListener(null)
+        }
+    }
+
     fun setOnClickListener(listener: (View) -> Unit) {
-        settingsContainer.setOnClickListener(listener)
+        this.listener = listener
+        if (settingsEnabled) {
+            settingsContainer.setOnClickListener(listener)
+        }
     }
 }

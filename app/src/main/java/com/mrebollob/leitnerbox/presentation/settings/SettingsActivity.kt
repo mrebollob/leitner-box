@@ -31,6 +31,7 @@ class SettingsActivity : BaseActivity(), SettingsView {
         levelsNumberView.setOnClickListener { presenter.onSetLevelsClick() }
         startDateView.setOnClickListener { presenter.onSetStartDateClick() }
         notificationHourView.setOnClickListener { presenter.onSetNotificationHourClick() }
+        notificationHourView.setSettingEnabled(false)
     }
 
     override fun showLevelsCountSelector(levelsCount: Int) {
