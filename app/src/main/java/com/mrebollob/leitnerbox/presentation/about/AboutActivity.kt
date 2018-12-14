@@ -27,7 +27,6 @@ class AboutActivity : BaseActivity(), AboutView {
         appVersionView.setValue(BuildConfig.VERSION_NAME)
 
         sourceCodeView.setOnClickListener { presenter.onSourceCodeClick() }
-        privacyPolicyView.setOnClickListener { presenter.onPrivacyPolicyClick() }
         licenseView.setOnClickListener { presenter.onLicenseClick() }
     }
 

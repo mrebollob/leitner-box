@@ -12,11 +12,8 @@
     <string name="about_source_code">Source code</string>
     <string name="about_source_code_link">github.com/mrebollob/leitner-box</string>
     <string name="about_version">Version</string>
-    <string name="about_privacy_policy">Privacy policy</string>
-    <string name="about_privacy_policy_link">github.com/mrebollob/leitner-box</string>
     <string name="about_license">License</string>
-    <string name="about_license_name">Apache V2</string>
-
+    <string name="about_license_name">Apache 2.0</string>
 
     <string-array name="levels_options">
         <item>3</item>
