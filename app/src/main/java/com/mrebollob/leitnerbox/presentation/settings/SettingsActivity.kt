@@ -10,6 +10,7 @@ import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,10 +29,18 @@ class SettingsActivity : BaseActivity(), SettingsView {
     }
 
     private fun initUI() {
+        initToolbar()
         levelsNumberView.setOnClickListener { presenter.onSetLevelsClick() }
         startDateView.setOnClickListener { presenter.onSetStartDateClick() }
         notificationHourView.setOnClickListener { presenter.onSetNotificationHourClick() }
         notificationHourView.setSettingEnabled(false)
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun showLevelsCountSelector(levelsCount: Int) {

@@ -10,6 +10,7 @@ import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.util.extensions.loadCustomTabs
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 
 
@@ -26,12 +27,20 @@ class AboutActivity : BaseActivity(), AboutView {
     }
 
     private fun initUI() {
+        initToolbar()
         appVersionView.setValue(BuildConfig.VERSION_NAME)
 
         sourceCodeView.setOnClickListener { presenter.onSourceCodeClick() }
         tutorialView.setOnClickListener { presenter.onTutorialViewClick() }
         recommendedReadingView.setOnClickListener { presenter.onRecommendedReadingViewClick() }
         licenseView.setOnClickListener { presenter.onLicenseClick() }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun openWebViewScreen(url: String) {
