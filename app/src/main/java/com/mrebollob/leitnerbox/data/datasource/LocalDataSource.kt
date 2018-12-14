@@ -5,6 +5,10 @@ import java.util.*
 
 interface LocalDataSource {
 
+    suspend fun isFirstStart(): Boolean
+
+    suspend fun setFirstStart(isFirstStart: Boolean)
+
     suspend fun saveStartDate(startDate: Date)
 
     suspend fun saveStudyTime(hour: Hour)

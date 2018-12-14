@@ -8,6 +8,11 @@ import com.mrebollob.leitnerbox.util.extensions.getDaysBetween
 import java.util.*
 
 
+suspend fun isFirstStart(repository: Repository): Boolean = repository.isFirstStart()
+
+suspend fun setFirstStart(repository: Repository, isFirstStart: Boolean) =
+    repository.setFirstStart(isFirstStart)
+
 suspend fun getStartDate(repository: Repository): Date = repository.getStartDate()
 
 suspend fun saveStartDate(repository: Repository, startDate: Date) =

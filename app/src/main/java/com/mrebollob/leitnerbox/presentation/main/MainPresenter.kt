@@ -7,6 +7,8 @@ import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.domain.usecase.getCurrentDay
 import com.mrebollob.leitnerbox.domain.usecase.getLevels
+import com.mrebollob.leitnerbox.domain.usecase.isFirstStart
+import com.mrebollob.leitnerbox.domain.usecase.setFirstStart
 import com.mrebollob.leitnerbox.presentation.Presenter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,8 +24,16 @@ class MainPresenter(
 
     override fun attachView(view: MainView) {
         this.view = view
-        loadLevels()
-        loadCurrentDay()
+
+        GlobalScope.launch(context = executor.main) {
+            if (isFirstStart(repository)) {
+                setFirstStart(repository, false)
+                view.goToIntroScreen()
+            } else {
+                loadLevels()
+                loadCurrentDay()
+            }
+        }
     }
 
     override fun detachView() {
@@ -55,6 +65,7 @@ class MainPresenter(
 interface MainView {
     fun showCurrentNumberDay(currentDay: Int)
     fun showLevels(levels: List<Level>)
+    fun goToIntroScreen()
     fun goToSettingsScreen()
     fun goToAboutScreen()
 }

@@ -11,8 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.main.MainActivity">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:node="replace">
+
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +26,17 @@
         <activity
             android:name=".presentation.settings.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName=".presentation.main.MainActivity" />
+            android:parentActivityName=".presentation.main.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.about.AboutActivity"
             android:label="@string/about_title"
-            android:parentActivityName=".presentation.main.MainActivity" />
+            android:parentActivityName=".presentation.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.intro.IntroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Intro" />
     </application>
+
 </manifest>

@@ -8,12 +8,22 @@ import java.util.*
 class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSource {
 
     companion object {
+        private const val FIRST_START_KEY = "FIRST_START_KEY"
         private const val START_DATE_KEY = "START_DATE_KEY"
         private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"
         private const val LEVELS_COUNT_KEY = "LEVELS_COUNT_KEY"
     }
 
     private val sharedPreferences = context.getSharedPreferences("leitnerbox", Context.MODE_PRIVATE)
+
+    override suspend fun isFirstStart(): Boolean =
+        sharedPreferences.getBoolean(FIRST_START_KEY, true)
+
+    override suspend fun setFirstStart(isFirstStart: Boolean) {
+        sharedPreferences.edit()
+            .putBoolean(FIRST_START_KEY, isFirstStart)
+            .apply()
+    }
 
     override suspend fun saveStartDate(startDate: Date) {
         sharedPreferences.edit()

@@ -7,6 +7,7 @@ import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.about.AboutActivity
+import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.presentation.main.adapter.LevelsAdapter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -61,6 +62,11 @@ class MainActivity : BaseActivity(), MainView {
         val names = levels.filter { it.active }.map { it.name }.reversed()
             .reduce { acc, string -> "$acc, $string" }
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
+    }
+
+    override fun goToIntroScreen() {
+        IntroActivity.open(this)
+        finish()
     }
 
     override fun goToSettingsScreen() {

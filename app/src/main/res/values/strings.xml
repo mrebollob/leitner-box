@@ -4,6 +4,11 @@
     <string name="main_view_day_number">"Day %1$d"</string>
     <string name="main_view_levels_to_review">"to review: Levels %1$s"</string>
 
+    <string name="intro_title_1">Ese que llega tiene musho peligro</string>
+    <string name="intro_descripcion_1">Lorem fistrum a wan no te digo trigo por no llamarte Rodrigor de la pradera diodeno sexuarl.</string>
+    <string name="intro_title_2">Ese que llega por la gloria de mi madre</string>
+    <string name="intro_descripcion_2">Lorem fistrum a gramenawer al ataquerl llevame al sircoo llevame al sircoo quietooor diodenoo quietooor pupita fistro.</string>
+
     <string name="settings">Settings</string>
     <string name="settings_start_date">Start date</string>
     <string name="settings_general_title">General</string>

@@ -37,6 +37,7 @@ dependencies {
     // Views
     implementation 'io.github.inflationx:calligraphy3:3.0.0'
     implementation 'io.github.inflationx:viewpump:1.0.0'
+    implementation 'com.github.apl-devs:appintro:v4.2.3'
 
     // Koin
     implementation "org.koin:koin-android:$koin_version"
