@@ -32,7 +32,7 @@ class AboutActivity : BaseActivity(), AboutView {
     }
 
     override fun openWebViewScreen(url: String) {
-        Uri.parse(url).loadCustomTabs(this)
+        loadCustomTabs(Uri.parse(url))
     }
 
     companion object Navigator {
