@@ -19,7 +19,7 @@ val mainModule = module {
     factory { Gson() }
     factory { LeitnerBox(get()) }
     single<Executor> { AndroidExecutor() }
-    single<LocalDataSource> { LocalDataSourceImp(androidContext()) }
+    single<LocalDataSource> { LocalDataSourceImp(androidContext(), get()) }
     single<Repository> { RepositoryImp(get()) }
 
     factory {

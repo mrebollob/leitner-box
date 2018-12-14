@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.koin.android.ext.android.inject
@@ -71,22 +72,22 @@ class SettingsActivity : BaseActivity(), SettingsView {
         datePickerDialog.show()
     }
 
-    override fun showTimeSelector(hour: Int, minute: Int) {
+    override fun showTimeSelector(hour: Hour) {
         val timePickerDialog =
             TimePickerDialog(this, { _, hourOfDay, minute ->
-                presenter.onSetStudyTime(hourOfDay, minute)
-            }, hour, minute, true)
+                presenter.onSetStudyTime(Hour(hourOfDay, minute))
+            }, hour.hour, hour.minute, true)
         timePickerDialog.show()
     }
 
     override fun showStartDate(startDate: Date) {
         // TODO extract format date and localize
-        val datestring = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(startDate)
-        startDateView.setValue(datestring)
+        val dateString = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(startDate)
+        startDateView.setValue(dateString)
     }
 
-    override fun showStudyTime(hour: Int, minute: Int) {
-        notificationHourView.setValue("$hour:$minute")
+    override fun showStudyTime(hour: Hour) {
+        notificationHourView.setValue(hour.getString())
     }
 
     override fun showLevelsCount(levelsCount: Int) {

@@ -1,6 +1,7 @@
 package com.mrebollob.leitnerbox.domain.usecase
 
 import com.mrebollob.leitnerbox.domain.LeitnerBox
+import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.util.extensions.getDaysBetween
@@ -11,6 +12,11 @@ suspend fun getStartDate(repository: Repository): Date = repository.getStartDate
 
 suspend fun saveStartDate(repository: Repository, startDate: Date) =
     repository.saveStartDate(startDate)
+
+suspend fun getStudyTime(repository: Repository): Hour = repository.getStudyTime()
+
+suspend fun saveStudyTime(repository: Repository, hour: Hour) =
+    repository.saveStudyTime(hour)
 
 suspend fun getLevelsCount(repository: Repository): Int = repository.getLevelsCount()
 

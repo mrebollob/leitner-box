@@ -1,22 +1,29 @@
 package com.mrebollob.leitnerbox.data.datasource
 
 import android.content.Context
+import com.google.gson.Gson
+import com.mrebollob.leitnerbox.domain.model.Hour
 import java.util.*
 
-class LocalDataSourceImp(context: Context) : LocalDataSource {
+class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSource {
 
     companion object {
-        const val START_DATE_KEY = "START_DATE_KEY"
-        const val LEVELS_COUNT_KEY = "LEVELS_COUNT_KEY"
+        private const val START_DATE_KEY = "START_DATE_KEY"
+        private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"
+        private const val LEVELS_COUNT_KEY = "LEVELS_COUNT_KEY"
     }
 
-
     private val sharedPreferences = context.getSharedPreferences("leitnerbox", Context.MODE_PRIVATE)
-
 
     override suspend fun saveStartDate(startDate: Date) {
         sharedPreferences.edit()
             .putLong(START_DATE_KEY, startDate.time)
+            .apply()
+    }
+
+    override suspend fun saveStudyTime(hour: Hour) {
+        sharedPreferences.edit()
+            .putString(STUDY_TIME_KEY, gson.toJson(hour))
             .apply()
     }
 
@@ -30,6 +37,17 @@ class LocalDataSourceImp(context: Context) : LocalDataSource {
         }
 
         return Date(startDateTime)
+    }
+
+    override suspend fun getStudyTime(): Hour {
+        val jsonHour = sharedPreferences.getString(STUDY_TIME_KEY, "")
+
+        if (jsonHour.isNullOrEmpty()) {
+            //TODO return error
+            return Hour(0, 0)
+        }
+
+        return gson.fromJson(jsonHour, Hour::class.java)
     }
 
     override suspend fun saveLevelsCount(levelsCount: Int) {

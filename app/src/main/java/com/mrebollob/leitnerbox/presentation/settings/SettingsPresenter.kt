@@ -1,11 +1,14 @@
 package com.mrebollob.leitnerbox.presentation.settings
 
 import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.domain.usecase.getLevelsCount
 import com.mrebollob.leitnerbox.domain.usecase.getStartDate
+import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
 import com.mrebollob.leitnerbox.domain.usecase.saveLevelsCount
 import com.mrebollob.leitnerbox.domain.usecase.saveStartDate
+import com.mrebollob.leitnerbox.domain.usecase.saveStudyTime
 import com.mrebollob.leitnerbox.presentation.Presenter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,6 +21,7 @@ class SettingsPresenter(
 
     private var view: SettingsView? = null
     private var startDate = Date()
+    private var studyTime = Hour(0, 0)
     private var levelsCount = -1
 
     override fun attachView(view: SettingsView) {
@@ -29,6 +33,9 @@ class SettingsPresenter(
 
             startDate = getStartDate(repository)
             view.showStartDate(startDate)
+
+            studyTime = getStudyTime(repository)
+            view.showStudyTime(studyTime)
         }
     }
 
@@ -53,7 +60,7 @@ class SettingsPresenter(
     }
 
     fun onSetNotificationHourClick() {
-        view?.showTimeSelector(1, 54)
+        view?.showTimeSelector(studyTime)
     }
 
     fun onSetStartDate(startDate: Date) {
@@ -64,17 +71,20 @@ class SettingsPresenter(
         }
     }
 
-    fun onSetStudyTime(hour: Int, minute: Int) {
-
-        view?.showStudyTime(hour, minute)
+    fun onSetStudyTime(hour: Hour) {
+        this.studyTime = hour
+        view?.showStudyTime(hour)
+        GlobalScope.launch(context = executor.main) {
+            saveStudyTime(repository, hour)
+        }
     }
 }
 
 interface SettingsView {
     fun showStartDate(startDate: Date)
-    fun showStudyTime(hour: Int, minute: Int)
+    fun showStudyTime(hour: Hour)
     fun showLevelsCount(levelsCount: Int)
     fun showLevelsCountSelector(levelsCount: Int)
     fun showDateSelector(startDate: Date)
-    fun showTimeSelector(hour: Int, minute: Int)
+    fun showTimeSelector(hour: Hour)
 }
