@@ -23,6 +23,10 @@
     <string name="about_version">Version</string>
     <string name="about_license">License</string>
     <string name="about_license_name">Apache 2.0</string>
+    <string name="about_tutorial">Tutorial</string>
+    <string name="about_tutorial_descripcion">Show app tutorial</string>
+    <string name="about_recommended_reading">Recommended reading</string>
+    <string name="about_recommended_reading_descripcion">ncase.me/remember</string>
 
     <string-array name="levels_options">
         <item>3</item>

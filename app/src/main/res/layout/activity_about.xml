@@ -46,6 +46,30 @@
         android:background="@color/divider" />
 
     <com.mrebollob.leitnerbox.util.view.SettingItemView
+        android:id="@+id/tutorialView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingsTitle="@string/about_tutorial"
+        app:settingsValue="@string/about_tutorial_descripcion" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <com.mrebollob.leitnerbox.util.view.SettingItemView
+        android:id="@+id/recommendedReadingView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingsTitle="@string/about_recommended_reading"
+        app:settingsValue="@string/about_recommended_reading_descripcion" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <com.mrebollob.leitnerbox.util.view.SettingItemView
         android:id="@+id/licenseView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
