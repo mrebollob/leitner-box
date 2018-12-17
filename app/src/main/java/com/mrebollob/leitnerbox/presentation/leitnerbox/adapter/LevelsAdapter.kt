@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.main.adapter
+package com.mrebollob.leitnerbox.presentation.leitnerbox.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import kotlin.properties.Delegates
 class LevelsAdapter : RecyclerView.Adapter<LevelViewHolder>() {
 
     var levels: List<Level> by Delegates.observable(emptyList())
-    { prop, old, new -> notifyDataSetChange() }
+    { _, _, _ -> notifyDataSetChange() }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LevelViewHolder {
         val view = parent.inflate(R.layout.level_list_item)
@@ -26,7 +26,7 @@ class LevelsAdapter : RecyclerView.Adapter<LevelViewHolder>() {
         return levels.count()
     }
 
-    fun notifyDataSetChange() {
+    private fun notifyDataSetChange() {
         notifyDataSetChanged()
     }
 }

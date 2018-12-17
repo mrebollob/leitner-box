@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.main.adapter
+package com.mrebollob.leitnerbox.presentation.leitnerbox.adapter
 
 import android.content.Context
 import android.support.annotation.ColorInt

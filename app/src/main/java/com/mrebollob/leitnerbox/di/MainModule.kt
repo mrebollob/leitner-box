@@ -8,6 +8,7 @@ import com.mrebollob.leitnerbox.domain.LeitnerBox
 import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.presentation.about.AboutPresenter
+import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxPresenter
 import com.mrebollob.leitnerbox.presentation.main.MainPresenter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsPresenter
 import com.mrebollob.leitnerbox.util.executor.AndroidExecutor
@@ -24,6 +25,13 @@ val mainModule = module {
 
     factory {
         MainPresenter(
+            executor = get(),
+            repository = get()
+        )
+    }
+
+    factory {
+        LeitnerBoxPresenter(
             executor = get(),
             repository = get(),
             leitnerBox = get()

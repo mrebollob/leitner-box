@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Level
-import com.mrebollob.leitnerbox.presentation.main.adapter.LevelsAdapter
+import com.mrebollob.leitnerbox.presentation.leitnerbox.adapter.LevelsAdapter
 import kotlinx.android.synthetic.main.fragment_leitner_box.*
 import org.koin.android.ext.android.inject
 
 class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     val presenter: LeitnerBoxPresenter by inject()
-    private var listener: OnLeitnerBoxFragmentListener? = null
+    private var listener: LeitnerBoxFragmentListener? = null
     private val levelsAdapter = LevelsAdapter()
 
     override fun onCreateView(
@@ -53,10 +53,10 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnLeitnerBoxFragmentListener) {
+        if (context is LeitnerBoxFragmentListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnLeitnerBoxFragmentListener")
+            throw RuntimeException(context.toString() + " must implement LeitnerBoxFragmentListener")
         }
     }
 
@@ -65,7 +65,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         listener = null
     }
 
-    interface OnLeitnerBoxFragmentListener {
+    interface LeitnerBoxFragmentListener {
         fun onDoneClick()
     }
 

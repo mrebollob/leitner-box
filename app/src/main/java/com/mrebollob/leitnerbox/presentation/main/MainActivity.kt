@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.mrebollob.leitnerbox.R
-import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.about.AboutActivity
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
-import com.mrebollob.leitnerbox.presentation.main.adapter.LevelsAdapter
+import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
+import com.mrebollob.leitnerbox.presentation.leitnerbox.adapter.LevelsAdapter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.mrebollob.leitnerbox.util.extensions.replaceFragment
 import org.koin.android.ext.android.inject
 
 
-class MainActivity : BaseActivity(), MainView {
+class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFragmentListener {
 
     val presenter: MainPresenter by inject()
     private val levelsAdapter = LevelsAdapter()
@@ -23,7 +23,6 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initUI()
         presenter.attachView(this)
     }
 
@@ -48,20 +47,13 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
-    private fun initUI() {
-//        setSupportActionBar(toolbar)
-        initRecyclerView()
+    override fun showLeitnerView() {
+        val fragment = LeitnerBoxFragment.newInstance()
+        replaceFragment(fragment, R.id.fragment_container)
     }
 
-    override fun showCurrentNumberDay(currentDay: Int) {
-        dayTextView.text = getString(R.string.main_view_day_number, currentDay)
-    }
+    override fun onDoneClick() {
 
-    override fun showLevels(levels: List<Level>) {
-        levelsAdapter.levels = levels
-        val names = levels.filter { it.active }.map { it.name }.reversed()
-            .reduce { acc, string -> "$acc, $string" }
-        levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
     }
 
     override fun goToIntroScreen() {
@@ -75,9 +67,5 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun goToAboutScreen() {
         AboutActivity.open(this)
-    }
-
-    private fun initRecyclerView() {
-        levelsListView.adapter = levelsAdapter
     }
 }
