@@ -27,7 +27,7 @@ class MainPresenter(
                 setFirstStart(repository, false)
                 view.goToIntroScreen()
             } else {
-                view.showCountdownView()
+                view.showCountdownView(false)
             }
         }
     }
@@ -61,13 +61,13 @@ class MainPresenter(
     }
 
     fun onDayCompleted() {
-        view?.showCountdownView()
+        view?.showCountdownView(true)
     }
 }
 
 interface MainView {
     fun showLeitnerView()
-    fun showCountdownView()
+    fun showCountdownView(withAnimation: Boolean)
     fun goToIntroScreen()
     fun goToSettingsScreen()
     fun goToAboutScreen()

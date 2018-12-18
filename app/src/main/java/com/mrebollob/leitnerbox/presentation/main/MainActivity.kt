@@ -21,6 +21,7 @@ import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.replaceFragment
+import com.mrebollob.leitnerbox.util.extensions.replaceFragmentWithAnimation
 import org.koin.android.ext.android.inject
 
 
@@ -64,16 +65,21 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
 
     override fun showLeitnerView() {
         val fragment = LeitnerBoxFragment.newInstance()
-        replaceFragment(fragment, R.id.fragment_container)
+        replaceFragmentWithAnimation(fragment, R.id.container)
     }
 
     override fun onDayCompleted() {
         presenter.onDayCompleted()
     }
 
-    override fun showCountdownView() {
+    override fun showCountdownView(withAnimation: Boolean) {
         val fragment = CountdownFragment.newInstance()
-        replaceFragment(fragment, R.id.fragment_container)
+
+        if (withAnimation) {
+            replaceFragmentWithAnimation(fragment, R.id.container)
+        } else {
+            replaceFragment(fragment, R.id.container)
+        }
     }
 
     override fun onGoToLeitnerBoxScreenClick() {

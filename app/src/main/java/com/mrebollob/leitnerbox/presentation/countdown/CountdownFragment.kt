@@ -62,28 +62,41 @@ class CountdownFragment : Fragment(), CountdownView {
                 updateCircleProgressView(seconds.toInt())
 
                 val res = resources
-                hoursTextView.text = res.getQuantityString(
-                    R.plurals.hour_format,
-                    hours.toInt(), hours
-                )
-                minutesTextView.visible()
-                minutesTextView.text = res.getQuantityString(
-                    R.plurals.minute_format,
-                    minutes.toInt(), minutes
-                )
+                hoursTextView?.apply {
+                    text = res.getQuantityString(
+                        R.plurals.hour_format,
+                        hours.toInt(), hours
+                    )
+                }
+
+                minutesTextView?.apply {
+                    visible()
+                    text = res.getQuantityString(
+                        R.plurals.minute_format,
+                        minutes.toInt(), minutes
+                    )
+                }
             }
 
             override fun onFinish() {
                 updateCircleProgressView(0)
-                hoursTextView.text = getString(R.string.countdown_view_completed_time)
-                minutesTextView.gone()
+
+                hoursTextView?.apply {
+                    text = getString(R.string.countdown_view_completed_time)
+                }
+
+                minutesTextView?.apply {
+                    gone()
+                }
             }
         }.start()
     }
 
     private fun updateCircleProgressView(secondsUntilFinished: Int) {
         val value = (86400 - secondsUntilFinished) / 24
-        circleProgressView.currentValue = value
+        circleProgressView?.apply {
+            currentValue = value
+        }
     }
 
     override fun goToLeitnerBoxScreen() {
@@ -102,8 +115,8 @@ class CountdownFragment : Fragment(), CountdownView {
     override fun onDetach() {
         super.onDetach()
         presenter.detachView()
-        listener = null
         countDownTimer?.cancel()
+        listener = null
     }
 
     interface CountdownListener {
