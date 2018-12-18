@@ -33,7 +33,9 @@ class SettingsActivity : BaseActivity(), SettingsView {
         levelsNumberView.setOnClickListener { presenter.onSetLevelsClick() }
         startDateView.setOnClickListener { presenter.onSetStartDateClick() }
         notificationHourView.setOnClickListener { presenter.onSetNotificationHourClick() }
-        notificationHourView.setSettingEnabled(false)
+        notificationEnableView.setOnCheckedChangeListener { isEnable ->
+            presenter.onNotificationEnableClick(isEnable)
+        }
     }
 
     private fun initToolbar() {
@@ -102,6 +104,11 @@ class SettingsActivity : BaseActivity(), SettingsView {
 
     override fun showLevelsCount(levelsCount: Int) {
         levelsNumberView.setValue(levelsCount.toString())
+    }
+
+    override fun showNotificationEnable(isEnable: Boolean) {
+        notificationHourView.setSettingEnabled(isEnable)
+        notificationEnableView.setValue(isEnable)
     }
 
     companion object Navigator {

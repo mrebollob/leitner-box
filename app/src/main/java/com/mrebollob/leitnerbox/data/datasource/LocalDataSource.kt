@@ -20,4 +20,8 @@ interface LocalDataSource {
     suspend fun saveLevelsCount(levelsCount: Int)
 
     suspend fun getLevelsCount(): Int
+
+    suspend fun saveNotificationEnable(enable: Boolean)
+
+    suspend fun getNotificationEnable(): Boolean
 }

@@ -43,7 +43,7 @@ class SettingItemView(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     fun setTitle(title: String) {
         this.settingTitle.text = title
-        this.value = title
+        this.title = title
     }
 
     fun setValue(value: String) {

@@ -20,11 +20,10 @@ class RepositoryImp(private val local: LocalDataSource) : Repository {
 
     override suspend fun getStudyTime(): Hour = local.getStudyTime()
 
-    override suspend fun saveNotificationEnable(enable: Boolean) {
+    override suspend fun saveNotificationEnable(enable: Boolean) =
+        local.saveNotificationEnable(enable)
 
-    }
-
-    override suspend fun getNotificationEnable(): Boolean = true
+    override suspend fun getNotificationEnable(): Boolean = local.getNotificationEnable()
 
     override suspend fun saveLevelsCount(levelsCount: Int) = local.saveLevelsCount(levelsCount)
 

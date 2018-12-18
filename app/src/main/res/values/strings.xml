@@ -15,6 +15,8 @@
     <string name="settings_notification_title">Notifications</string>
     <string name="settings_levels">Levels</string>
     <string name="settings_notification_study_time">Study hour</string>
+    <string name="settings_notification_enable_title">Enable notifications</string>
+    <string name="settings_notification_enable_subTitle">Study reminders notifications</string>
 
     <string name="about_title">About</string>
     <string name="about_descripcion">Lorem fistrum qué dise usteer torpedo a gramenawer papaar papaar qué dise usteer pecador ahorarr amatomaa. A peich tiene musho peligro qué dise usteer papaar papaar qué dise usteer. A gramenawer torpedo quietooor de la pradera.</string>

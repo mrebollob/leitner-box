@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:settingsTitle="@string/settings_levels"
-            app:settingsValue="" />
+            app:settingsValue="-" />
 
         <View
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:settingsTitle="@string/settings_start_date"
-            app:settingsValue="" />
+            app:settingsValue="-" />
 
         <View
             android:layout_width="match_parent"
@@ -59,12 +59,24 @@
             android:textColor="@color/primary_text"
             android:textSize="@dimen/font_normal" />
 
+        <com.mrebollob.leitnerbox.util.view.SettingBooleanItemView
+            android:id="@+id/notificationEnableView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingsBooleanSubTitle="@string/settings_notification_enable_subTitle"
+            app:settingsBooleanTitle="@string/settings_notification_enable_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
         <com.mrebollob.leitnerbox.util.view.SettingItemView
             android:id="@+id/notificationHourView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:settingsTitle="@string/settings_notification_study_time"
-            app:settingsValue="12:28" />
+            app:settingsValue="22:00" />
 
         <View
             android:layout_width="match_parent"

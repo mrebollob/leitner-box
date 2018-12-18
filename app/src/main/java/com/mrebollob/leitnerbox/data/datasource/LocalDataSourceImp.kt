@@ -12,6 +12,7 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
         private const val START_DATE_KEY = "START_DATE_KEY"
         private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"
         private const val LEVELS_COUNT_KEY = "LEVELS_COUNT_KEY"
+        private const val NOTIFICATION_ENABLE_KEY = "NOTIFICATION_ENABLE_KEY"
     }
 
     private val sharedPreferences = context.getSharedPreferences("leitnerbox", Context.MODE_PRIVATE)
@@ -54,7 +55,7 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
 
         if (jsonHour.isNullOrEmpty()) {
             //TODO return error
-            return Hour(0, 0)
+            return Hour(22, 0)
         }
 
         return gson.fromJson(jsonHour, Hour::class.java)
@@ -76,4 +77,13 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
 
         return levelsCount
     }
+
+    override suspend fun saveNotificationEnable(enable: Boolean) {
+        sharedPreferences.edit()
+            .putBoolean(NOTIFICATION_ENABLE_KEY, enable)
+            .apply()
+    }
+
+    override suspend fun getNotificationEnable(): Boolean =
+        sharedPreferences.getBoolean(NOTIFICATION_ENABLE_KEY, true)
 }
