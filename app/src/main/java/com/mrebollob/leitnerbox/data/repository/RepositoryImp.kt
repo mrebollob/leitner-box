@@ -7,17 +7,24 @@ import java.util.*
 
 class RepositoryImp(private val local: LocalDataSource) : Repository {
 
+
     override suspend fun isFirstStart(): Boolean = local.isFirstStart()
 
     override suspend fun setFirstStart(isFirstStart: Boolean) = local.setFirstStart(isFirstStart)
 
     override suspend fun saveStartDate(startDate: Date) = local.saveStartDate(startDate)
 
-    override suspend fun saveStudyTime(hour: Hour) = local.saveStudyTime(hour)
-
     override suspend fun getStartDate(): Date = local.getStartDate()
 
+    override suspend fun saveStudyTime(hour: Hour) = local.saveStudyTime(hour)
+
     override suspend fun getStudyTime(): Hour = local.getStudyTime()
+
+    override suspend fun saveNotificationEnable(enable: Boolean) {
+
+    }
+
+    override suspend fun getNotificationEnable(): Boolean = true
 
     override suspend fun saveLevelsCount(levelsCount: Int) = local.saveLevelsCount(levelsCount)
 

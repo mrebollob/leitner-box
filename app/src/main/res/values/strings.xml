@@ -33,4 +33,14 @@
         <item>5</item>
         <item>7</item>
     </string-array>
+
+    <string name="notifTitleFirst">Time to head to bed.</string>
+    <string name="notifTitleSingular">It is %d minute past your bedtime!</string>
+    <string name="notifTitlePlural">It is %d minutes past your bedtime!</string>
+    <string name="notifTitleFunky">%d</string>
+
+    <string name="channel_name">Bedtime Reminders</string>
+    <string name="channel_description">Bedtime notifications remind you around your bedtime to go to sleep.</string>
+
+    <string name="notifAction">I\'m going to sleep</string>
 </resources>

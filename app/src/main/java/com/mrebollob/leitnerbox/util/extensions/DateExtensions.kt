@@ -1,5 +1,6 @@
 package com.mrebollob.leitnerbox.util.extensions
 
+import com.mrebollob.leitnerbox.domain.model.Hour
 import java.util.*
 import java.util.Calendar.HOUR
 
@@ -21,4 +22,12 @@ fun Date.getDaysBetween(endDate: Date): Int = with(this) {
     val elapsedDays = different / daysInMilli
 
     return elapsedDays.toInt()
+}
+
+fun Hour.getCalendarForToday() :Calendar{
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.HOUR_OF_DAY, this.hour)
+    calendar.set(Calendar.MINUTE, this.minute)
+    calendar.set(Calendar.SECOND, 0)
+    return calendar
 }

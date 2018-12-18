@@ -11,11 +11,15 @@ interface Repository {
 
     suspend fun saveStartDate(startDate: Date)
 
-    suspend fun saveStudyTime(hour: Hour)
-
     suspend fun getStartDate(): Date
 
+    suspend fun saveStudyTime(hour: Hour)
+
     suspend fun getStudyTime(): Hour
+
+    suspend fun saveNotificationEnable(enable: Boolean)
+
+    suspend fun getNotificationEnable(): Boolean
 
     suspend fun saveLevelsCount(levelsCount: Int)
 

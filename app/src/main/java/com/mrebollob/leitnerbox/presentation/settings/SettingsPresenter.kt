@@ -3,7 +3,6 @@ package com.mrebollob.leitnerbox.presentation.settings
 import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.repository.Repository
-import com.mrebollob.leitnerbox.domain.usecase.getLevelsCount
 import com.mrebollob.leitnerbox.domain.usecase.getStartDate
 import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
 import com.mrebollob.leitnerbox.domain.usecase.saveLevelsCount
@@ -28,7 +27,6 @@ class SettingsPresenter(
         this.view = view
 
         GlobalScope.launch(context = executor.main) {
-            levelsCount = getLevelsCount(repository)
             view.showLevelsCount(levelsCount)
 
             startDate = getStartDate(repository)
