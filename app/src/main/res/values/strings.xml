@@ -7,6 +7,7 @@
 
     <string name="countdown_view_study_time">Study time: %1$s</string>
     <string name="countdown_view_completed_time">Done!</string>
+    <string name="countdown_view_skip_countdown">Show leitner box</string>
 
     <string name="intro_title_1">Ese que llega tiene musho peligro</string>
     <string name="intro_descripcion_1">Lorem fistrum a wan no te digo trigo por no llamarte Rodrigor de la pradera diodeno sexuarl.</string>

@@ -76,7 +76,7 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     }
 
     override fun onGoToLeitnerBoxScreenClick() {
-        toast("onGoToLeitnerBoxScreenClick")
+        presenter.onShowLeitnerBoxClick()
     }
 
     override fun goToIntroScreen() {

@@ -27,7 +27,6 @@ class MainPresenter(
                 setFirstStart(repository, false)
                 view.goToIntroScreen()
             } else {
-//                view.showLeitnerView()
                 view.showCountdownView()
             }
 
@@ -51,6 +50,10 @@ class MainPresenter(
 
     fun onAboutClick() {
         view?.goToAboutScreen()
+    }
+
+    fun onShowLeitnerBoxClick() {
+        view?.showLeitnerView()
     }
 }
 
