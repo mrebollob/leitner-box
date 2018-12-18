@@ -15,22 +15,28 @@ import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Compa
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.about.AboutActivity
+import com.mrebollob.leitnerbox.presentation.countdown.CountdownFragment
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.replaceFragment
+import com.mrebollob.leitnerbox.util.extensions.toast
 import org.koin.android.ext.android.inject
 
 
-class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFragmentListener {
+class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFragmentListener,
+    CountdownFragment.CountdownListener {
 
     val presenter: MainPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
+    override fun onResume() {
+        super.onResume()
         presenter.attachView(this)
     }
 
@@ -61,7 +67,16 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     }
 
     override fun onDoneClick() {
+        toast("onDoneClick")
+    }
 
+    override fun showCountdownView() {
+        val fragment = CountdownFragment.newInstance()
+        replaceFragment(fragment, R.id.fragment_container)
+    }
+
+    override fun onGoToLeitnerBoxScreenClick() {
+        toast("onGoToLeitnerBoxScreenClick")
     }
 
     override fun goToIntroScreen() {

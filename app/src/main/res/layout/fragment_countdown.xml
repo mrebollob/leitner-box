@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.countdown.CountdownFragment">
+
+    <TextView
+        android:id="@+id/StudyTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:gravity="center"
+        android:textColor="@color/white_text"
+        android:textSize="@dimen/font_large"
+        tools:text="@string/main_view_levels_to_review" />
+
+    <TextView
+        android:id="@+id/hoursTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:gravity="center"
+        android:textColor="@color/white_text"
+        android:textSize="@dimen/font_large"
+        tools:text="@string/main_view_levels_to_review" />
+
+    <TextView
+        android:id="@+id/minutesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:gravity="center"
+        android:textColor="@color/white_text"
+        android:textSize="@dimen/font_large"
+        tools:text="@string/main_view_levels_to_review" />
+
+    <Button
+        android:id="@+id/skipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hola"/>
+
+</LinearLayout>

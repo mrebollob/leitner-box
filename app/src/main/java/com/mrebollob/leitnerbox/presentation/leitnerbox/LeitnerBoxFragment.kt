@@ -62,6 +62,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     override fun onDetach() {
         super.onDetach()
+        presenter.detachView()
         listener = null
     }
 

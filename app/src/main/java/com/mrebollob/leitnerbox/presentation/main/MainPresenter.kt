@@ -27,7 +27,8 @@ class MainPresenter(
                 setFirstStart(repository, false)
                 view.goToIntroScreen()
             } else {
-                view.showLeitnerView()
+//                view.showLeitnerView()
+                view.showCountdownView()
             }
 
             val isEnable = getNotificationEnable(repository)
@@ -55,6 +56,7 @@ class MainPresenter(
 
 interface MainView {
     fun showLeitnerView()
+    fun showCountdownView()
     fun goToIntroScreen()
     fun goToSettingsScreen()
     fun goToAboutScreen()

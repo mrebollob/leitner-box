@@ -8,6 +8,7 @@ import com.mrebollob.leitnerbox.domain.LeitnerBox
 import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.presentation.about.AboutPresenter
+import com.mrebollob.leitnerbox.presentation.countdown.CountdownPresenter
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxPresenter
 import com.mrebollob.leitnerbox.presentation.main.MainPresenter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsPresenter
@@ -35,6 +36,13 @@ val mainModule = module {
             executor = get(),
             repository = get(),
             leitnerBox = get()
+        )
+    }
+
+    factory {
+        CountdownPresenter(
+            executor = get(),
+            repository = get()
         )
     }
 

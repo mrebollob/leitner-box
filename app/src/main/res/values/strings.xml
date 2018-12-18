@@ -45,4 +45,7 @@
     <string name="channel_description">Bedtime notifications remind you around your bedtime to go to sleep.</string>
 
     <string name="notifAction">I\'m going to sleep</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
