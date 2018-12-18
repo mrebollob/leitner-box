@@ -29,6 +29,10 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         super.onViewCreated(view, savedInstanceState)
 
         initUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
         presenter.attachView(this)
     }
 

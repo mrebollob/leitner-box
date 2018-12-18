@@ -33,6 +33,10 @@ class CountdownFragment : Fragment(), CountdownView {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+    }
+
+    override fun onResume() {
+        super.onResume()
         presenter.attachView(this)
     }
 
