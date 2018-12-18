@@ -35,7 +35,6 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     private fun initView() {
-        circleProgressView.currentValue = 2000
         skipButton.setOnClickListener { presenter.onSkipButtonClick() }
     }
 
@@ -53,6 +52,7 @@ class CountdownFragment : Fragment(), CountdownView {
                 val seconds = millisUntilFinished / 1000
                 val hours = seconds / 3600
                 val minutes = ((seconds - hours * 3600) / 60) + 1
+                updateCircleProgressView(seconds.toInt())
 
                 val res = resources
                 hoursTextView.text = res.getQuantityString(
@@ -70,6 +70,11 @@ class CountdownFragment : Fragment(), CountdownView {
                 minutesTextView.text = ""
             }
         }.start()
+    }
+
+    private fun updateCircleProgressView(secondsUntilFinished: Int) {
+        val value = (86400 - secondsUntilFinished) / 24
+        circleProgressView.currentValue = value
     }
 
     override fun goToLeitnerBoxScreen() {

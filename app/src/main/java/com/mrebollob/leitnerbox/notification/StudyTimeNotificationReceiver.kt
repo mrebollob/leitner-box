@@ -50,7 +50,7 @@ class StudyTimeNotificationReceiver : BroadcastReceiver() {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val mBuilder = NotificationCompat.Builder(context, BEDTIME_CHANNEL_ID)
+        val mBuilder = NotificationCompat.Builder(context, STUDY_TIME_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_about)
             .setContentTitle(title)
             .setAutoCancel(true)
@@ -78,14 +78,14 @@ class StudyTimeNotificationReceiver : BroadcastReceiver() {
 
     companion object {
 
-        internal val BEDTIME_CHANNEL_ID = "studyTimeReminders"
+        internal const val STUDY_TIME_CHANNEL_ID = "studyTimeReminders"
 
-        internal val FIRST_NOTIFICATION_ALARM_REQUEST_CODE = 1
-        internal val NOTIFICATION_REQUEST_CODE = 2
-        internal val LAUNCH_APP_REQUEST_CODE = 6
-        internal val ONE_DAY_MILLIS: Long = 86400000
+        internal const val FIRST_NOTIFICATION_ALARM_REQUEST_CODE = 1
+        internal const val NOTIFICATION_REQUEST_CODE = 2
+        internal const val LAUNCH_APP_REQUEST_CODE = 6
+        internal const val ONE_DAY_MILLIS: Long = 86400000
 
-        internal val CURRENT_NOTIFICATION_KEY = "current_notification"
+        internal const val CURRENT_NOTIFICATION_KEY = "current_notification"
 
         internal fun setNextDayNotification(context: Context, studyTime: Calendar) {
             val calendar = Calendar.getInstance()
@@ -117,7 +117,7 @@ class StudyTimeNotificationReceiver : BroadcastReceiver() {
                 val name = context.getString(R.string.channel_name)
                 val description = context.getString(R.string.channel_description)
                 val importance = NotificationManager.IMPORTANCE_HIGH
-                val channel = NotificationChannel(BEDTIME_CHANNEL_ID, name, importance)
+                val channel = NotificationChannel(STUDY_TIME_CHANNEL_ID, name, importance)
                 channel.description = description
                 channel.setBypassDnd(true)
                 channel.enableLights(true)
