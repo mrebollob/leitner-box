@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mrebollob.leitnerbox">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -50,15 +51,15 @@
             android:name=".notification.StudyTimeNotificationReceiver"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <receiver
-            android:name=".AutoDoNotDisturbReceiver"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <receiver android:name=".notification.StudyTimeNotificationHelper">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="74191977ac775d9e34de7cdabf2a5840cb9a3ab1" />
 
     </application>
 
