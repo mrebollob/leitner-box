@@ -24,4 +24,8 @@ interface LocalDataSource {
     suspend fun saveNotificationEnable(enable: Boolean)
 
     suspend fun getNotificationEnable(): Boolean
+
+    suspend fun getLastDayCompleted(): Int
+
+    suspend fun saveLastDayCompleted(dayNumber: Int)
 }

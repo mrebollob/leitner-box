@@ -7,7 +7,6 @@ import java.util.*
 
 class RepositoryImp(private val local: LocalDataSource) : Repository {
 
-
     override suspend fun isFirstStart(): Boolean = local.isFirstStart()
 
     override suspend fun setFirstStart(isFirstStart: Boolean) = local.setFirstStart(isFirstStart)
@@ -28,4 +27,9 @@ class RepositoryImp(private val local: LocalDataSource) : Repository {
     override suspend fun saveLevelsCount(levelsCount: Int) = local.saveLevelsCount(levelsCount)
 
     override suspend fun getLevelsCount(): Int = local.getLevelsCount()
+
+    override suspend fun getLastDayCompleted(): Int = local.getLastDayCompleted()
+
+    override suspend fun saveLastDayCompleted(dayNumber: Int) =
+        local.saveLastDayCompleted(dayNumber)
 }

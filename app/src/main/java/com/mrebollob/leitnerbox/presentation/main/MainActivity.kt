@@ -66,8 +66,8 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
         replaceFragment(fragment, R.id.fragment_container)
     }
 
-    override fun onDoneClick() {
-        toast("onDoneClick")
+    override fun onDayCompleted() {
+      presenter.onDayCompleted()
     }
 
     override fun showCountdownView() {

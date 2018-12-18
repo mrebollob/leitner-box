@@ -4,9 +4,11 @@
 
     <string name="main_view_day_number">"Day %1$d"</string>
     <string name="main_view_levels_to_review">"to review: Levels %1$s"</string>
+    <string name="leitner_view_mark_as_done_button">Mark as done</string>
+    <string name="leitner_view_day_done_button">Day done, congratulations!</string>
 
     <string name="countdown_view_study_time">Study time: %1$s</string>
-    <string name="countdown_view_completed_time">Done!</string>
+    <string name="countdown_view_completed_time">Time to study!</string>
     <string name="countdown_view_skip_countdown">Show leitner box</string>
 
     <string name="intro_title_1">Ese que llega tiene musho peligro</string>

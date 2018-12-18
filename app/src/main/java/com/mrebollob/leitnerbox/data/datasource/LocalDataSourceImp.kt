@@ -13,6 +13,7 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
         private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"
         private const val LEVELS_COUNT_KEY = "LEVELS_COUNT_KEY"
         private const val NOTIFICATION_ENABLE_KEY = "NOTIFICATION_ENABLE_KEY"
+        private const val LAST_DAY_COMPLETED_KEY = "LAST_DAY_COMPLETED_KEY"
     }
 
     private val sharedPreferences = context.getSharedPreferences("leitnerbox", Context.MODE_PRIVATE)
@@ -86,4 +87,13 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
 
     override suspend fun getNotificationEnable(): Boolean =
         sharedPreferences.getBoolean(NOTIFICATION_ENABLE_KEY, true)
+
+    override suspend fun getLastDayCompleted(): Int =
+        sharedPreferences.getInt(LAST_DAY_COMPLETED_KEY, -1)
+
+    override suspend fun saveLastDayCompleted(dayNumber: Int) {
+        sharedPreferences.edit()
+            .putInt(LAST_DAY_COMPLETED_KEY, dayNumber)
+            .apply()
+    }
 }

@@ -34,6 +34,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     private fun initUI() {
         levelsListView.adapter = levelsAdapter
+        dayDoneButton.setOnClickListener { presenter.onDoneClick() }
     }
 
     override fun showCurrentNumberDay(currentDay: Int) {
@@ -47,8 +48,16 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
     }
 
-    override fun showDayAsDone() {
-        listener?.onDoneClick()
+    override fun showDayDone() {
+        dayDoneButton.text = getString(R.string.leitner_view_day_done_button)
+    }
+
+    override fun showDayToDo() {
+        dayDoneButton.text = getString(R.string.leitner_view_mark_as_done_button)
+    }
+
+    override fun onDayCompleted() {
+        listener?.onDayCompleted()
     }
 
     override fun onAttach(context: Context) {
@@ -67,7 +76,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
     }
 
     interface LeitnerBoxFragmentListener {
-        fun onDoneClick()
+        fun onDayCompleted()
     }
 
     companion object {

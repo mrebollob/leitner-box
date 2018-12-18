@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
+import com.mrebollob.leitnerbox.util.extensions.gone
+import com.mrebollob.leitnerbox.util.extensions.visible
 import kotlinx.android.synthetic.main.fragment_countdown.*
 import org.koin.android.ext.android.inject
 
@@ -43,8 +45,13 @@ class CountdownFragment : Fragment(), CountdownView {
                 getString(R.string.countdown_view_study_time, studyTime.getString())
     }
 
-    override fun showCountdown(studyTime: Hour) {
-        val remainingTime = studyTime.getCalendarForToday().time.time - System.currentTimeMillis()
+    override fun showCountdown(studyTime: Hour, addDay: Boolean) {
+
+        var remainingTime = studyTime.getCalendarForToday().time.time - System.currentTimeMillis()
+
+        if (addDay) {
+            remainingTime += ONE_DAY_MILLIS
+        }
 
         countDownTimer = object : CountDownTimer(remainingTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -59,6 +66,7 @@ class CountdownFragment : Fragment(), CountdownView {
                     R.plurals.hour_format,
                     hours.toInt(), hours
                 )
+                minutesTextView.visible()
                 minutesTextView.text = res.getQuantityString(
                     R.plurals.minute_format,
                     minutes.toInt(), minutes
@@ -66,8 +74,9 @@ class CountdownFragment : Fragment(), CountdownView {
             }
 
             override fun onFinish() {
+                updateCircleProgressView(0)
                 hoursTextView.text = getString(R.string.countdown_view_completed_time)
-                minutesTextView.text = ""
+                minutesTextView.gone()
             }
         }.start()
     }
@@ -102,6 +111,8 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     companion object {
+        const val ONE_DAY_MILLIS: Long = 86400000
+
         @JvmStatic
         fun newInstance() = CountdownFragment()
     }

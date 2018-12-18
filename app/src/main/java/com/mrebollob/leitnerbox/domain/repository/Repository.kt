@@ -24,4 +24,8 @@ interface Repository {
     suspend fun saveLevelsCount(levelsCount: Int)
 
     suspend fun getLevelsCount(): Int
+
+    suspend fun getLastDayCompleted(): Int
+
+    suspend fun saveLastDayCompleted(dayNumber: Int)
 }

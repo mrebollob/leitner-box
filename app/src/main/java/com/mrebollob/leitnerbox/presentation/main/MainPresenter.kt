@@ -55,6 +55,10 @@ class MainPresenter(
     fun onShowLeitnerBoxClick() {
         view?.showLeitnerView()
     }
+
+    fun onDayCompleted() {
+        view?.showCountdownView()
+    }
 }
 
 interface MainView {
