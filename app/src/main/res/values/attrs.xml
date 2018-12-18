@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SettingItemView">
+        <attr name="settingsTitle" format="string" />
+        <attr name="settingsValue" format="string" />
+        <attr name="settingsEnabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SettingBooleanItemView">
+        <attr name="settingsBooleanTitle" format="string" />
+        <attr name="settingsBooleanSubTitle" format="string" />
+        <attr name="settingsBooleanValue" format="boolean" />
+    </declare-styleable>
+</resources>

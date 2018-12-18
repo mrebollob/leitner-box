@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".presentation.about.AboutActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:text="@string/about_descripcion"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@color/divider" />
+
+        <com.mrebollob.leitnerbox.util.view.SettingItemView
+            android:id="@+id/sourceCodeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingsTitle="@string/about_source_code"
+            app:settingsValue="@string/about_source_code_link" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <com.mrebollob.leitnerbox.util.view.SettingItemView
+            android:id="@+id/appVersionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingsTitle="@string/about_version"
+            app:settingsValue="" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <com.mrebollob.leitnerbox.util.view.SettingItemView
+            android:id="@+id/tutorialView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingsTitle="@string/about_tutorial"
+            app:settingsValue="@string/about_tutorial_descripcion" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <com.mrebollob.leitnerbox.util.view.SettingItemView
+            android:id="@+id/recommendedReadingView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingsTitle="@string/about_recommended_reading"
+            app:settingsValue="@string/about_recommended_reading_descripcion" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <com.mrebollob.leitnerbox.util.view.SettingItemView
+            android:id="@+id/licenseView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingsTitle="@string/about_license"
+            app:settingsValue="@string/about_license_name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
