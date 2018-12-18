@@ -1,15 +1,24 @@
 package com.mrebollob.leitnerbox.presentation.main
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver
+import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
+import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.about.AboutActivity
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
-import com.mrebollob.leitnerbox.presentation.leitnerbox.adapter.LevelsAdapter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
+import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.replaceFragment
 import org.koin.android.ext.android.inject
 
@@ -17,7 +26,6 @@ import org.koin.android.ext.android.inject
 class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFragmentListener {
 
     val presenter: MainPresenter by inject()
-    private val levelsAdapter = LevelsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,5 +75,46 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
 
     override fun goToAboutScreen() {
         AboutActivity.open(this)
+    }
+
+    override fun initNotification(studyHour: Hour) {
+
+        val studyTime = studyHour.getCalendarForToday()
+
+        if (studyTime.timeInMillis < System.currentTimeMillis()) {
+            studyTime.timeInMillis = studyTime.timeInMillis + ONE_DAY_MILLIS
+        }
+
+        val notificationIntent = Intent(this, StudyTimeNotificationReceiver::class.java)
+        val notificationPendingIntent = PendingIntent.getBroadcast(
+            this,
+            FIRST_NOTIFICATION_ALARM_REQUEST_CODE,
+            notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val am = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            am.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                studyTime.timeInMillis,
+                notificationPendingIntent
+            )
+        } else {
+            am.setExact(AlarmManager.RTC_WAKEUP, studyTime.timeInMillis, notificationPendingIntent)
+        }
+    }
+
+    override fun cancelNextNotification() {
+        val notificationIntent = Intent(this, StudyTimeNotificationReceiver::class.java)
+        val notificationPendingIntent = PendingIntent.getBroadcast(
+            this,
+            FIRST_NOTIFICATION_ALARM_REQUEST_CODE,
+            notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        am.cancel(notificationPendingIntent)
     }
 }
