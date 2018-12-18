@@ -29,13 +29,17 @@ class MainPresenter(
             } else {
                 view.showCountdownView()
             }
+        }
+    }
 
+    fun refreshConfig() {
+        GlobalScope.launch(context = executor.main) {
             val isEnable = getNotificationEnable(repository)
             if (isEnable) {
                 val studyHour = getStudyTime(repository)
-                view.initNotification(studyHour)
+                view?.initNotification(studyHour)
             } else {
-                view.cancelNextNotification()
+                view?.cancelNextNotification()
             }
         }
     }

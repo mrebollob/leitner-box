@@ -21,7 +21,6 @@ import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.replaceFragment
-import com.mrebollob.leitnerbox.util.extensions.toast
 import org.koin.android.ext.android.inject
 
 
@@ -33,11 +32,13 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        presenter.attachView(this)
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.attachView(this)
+        presenter.refreshConfig()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,7 +68,7 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     }
 
     override fun onDayCompleted() {
-      presenter.onDayCompleted()
+        presenter.onDayCompleted()
     }
 
     override fun showCountdownView() {
