@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Leitner Box</string>
 
     <string name="main_view_day_number">"Day %1$d"</string>
     <string name="main_view_levels_to_review">"to review: Levels %1$s"</string>
+
+    <string name="countdown_view_study_time">Study time: %1$s</string>
+    <string name="countdown_view_completed_time">Done!</string>
 
     <string name="intro_title_1">Ese que llega tiene musho peligro</string>
     <string name="intro_descripcion_1">Lorem fistrum a wan no te digo trigo por no llamarte Rodrigor de la pradera diodeno sexuarl.</string>
@@ -36,6 +40,16 @@
         <item>7</item>
     </string-array>
 
+    <plurals name="hour_format">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+
+    <plurals name="minute_format">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+
     <string name="notifTitleFirst">Time to head to bed.</string>
     <string name="notifTitleSingular">It is %d minute past your bedtime!</string>
     <string name="notifTitlePlural">It is %d minutes past your bedtime!</string>
@@ -45,7 +59,4 @@
     <string name="channel_description">Bedtime notifications remind you around your bedtime to go to sleep.</string>
 
     <string name="notifAction">I\'m going to sleep</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

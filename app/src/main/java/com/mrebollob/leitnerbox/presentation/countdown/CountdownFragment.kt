@@ -35,11 +35,13 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     private fun initView() {
+        circleProgressView.currentValue = 2000
         skipButton.setOnClickListener { presenter.onSkipButtonClick() }
     }
 
     override fun showStudyTime(studyTime: Hour) {
-        StudyTimeTextView.text = studyTime.getString()
+        StudyTimeTextView.text =
+                getString(R.string.countdown_view_study_time, studyTime.getString())
     }
 
     override fun showCountdown(studyTime: Hour) {
@@ -52,12 +54,19 @@ class CountdownFragment : Fragment(), CountdownView {
                 val hours = seconds / 3600
                 val minutes = ((seconds - hours * 3600) / 60) + 1
 
-                hoursTextView.text = "hours: $hours"
-                minutesTextView.text = "minutes $minutes"
+                val res = resources
+                hoursTextView.text = res.getQuantityString(
+                    R.plurals.hour_format,
+                    hours.toInt(), hours
+                )
+                minutesTextView.text = res.getQuantityString(
+                    R.plurals.minute_format,
+                    minutes.toInt(), minutes
+                )
             }
 
             override fun onFinish() {
-                hoursTextView.text = "done!"
+                hoursTextView.text = getString(R.string.countdown_view_completed_time)
                 minutesTextView.text = ""
             }
         }.start()

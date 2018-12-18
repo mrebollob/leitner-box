@@ -4,42 +4,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:background="@color/primary"
     tools:context=".presentation.countdown.CountdownFragment">
 
-    <TextView
-        android:id="@+id/StudyTimeTextView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_tiny"
-        android:gravity="center"
-        android:textColor="@color/white_text"
-        android:textSize="@dimen/font_large"
-        tools:text="@string/main_view_levels_to_review" />
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_normal">
 
-    <TextView
-        android:id="@+id/hoursTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_tiny"
-        android:gravity="center"
-        android:textColor="@color/white_text"
-        android:textSize="@dimen/font_large"
-        tools:text="@string/main_view_levels_to_review" />
+        <com.mrebollob.leitnerbox.util.view.CircleProgressView
+            android:id="@+id/circleProgressView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center" />
 
-    <TextView
-        android:id="@+id/minutesTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_tiny"
-        android:gravity="center"
-        android:textColor="@color/white_text"
-        android:textSize="@dimen/font_large"
-        tools:text="@string/main_view_levels_to_review" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hoursTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:gravity="center"
+                android:textColor="@color/white_text"
+                android:textSize="@dimen/font_large"
+                tools:text="@string/main_view_levels_to_review" />
+
+            <TextView
+                android:id="@+id/minutesTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:gravity="center"
+                android:textColor="@color/white_text"
+                android:textSize="@dimen/font_normal"
+                tools:text="@string/main_view_levels_to_review" />
+
+            <TextView
+                android:id="@+id/StudyTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:gravity="center"
+                android:textColor="@color/white_text"
+                android:textSize="@dimen/font_small"
+                tools:text="@string/main_view_levels_to_review" />
+        </LinearLayout>
+    </FrameLayout>
 
     <Button
         android:id="@+id/skipButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola"/>
-
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:text="Hola" />
 </LinearLayout>
