@@ -2,6 +2,7 @@ package com.mrebollob.leitnerbox.data.repository
 
 import com.mrebollob.leitnerbox.data.datasource.LocalDataSource
 import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import java.util.*
 
@@ -28,8 +29,8 @@ class RepositoryImp(private val local: LocalDataSource) : Repository {
 
     override suspend fun getLevelsCount(): Int = local.getLevelsCount()
 
-    override suspend fun getLastDayCompleted(): Int = local.getLastDayCompleted()
+    override suspend fun getLastDayCompleted(): LeitnerDay = local.getLastDayCompleted()
 
-    override suspend fun saveLastDayCompleted(dayNumber: Int) =
-        local.saveLastDayCompleted(dayNumber)
+    override suspend fun saveLastDayCompleted(day: LeitnerDay) =
+        local.saveLastDayCompleted(day)
 }

@@ -2,6 +2,7 @@ package com.mrebollob.leitnerbox.presentation.leitnerbox
 
 import com.mrebollob.leitnerbox.domain.LeitnerBox
 import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.domain.usecase.getLastDayCompleted
@@ -19,7 +20,7 @@ class LeitnerBoxPresenter(
 ) : Presenter<LeitnerBoxView> {
 
     private var view: LeitnerBoxView? = null
-    private var currentNumberDay = 0
+    private var currentDay = LeitnerDay(0)
 
     override fun attachView(view: LeitnerBoxView) {
         this.view = view
@@ -32,12 +33,12 @@ class LeitnerBoxPresenter(
     }
 
     fun onDayCompletedClick() = GlobalScope.launch(context = executor.main) {
-        saveLastDayCompleted(repository, currentNumberDay)
+        saveLastDayCompleted(repository, currentDay)
         view?.onDayCompleted()
     }
 
     private fun updateDoneView() = GlobalScope.launch(context = executor.main) {
-        if (isDayCompleted(repository, currentNumberDay)) {
+        if (isDayCompleted(repository, currentDay)) {
             view?.showDayDone()
         } else {
             view?.showDayToDo()
@@ -47,10 +48,10 @@ class LeitnerBoxPresenter(
     private fun loadLevels() = GlobalScope.launch(context = executor.main) {
 
         val lastDayCompleted = getLastDayCompleted(repository)
-        currentNumberDay = lastDayCompleted + 1
+        currentDay = LeitnerDay(lastDayCompleted.number + 1)
 
-        view?.showCurrentNumberDay(currentNumberDay)
-        val levels = getLevels(leitnerBox, currentNumberDay)
+        view?.showCurrentNumberDay(currentDay.number)
+        val levels = getLevels(leitnerBox, currentDay.number)
         view?.showLevels(levels)
 
         updateDoneView()

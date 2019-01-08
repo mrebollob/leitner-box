@@ -12,7 +12,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 1)
+        val levels = leitnerBox.getLevelsForDay(1)
 
         Assert.assertEquals(
             arrayListOf(2, 1),
@@ -25,7 +25,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 2)
+        val levels = leitnerBox.getLevelsForDay(2)
 
         Assert.assertEquals(
             arrayListOf(3, 1),
@@ -38,7 +38,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 10)
+        val levels = leitnerBox.getLevelsForDay(10)
 
         Assert.assertEquals(
             arrayListOf(3, 1),
@@ -51,7 +51,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 24)
+        val levels = leitnerBox.getLevelsForDay(24)
 
         Assert.assertEquals(
             arrayListOf(6, 1),
@@ -64,7 +64,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 29)
+        val levels = leitnerBox.getLevelsForDay(29)
 
         Assert.assertEquals(
             arrayListOf(4, 2, 1),
@@ -77,7 +77,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 56)
+        val levels = leitnerBox.getLevelsForDay(56)
 
         Assert.assertEquals(
             arrayListOf(7, 1),
@@ -90,7 +90,7 @@ class LeitnerBoxTest {
 
         val leitnerBox = getLeitnerBox()
 
-        val levels = leitnerBox.getLevelsForDay(7, 64)
+        val levels = leitnerBox.getLevelsForDay(64)
 
         Assert.assertEquals(arrayListOf(1), levels.filter { it.active }.map { it.index }.reversed())
     }
