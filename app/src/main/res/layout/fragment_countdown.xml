@@ -47,7 +47,7 @@
                 tools:text="@string/main_view_levels_to_review" />
 
             <TextView
-                android:id="@+id/StudyTimeTextView"
+                android:id="@+id/studyTimeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"

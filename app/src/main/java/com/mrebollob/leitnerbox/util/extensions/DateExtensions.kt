@@ -5,6 +5,8 @@ import java.util.*
 import java.util.Calendar.HOUR
 
 
+const val ONE_DAY_MILLIS: Long = 86400000
+
 fun Date.getDaysBetween(endDate: Date): Int = with(this) {
     val todayCalendar = Calendar.getInstance()
     todayCalendar.time = this

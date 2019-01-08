@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.gone
 import com.mrebollob.leitnerbox.util.extensions.visible
@@ -44,12 +45,10 @@ class CountdownFragment : Fragment(), CountdownView {
         skipButton.setOnClickListener { presenter.onSkipButtonClick() }
     }
 
-    override fun showStudyTime(studyTime: Hour) {
-        StudyTimeTextView.text =
-                getString(R.string.countdown_view_study_time, studyTime.getString())
-    }
+    override fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean) {
 
-    override fun showCountdown(studyTime: Hour, addDay: Boolean) {
+        studyTimeTextView.text =
+                getString(R.string.countdown_view_study_time, studyTime.getString())
 
         var remainingTime = studyTime.getCalendarForToday().time.time - System.currentTimeMillis()
 
@@ -128,7 +127,6 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     companion object {
-        const val ONE_DAY_MILLIS: Long = 86400000
 
         @JvmStatic
         fun newInstance() = CountdownFragment()

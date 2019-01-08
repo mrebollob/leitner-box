@@ -30,8 +30,7 @@ class CountdownPresenter(
     private fun loadDate() = GlobalScope.launch(context = executor.main) {
 
         val studyHour = getStudyTime(repository)
-        view?.showStudyTime(studyHour)
-        view?.showCountdown(
+        view?.showStudyTimeCountdown(
             studyHour,
             isTodayCompleted(repository, Date())
         )
@@ -43,7 +42,6 @@ class CountdownPresenter(
 }
 
 interface CountdownView {
-    fun showStudyTime(studyTime: Hour)
-    fun showCountdown(studyTime: Hour, addDay: Boolean)
+    fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean)
     fun goToLeitnerBoxScreen()
 }

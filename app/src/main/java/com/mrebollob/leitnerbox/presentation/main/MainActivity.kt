@@ -12,13 +12,13 @@ import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
-import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.about.AboutActivity
 import com.mrebollob.leitnerbox.presentation.countdown.CountdownFragment
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
+import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.replaceFragment
 import com.mrebollob.leitnerbox.util.extensions.replaceFragmentWithAnimation
