@@ -4,8 +4,6 @@ import com.mrebollob.leitnerbox.domain.LeitnerBox
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.repository.Repository
-import com.mrebollob.leitnerbox.util.extensions.getDaysBetween
-import java.util.*
 
 
 suspend fun isFirstStart(repository: Repository): Boolean = repository.isFirstStart()
@@ -13,23 +11,12 @@ suspend fun isFirstStart(repository: Repository): Boolean = repository.isFirstSt
 suspend fun setFirstStart(repository: Repository, isFirstStart: Boolean) =
     repository.setFirstStart(isFirstStart)
 
-suspend fun getStartDate(repository: Repository): Date = repository.getStartDate()
-
-suspend fun saveStartDate(repository: Repository, startDate: Date) =
-    repository.saveStartDate(startDate)
 
 suspend fun getStudyTime(repository: Repository): Hour = repository.getStudyTime()
 
 suspend fun saveStudyTime(repository: Repository, hour: Hour) =
     repository.saveStudyTime(hour)
 
-suspend fun getLevelsCount(repository: Repository): Int = repository.getLevelsCount()
-
-suspend fun saveLevelsCount(repository: Repository, levelsCount: Int) =
-    repository.saveLevelsCount(levelsCount)
-
-suspend fun getCurrentDay(repository: Repository, now: Date): Int =
-    repository.getStartDate().getDaysBetween(now) + 1
 
 suspend fun saveNotificationEnable(repository: Repository, enable: Boolean) =
     repository.saveNotificationEnable(enable)
@@ -37,20 +24,19 @@ suspend fun saveNotificationEnable(repository: Repository, enable: Boolean) =
 suspend fun getNotificationEnable(repository: Repository): Boolean =
     repository.getNotificationEnable()
 
-suspend fun getLevels(repository: Repository, leitnerBox: LeitnerBox, now: Date): List<Level> {
 
-    val levelCount = repository.getLevelsCount()
-    val currentDay = getCurrentDay(repository, now)
-
-    return leitnerBox.getLevelsForDay(levelCount, currentDay)
+suspend fun getLevels(leitnerBox: LeitnerBox, dayNumber: Int): List<Level> {
+    return leitnerBox.getLevelsForDay(dayNumber)
 }
 
-suspend fun isDayCompleted(repository: Repository, now: Date): Boolean {
-    val currentDay = getCurrentDay(repository, now)
-    val lastDayCompleted = repository.getLastDayCompleted()
-    return lastDayCompleted >= currentDay
-}
+
+suspend fun getLastDayCompleted(repository: Repository): Int = repository.getLastDayCompleted()
 
 suspend fun saveLastDayCompleted(repository: Repository, dayNumber: Int) =
     repository.saveLastDayCompleted(dayNumber)
+
+suspend fun isDayCompleted(repository: Repository, dayNumber: Int): Boolean {
+    val lastDayCompleted = getLastDayCompleted(repository)
+    return dayNumber >= lastDayCompleted
+}
 

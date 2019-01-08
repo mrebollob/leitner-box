@@ -3,9 +3,11 @@ package com.mrebollob.leitnerbox.domain
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mrebollob.leitnerbox.domain.model.Level
+import timber.log.Timber
 
+private const val LEVELS_COUNT = 7
 
-class LeitnerBox(val gson: Gson) {
+class LeitnerBox(private val gson: Gson) {
 
     // data from https://ncase.me/remember/
     private var calendarJson = """[
@@ -19,11 +21,16 @@ class LeitnerBox(val gson: Gson) {
 	[2,1],	[3,1],	[6,2,1],[5,1], [4,2,1],	[3,1],	[2,1],	[1]
     ]"""
 
-    fun getLevelsForDay(levelsCount: Int, day: Int): List<Level> {
+    fun getLevelsForDay(day: Int): List<Level> {
 
         val levels = mutableListOf<Level>()
 
-        for (index in 1..levelsCount) {
+        if (day < 1) {
+            Timber.e("Day number error!")
+            return levels
+        }
+
+        for (index in 1..LEVELS_COUNT) {
             levels.add(
                 Level(
                     index,

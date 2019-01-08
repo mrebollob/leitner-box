@@ -89,7 +89,7 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
         sharedPreferences.getBoolean(NOTIFICATION_ENABLE_KEY, true)
 
     override suspend fun getLastDayCompleted(): Int =
-        sharedPreferences.getInt(LAST_DAY_COMPLETED_KEY, -1)
+        sharedPreferences.getInt(LAST_DAY_COMPLETED_KEY, 0)
 
     override suspend fun saveLastDayCompleted(dayNumber: Int) {
         sharedPreferences.edit()

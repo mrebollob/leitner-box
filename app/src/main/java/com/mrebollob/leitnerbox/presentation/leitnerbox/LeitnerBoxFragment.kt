@@ -38,7 +38,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     private fun initUI() {
         levelsListView.adapter = levelsAdapter
-        dayDoneButton.setOnClickListener { presenter.onDoneClick() }
+        dayDoneButton.setOnClickListener { presenter.onDayCompletedClick() }
     }
 
     override fun showCurrentNumberDay(currentDay: Int) {
@@ -47,6 +47,11 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     override fun showLevels(levels: List<Level>) {
         levelsAdapter.levels = levels
+
+        if (levels.isEmpty()) {
+            return
+        }
+
         val names = levels.filter { it.active }.map { it.name }.reversed()
             .reduce { acc, string -> "$acc, $string" }
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)

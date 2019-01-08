@@ -4,11 +4,9 @@ import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
-import com.mrebollob.leitnerbox.domain.usecase.isDayCompleted
 import com.mrebollob.leitnerbox.presentation.Presenter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 class CountdownPresenter(
     private val executor: Executor,
@@ -24,7 +22,7 @@ class CountdownPresenter(
 
             val studyHour = getStudyTime(repository)
             view.showStudyTime(studyHour)
-            view.showCountdown(studyHour, isDayCompleted(repository, Date()))
+            view.showCountdown(studyHour, false)
         }
     }
 
