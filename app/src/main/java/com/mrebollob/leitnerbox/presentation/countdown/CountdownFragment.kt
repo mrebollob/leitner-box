@@ -59,6 +59,10 @@ class CountdownFragment : Fragment(), CountdownView {
         countDownTimer = object : CountDownTimer(remainingTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
+                if (!isAdded) {
+                    return
+                }
+
                 val seconds = millisUntilFinished / 1000
                 val hours = seconds / 3600
                 val minutes = ((seconds - hours * 3600) / 60) + 1
