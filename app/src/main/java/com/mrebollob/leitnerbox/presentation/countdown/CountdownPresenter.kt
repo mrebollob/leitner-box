@@ -36,12 +36,17 @@ class CountdownPresenter(
         )
     }
 
-    fun onSkipButtonClick() {
-        view?.goToLeitnerBoxScreen()
+    fun onShowLeitnerClick() {
+        if (false) {
+            view?.goToLeitnerBoxScreen()
+        } else {
+            view?.showAdvanceTimeError()
+        }
     }
 }
 
 interface CountdownView {
     fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean)
+    fun showAdvanceTimeError()
     fun goToLeitnerBoxScreen()
 }

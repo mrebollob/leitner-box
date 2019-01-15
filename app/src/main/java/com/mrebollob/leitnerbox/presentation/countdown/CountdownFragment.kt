@@ -12,6 +12,7 @@ import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.gone
+import com.mrebollob.leitnerbox.util.extensions.snack
 import com.mrebollob.leitnerbox.util.extensions.visible
 import kotlinx.android.synthetic.main.fragment_countdown.*
 import org.koin.android.ext.android.inject
@@ -42,7 +43,7 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     private fun initView() {
-        skipButton.setOnClickListener { presenter.onSkipButtonClick() }
+        showLeitnerButton.setOnClickListener { presenter.onShowLeitnerClick() }
     }
 
     override fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean) {
@@ -104,6 +105,10 @@ class CountdownFragment : Fragment(), CountdownView {
         circleProgressView?.apply {
             currentValue = value
         }
+    }
+
+    override fun showAdvanceTimeError() {
+        showLeitnerButton.snack(getString(R.string.settings))
     }
 
     override fun goToLeitnerBoxScreen() {
