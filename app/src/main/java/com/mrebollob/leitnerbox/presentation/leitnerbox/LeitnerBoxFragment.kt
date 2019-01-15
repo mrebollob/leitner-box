@@ -57,14 +57,6 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
     }
 
-    override fun showDayDone() {
-        dayDoneButton.text = getString(R.string.leitner_view_day_done_button)
-    }
-
-    override fun showDayToDo() {
-        dayDoneButton.text = getString(R.string.leitner_view_mark_as_done_button)
-    }
-
     override fun onDayCompleted() {
         listener?.onDayCompleted()
     }
