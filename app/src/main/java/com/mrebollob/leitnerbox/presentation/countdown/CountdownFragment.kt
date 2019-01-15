@@ -1,9 +1,11 @@
 package com.mrebollob.leitnerbox.presentation.countdown
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,6 +115,28 @@ class CountdownFragment : Fragment(), CountdownView {
 
     override fun goToLeitnerBoxScreen() {
         listener?.onGoToLeitnerBoxScreenClick()
+    }
+
+    override fun showLeitnerButtonEnabled() {
+        context?.let {
+            showLeitnerButton.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    it,
+                    R.color.show_leitner_button_color_enabled
+                )
+            )
+        }
+    }
+
+    override fun showLeitnerButtonDisabled() {
+        context?.let {
+            showLeitnerButton.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    it,
+                    R.color.show_leitner_button_color_disabled
+                )
+            )
+        }
     }
 
     override fun onAttach(context: Context) {

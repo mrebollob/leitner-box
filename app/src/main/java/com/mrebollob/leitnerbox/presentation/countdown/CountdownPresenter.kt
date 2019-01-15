@@ -34,14 +34,25 @@ class CountdownPresenter(
             studyHour,
             isTodayCompleted(repository, Date())
         )
+
+        if (isButtonEnabled()) {
+            view?.showLeitnerButtonEnabled()
+        } else {
+            view?.showLeitnerButtonDisabled()
+        }
     }
 
     fun onShowLeitnerClick() {
-        if (false) {
+        if (isButtonEnabled()) {
             view?.goToLeitnerBoxScreen()
         } else {
             view?.showAdvanceTimeError()
         }
+    }
+
+    private fun isButtonEnabled(): Boolean {
+        // TODO check study time
+        return false
     }
 }
 
@@ -49,4 +60,6 @@ interface CountdownView {
     fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean)
     fun showAdvanceTimeError()
     fun goToLeitnerBoxScreen()
+    fun showLeitnerButtonEnabled()
+    fun showLeitnerButtonDisabled()
 }

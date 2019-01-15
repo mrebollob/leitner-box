@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/countDownView"
     android:layout_width="match_parent"
@@ -65,5 +66,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_start" />
+        android:src="@drawable/ic_start"
+        app:backgroundTint="@color/show_leitner_button_color_enabled" />
 </android.support.design.widget.CoordinatorLayout>

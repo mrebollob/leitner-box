@@ -10,6 +10,9 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="show_leitner_button_color_enabled">#2196F3</color>
+    <color name="show_leitner_button_color_disabled">#BDBDBD</color>
+
     <!-- level colors -->
     <color name="level_1">#f44336</color>
     <color name="level_2">#e91e63</color>
