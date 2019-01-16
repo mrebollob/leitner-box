@@ -3,9 +3,9 @@
     <string name="app_name">Leitner Box</string>
 
     <string name="main_view_day_number">"Day %1$d"</string>
+    <string name="leitner_view_first_day">Your first day!</string>
     <string name="main_view_levels_to_review">"to review: Levels %1$s"</string>
-    <string name="leitner_view_mark_as_done_button">Mark as done</string>
-    <string name="leitner_view_day_done_button">Day done, congratulations!</string>
+    <string name="leitner_view_first_day_info">Add cards at level 1</string>
 
     <string name="countdown_view_study_time">Study time: %1$s</string>
     <string name="countdown_view_completed_time">Time to study!</string>

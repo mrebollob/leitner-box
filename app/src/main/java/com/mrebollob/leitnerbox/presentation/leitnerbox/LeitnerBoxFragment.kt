@@ -41,13 +41,16 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         doneButton.setOnClickListener { presenter.onDayCompletedClick() }
     }
 
+    override fun showFirstDayTitle() {
+        dayTextView.text = getString(R.string.leitner_view_first_day)
+        levelsTextView.text = getString(R.string.leitner_view_first_day_info)
+    }
+
     override fun showCurrentNumberDay(currentDay: Int) {
         dayTextView.text = getString(R.string.main_view_day_number, currentDay)
     }
 
-    override fun showLevels(levels: List<Level>) {
-        levelsAdapter.levels = levels
-
+    override fun showLevelsToReview(levels: List<Level>) {
         if (levels.isEmpty()) {
             return
         }
@@ -55,6 +58,10 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         val names = levels.filter { it.active }.map { it.name }.reversed()
             .reduce { acc, string -> "$acc, $string" }
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
+    }
+
+    override fun showLevels(levels: List<Level>) {
+        levelsAdapter.levels = levels
     }
 
     override fun onDayCompleted() {

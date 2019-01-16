@@ -40,15 +40,22 @@ class LeitnerBoxPresenter(
 
         val lastDayCompleted = getLastDayCompleted(repository)
         currentDay = LeitnerDay(lastDayCompleted.number)
-
-        view?.showCurrentNumberDay(currentDay.number)
         val levels = getLevels(leitnerBox, currentDay.number)
         view?.showLevels(levels)
+
+        if (currentDay.number == 0) {
+            view?.showFirstDayTitle()
+        } else {
+            view?.showCurrentNumberDay(currentDay.number)
+            view?.showLevelsToReview(levels)
+        }
     }
 }
 
 interface LeitnerBoxView {
+    fun showFirstDayTitle()
     fun showCurrentNumberDay(currentDay: Int)
+    fun showLevelsToReview(levels: List<Level>)
     fun showLevels(levels: List<Level>)
     fun onDayCompleted()
 }
