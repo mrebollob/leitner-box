@@ -110,7 +110,12 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     override fun showAdvanceTimeError() {
-        showLeitnerButton.snack(getString(R.string.settings))
+        showLeitnerButton.snack(
+            getString(
+                R.string.countdown_view_advance_time_error,
+                STUDY_HOUR_THRESHOLD
+            )
+        )
     }
 
     override fun goToLeitnerBoxScreen() {
