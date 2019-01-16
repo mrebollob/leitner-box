@@ -92,12 +92,11 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
     override suspend fun getLastDayCompleted(): LeitnerDay {
         val jsonDay = sharedPreferences.getString(LAST_DAY_COMPLETED_KEY, "")
 
-        if (jsonDay.isNullOrEmpty()) {
-            //TODO return error
-            return LeitnerDay(0, Date(0))
+        return if (jsonDay.isNullOrEmpty()) {
+            LeitnerDay(0, Date(0))
+        } else {
+            gson.fromJson(jsonDay, LeitnerDay::class.java)
         }
-
-        return gson.fromJson(jsonDay, LeitnerDay::class.java)
     }
 
     override suspend fun saveLastDayCompleted(day: LeitnerDay) {

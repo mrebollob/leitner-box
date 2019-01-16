@@ -32,18 +32,11 @@ suspend fun getLevels(leitnerBox: LeitnerBox, dayNumber: Int): List<Level> {
     return leitnerBox.getLevelsForDay(dayNumber)
 }
 
-
 suspend fun getLastDayCompleted(repository: Repository): LeitnerDay =
     repository.getLastDayCompleted()
 
 suspend fun saveLastDayCompleted(repository: Repository, day: LeitnerDay) =
     repository.saveLastDayCompleted(day)
-
-suspend fun isDayCompleted(repository: Repository, day: LeitnerDay): Boolean {
-
-    val lastDayCompleted = getLastDayCompleted(repository)
-    return day.number >= lastDayCompleted.number
-}
 
 suspend fun isTodayCompleted(repository: Repository, today: Date): Boolean {
 

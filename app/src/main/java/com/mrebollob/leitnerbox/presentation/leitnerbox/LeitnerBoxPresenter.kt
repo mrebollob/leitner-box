@@ -39,7 +39,7 @@ class LeitnerBoxPresenter(
     private fun loadLevels() = GlobalScope.launch(context = executor.main) {
 
         val lastDayCompleted = getLastDayCompleted(repository)
-        currentDay = LeitnerDay(lastDayCompleted.number + 1)
+        currentDay = LeitnerDay(lastDayCompleted.number)
 
         view?.showCurrentNumberDay(currentDay.number)
         val levels = getLevels(leitnerBox, currentDay.number)

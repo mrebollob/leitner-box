@@ -3,7 +3,6 @@ package com.mrebollob.leitnerbox.domain
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mrebollob.leitnerbox.domain.model.Level
-import timber.log.Timber
 
 private const val LEVELS_COUNT = 7
 
@@ -25,17 +24,12 @@ class LeitnerBox(private val gson: Gson) {
 
         val levels = mutableListOf<Level>()
 
-        if (day < 1) {
-            Timber.e("Day number error!")
-            return levels
-        }
-
         for (index in 1..LEVELS_COUNT) {
             levels.add(
                 Level(
                     index,
                     "$index",
-                    isActive(index, getLevelList(day - 1))
+                    isActive(index, day, getLevelList(day))
                 )
             )
         }
@@ -43,7 +37,11 @@ class LeitnerBox(private val gson: Gson) {
         return levels
     }
 
-    private fun isActive(index: Int, activeLevels: List<Int>): Boolean {
+    private fun isActive(index: Int, day: Int, activeLevels: List<Int>): Boolean {
+        if (day < 1) {
+            return index == 1
+        }
+
         return activeLevels.contains(index)
     }
 
