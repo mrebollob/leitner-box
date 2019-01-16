@@ -12,6 +12,7 @@
 
     <color name="show_leitner_button_color_enabled">#2196F3</color>
     <color name="show_leitner_button_color_disabled">#BDBDBD</color>
+    <color name="done_button_color">#4CAF50</color>
 
     <!-- level colors -->
     <color name="level_1">#f44336</color>

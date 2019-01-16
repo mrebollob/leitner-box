@@ -38,7 +38,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     private fun initUI() {
         levelsListView.adapter = levelsAdapter
-        dayDoneButton.setOnClickListener { presenter.onDayCompletedClick() }
+        doneButton.setOnClickListener { presenter.onDayCompletedClick() }
     }
 
     override fun showCurrentNumberDay(currentDay: Int) {
