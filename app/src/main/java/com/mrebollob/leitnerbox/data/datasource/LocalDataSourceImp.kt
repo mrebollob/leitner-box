@@ -3,6 +3,7 @@ package com.mrebollob.leitnerbox.data.datasource
 import android.content.Context
 import com.google.gson.Gson
 import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import java.util.*
 
 class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSource {
@@ -88,12 +89,19 @@ class LocalDataSourceImp(context: Context, private val gson: Gson) : LocalDataSo
     override suspend fun getNotificationEnable(): Boolean =
         sharedPreferences.getBoolean(NOTIFICATION_ENABLE_KEY, true)
 
-    override suspend fun getLastDayCompleted(): Int =
-        sharedPreferences.getInt(LAST_DAY_COMPLETED_KEY, -1)
+    override suspend fun getLastDayCompleted(): LeitnerDay {
+        val jsonDay = sharedPreferences.getString(LAST_DAY_COMPLETED_KEY, "")
 
-    override suspend fun saveLastDayCompleted(dayNumber: Int) {
+        return if (jsonDay.isNullOrEmpty()) {
+            LeitnerDay(0, Date(0))
+        } else {
+            gson.fromJson(jsonDay, LeitnerDay::class.java)
+        }
+    }
+
+    override suspend fun saveLastDayCompleted(day: LeitnerDay) {
         sharedPreferences.edit()
-            .putInt(LAST_DAY_COMPLETED_KEY, dayNumber)
+            .putString(LAST_DAY_COMPLETED_KEY, gson.toJson(day))
             .apply()
     }
 }

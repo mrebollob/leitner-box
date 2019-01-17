@@ -1,16 +1,20 @@
 package com.mrebollob.leitnerbox.presentation.countdown
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import com.mrebollob.leitnerbox.util.extensions.gone
+import com.mrebollob.leitnerbox.util.extensions.snack
 import com.mrebollob.leitnerbox.util.extensions.visible
 import kotlinx.android.synthetic.main.fragment_countdown.*
 import org.koin.android.ext.android.inject
@@ -41,15 +45,13 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     private fun initView() {
-        skipButton.setOnClickListener { presenter.onSkipButtonClick() }
+        showLeitnerButton.setOnClickListener { presenter.onShowLeitnerClick() }
     }
 
-    override fun showStudyTime(studyTime: Hour) {
-        StudyTimeTextView.text =
+    override fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean) {
+
+        studyTimeTextView.text =
                 getString(R.string.countdown_view_study_time, studyTime.getString())
-    }
-
-    override fun showCountdown(studyTime: Hour, addDay: Boolean) {
 
         var remainingTime = studyTime.getCalendarForToday().time.time - System.currentTimeMillis()
 
@@ -59,6 +61,10 @@ class CountdownFragment : Fragment(), CountdownView {
 
         countDownTimer = object : CountDownTimer(remainingTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
+
+                if (!isAdded) {
+                    return
+                }
 
                 val seconds = millisUntilFinished / 1000
                 val hours = seconds / 3600
@@ -103,8 +109,39 @@ class CountdownFragment : Fragment(), CountdownView {
         }
     }
 
+    override fun showAdvanceTimeError() {
+        showLeitnerButton.snack(
+            getString(
+                R.string.countdown_view_advance_time_error,
+                STUDY_HOUR_THRESHOLD
+            )
+        )
+    }
+
     override fun goToLeitnerBoxScreen() {
         listener?.onGoToLeitnerBoxScreenClick()
+    }
+
+    override fun showLeitnerButtonEnabled() {
+        context?.let {
+            showLeitnerButton.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    it,
+                    R.color.show_leitner_button_color_enabled
+                )
+            )
+        }
+    }
+
+    override fun showLeitnerButtonDisabled() {
+        context?.let {
+            showLeitnerButton.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    it,
+                    R.color.show_leitner_button_color_disabled
+                )
+            )
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -128,7 +165,6 @@ class CountdownFragment : Fragment(), CountdownView {
     }
 
     companion object {
-        const val ONE_DAY_MILLIS: Long = 86400000
 
         @JvmStatic
         fun newInstance() = CountdownFragment()

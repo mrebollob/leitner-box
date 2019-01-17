@@ -3,13 +3,13 @@
     <string name="app_name">Leitner Box</string>
 
     <string name="main_view_day_number">"Day %1$d"</string>
+    <string name="leitner_view_first_day">Your first day!</string>
     <string name="main_view_levels_to_review">"to review: Levels %1$s"</string>
-    <string name="leitner_view_mark_as_done_button">Mark as done</string>
-    <string name="leitner_view_day_done_button">Day done, congratulations!</string>
+    <string name="leitner_view_first_day_info">Add cards at level 1</string>
 
     <string name="countdown_view_study_time">Study time: %1$s</string>
     <string name="countdown_view_completed_time">Time to study!</string>
-    <string name="countdown_view_skip_countdown">Show leitner box</string>
+    <string name="countdown_view_advance_time_error">The button will be enabled %d hours before your study time</string>
 
     <string name="intro_title_1">Ese que llega tiene musho peligro</string>
     <string name="intro_descripcion_1">Lorem fistrum a wan no te digo trigo por no llamarte Rodrigor de la pradera diodeno sexuarl.</string>

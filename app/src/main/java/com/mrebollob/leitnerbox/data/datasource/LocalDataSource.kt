@@ -1,6 +1,7 @@
 package com.mrebollob.leitnerbox.data.datasource
 
 import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import java.util.*
 
 interface LocalDataSource {
@@ -25,7 +26,7 @@ interface LocalDataSource {
 
     suspend fun getNotificationEnable(): Boolean
 
-    suspend fun getLastDayCompleted(): Int
+    suspend fun getLastDayCompleted(): LeitnerDay
 
-    suspend fun saveLastDayCompleted(dayNumber: Int)
+    suspend fun saveLastDayCompleted(day: LeitnerDay)
 }

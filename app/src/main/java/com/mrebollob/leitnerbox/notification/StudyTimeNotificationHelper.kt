@@ -14,7 +14,7 @@ import com.mrebollob.leitnerbox.domain.usecase.getNotificationEnable
 import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.CURRENT_NOTIFICATION_KEY
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
-import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.ONE_DAY_MILLIS
+import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

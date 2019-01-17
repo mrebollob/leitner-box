@@ -17,6 +17,7 @@ import com.mrebollob.leitnerbox.domain.executor.Executor
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
 import com.mrebollob.leitnerbox.presentation.main.MainActivity
+import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -83,7 +84,6 @@ class StudyTimeNotificationReceiver : BroadcastReceiver() {
         internal const val FIRST_NOTIFICATION_ALARM_REQUEST_CODE = 1
         internal const val NOTIFICATION_REQUEST_CODE = 2
         internal const val LAUNCH_APP_REQUEST_CODE = 6
-        internal const val ONE_DAY_MILLIS: Long = 86400000
 
         internal const val CURRENT_NOTIFICATION_KEY = "current_notification"
 

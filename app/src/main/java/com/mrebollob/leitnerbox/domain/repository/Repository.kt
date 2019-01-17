@@ -1,6 +1,7 @@
 package com.mrebollob.leitnerbox.domain.repository
 
 import com.mrebollob.leitnerbox.domain.model.Hour
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import java.util.*
 
 interface Repository {
@@ -25,7 +26,7 @@ interface Repository {
 
     suspend fun getLevelsCount(): Int
 
-    suspend fun getLastDayCompleted(): Int
+    suspend fun getLastDayCompleted(): LeitnerDay
 
-    suspend fun saveLastDayCompleted(dayNumber: Int)
+    suspend fun saveLastDayCompleted(day: LeitnerDay)
 }

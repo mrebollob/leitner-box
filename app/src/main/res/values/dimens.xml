@@ -24,4 +24,6 @@
     <dimen name="default_padding">16dp</dimen>
     <dimen name="item_image_height">140dp</dimen>
 
+    <dimen name="fab_margin">16dp</dimen>
+
 </resources>

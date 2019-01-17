@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/countDownView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -47,7 +49,7 @@
                 tools:text="@string/main_view_levels_to_review" />
 
             <TextView
-                android:id="@+id/StudyTimeTextView"
+                android:id="@+id/studyTimeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
@@ -58,14 +60,12 @@
         </LinearLayout>
     </FrameLayout>
 
-    <Button
-        android:id="@+id/skipButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/showLeitnerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_margin="@dimen/spacing_normal"
-        android:text="@string/countdown_view_skip_countdown"
-        android:textColor="@color/white_text"
-        android:textSize="@dimen/font_normal" />
-</FrameLayout>
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_start"
+        app:backgroundTint="@color/show_leitner_button_color_enabled" />
+</android.support.design.widget.CoordinatorLayout>
