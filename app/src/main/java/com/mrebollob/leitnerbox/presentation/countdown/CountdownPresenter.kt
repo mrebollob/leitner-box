@@ -1,46 +1,52 @@
 package com.mrebollob.leitnerbox.presentation.countdown
 
-import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.interactor.CheckDayDayCompleted
+import com.mrebollob.leitnerbox.domain.interactor.GetStudyTime
+import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
-import com.mrebollob.leitnerbox.domain.model.VOID_HOUR
-import com.mrebollob.leitnerbox.domain.repository.Repository
-import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
-import com.mrebollob.leitnerbox.domain.usecase.isTodayCompleted
 import com.mrebollob.leitnerbox.presentation.Presenter
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.mrebollob.leitnerbox.presentation.View
 import java.util.*
 
 const val STUDY_HOUR_THRESHOLD = 6
 
 class CountdownPresenter(
-    private val executor: Executor,
-    private val repository: Repository
+    private val getStudyTime: GetStudyTime,
+    private val checkDayDayCompleted: CheckDayDayCompleted
 ) : Presenter<CountdownView> {
 
     private var view: CountdownView? = null
-    private var studyHour = VOID_HOUR
+    private var studyHour = Hour.empty()
     private var isTodayCompleted = false
 
     override fun attachView(view: CountdownView) {
         this.view = view
 
-        loadDate()
+        loadData()
     }
 
-    override fun detachView() {
+    private fun loadData() =
+        checkDayDayCompleted(CheckDayDayCompleted.Params(Date())) {
+            it.either(
+                ::handleFailure,
+                ::loadStudyTime
+            )
+        }
 
-    }
+    private fun loadStudyTime(isTodayCompleted: Boolean) =
+        getStudyTime(UseCase.None()) {
+            it.either(
+                ::handleFailure
+            ) { handleStudyTime(it, isTodayCompleted) }
+        }
 
-    private fun loadDate() = GlobalScope.launch(context = executor.main) {
+    private fun handleStudyTime(studyHour: Hour, isTodayCompleted: Boolean) {
 
-        studyHour = getStudyTime(repository)
-        isTodayCompleted = isTodayCompleted(repository, Date())
+        this.studyHour = studyHour
+        this.isTodayCompleted = isTodayCompleted
 
-        view?.showStudyTimeCountdown(
-            studyHour,
-            isTodayCompleted(repository, Date())
-        )
+        view?.showStudyTimeCountdown(studyHour, isTodayCompleted)
 
         if (isLeitnerButtonEnabled()) {
             view?.showLeitnerButtonEnabled()
@@ -58,14 +64,18 @@ class CountdownPresenter(
     }
 
     private fun isLeitnerButtonEnabled(): Boolean =
-        if (studyHour == VOID_HOUR || isTodayCompleted) {
+        if (studyHour == Hour.empty() || isTodayCompleted) {
             false
         } else {
             studyHour.getHoursUntilDate(Date()) < STUDY_HOUR_THRESHOLD
         }
+
+    private fun handleFailure(failure: Failure) {
+        view?.handleFailure(failure)
+    }
 }
 
-interface CountdownView {
+interface CountdownView : View {
     fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean)
     fun showAdvanceTimeError()
     fun goToLeitnerBoxScreen()

@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.util.extensions
+package com.mrebollob.leitnerbox.domain.extension
 
 import android.content.Context
 import android.net.Uri

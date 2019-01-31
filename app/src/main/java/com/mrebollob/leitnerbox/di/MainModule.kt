@@ -1,55 +1,57 @@
 package com.mrebollob.leitnerbox.di
 
 import com.google.gson.Gson
-import com.mrebollob.leitnerbox.data.datasource.LocalDataSource
-import com.mrebollob.leitnerbox.data.datasource.LocalDataSourceImp
-import com.mrebollob.leitnerbox.data.repository.RepositoryImp
-import com.mrebollob.leitnerbox.domain.LeitnerBox
-import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.data.RepositoryImp
+import com.mrebollob.leitnerbox.domain.repository.LeitnerBox
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.presentation.about.AboutPresenter
 import com.mrebollob.leitnerbox.presentation.countdown.CountdownPresenter
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxPresenter
+import com.mrebollob.leitnerbox.presentation.main.FirstStartHandler
 import com.mrebollob.leitnerbox.presentation.main.MainPresenter
 import com.mrebollob.leitnerbox.presentation.settings.SettingsPresenter
-import com.mrebollob.leitnerbox.util.executor.AndroidExecutor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 
 val mainModule = module {
 
     factory { Gson() }
+
     factory { LeitnerBox(get()) }
-    single<Executor> { AndroidExecutor() }
-    single<LocalDataSource> { LocalDataSourceImp(androidContext(), get()) }
-    single<Repository> { RepositoryImp(get()) }
+
+    single<Repository> { RepositoryImp(androidContext(), get()) }
+
+    factory { FirstStartHandler(androidContext()) }
 
     factory {
         MainPresenter(
-            executor = get(),
-            repository = get()
+            getStudyTime = get(),
+            getNotificationEnabled = get(),
+            firstStartHandler = get()
         )
     }
 
     factory {
         LeitnerBoxPresenter(
-            executor = get(),
-            repository = get(),
-            leitnerBox = get()
+            getCurrentDay = get(),
+            saveDayCompleted = get(),
+            getDayLevels = get()
         )
     }
 
     factory {
         CountdownPresenter(
-            executor = get(),
-            repository = get()
+            getStudyTime = get(),
+            checkDayDayCompleted = get()
         )
     }
 
     factory {
         SettingsPresenter(
-            executor = get(),
-            repository = get()
+            getStudyTime = get(),
+            saveStudyTime = get(),
+            getNotificationEnabled = get(),
+            saveNotificationEnabled = get()
         )
     }
 

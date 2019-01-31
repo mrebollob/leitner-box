@@ -25,7 +25,7 @@
             android:textColor="@color/primary_text"
             android:textSize="@dimen/font_normal" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingBooleanItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingBooleanItemView
             android:id="@+id/notificationEnableView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_height="1dp"
             android:background="@color/divider" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingItemView
             android:id="@+id/notificationHourView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

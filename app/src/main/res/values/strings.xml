@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Leitner Box</string>
+    <string name="generic_error">Something was wrong :(</string>
 
     <string name="main_view_day_number">"Day %1$d"</string>
     <string name="leitner_view_first_day">Your first day!</string>
@@ -36,6 +37,9 @@
     <string name="about_tutorial_descripcion">Show app tutorial</string>
     <string name="about_recommended_reading">Recommended reading</string>
     <string name="about_recommended_reading_descripcion">ncase.me/remember</string>
+
+    <string name="notification_title">Study time</string>
+    <string name="notification_content">It\'s time to review your cards</string>
 
     <string-array name="levels_options">
         <item>3</item>

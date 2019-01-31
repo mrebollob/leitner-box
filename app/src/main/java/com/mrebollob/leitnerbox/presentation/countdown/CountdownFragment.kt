@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
+import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
+import com.mrebollob.leitnerbox.domain.extension.gone
+import com.mrebollob.leitnerbox.domain.extension.snack
+import com.mrebollob.leitnerbox.domain.extension.toast
+import com.mrebollob.leitnerbox.domain.extension.visible
 import com.mrebollob.leitnerbox.domain.model.Hour
-import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
-import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
-import com.mrebollob.leitnerbox.util.extensions.gone
-import com.mrebollob.leitnerbox.util.extensions.snack
-import com.mrebollob.leitnerbox.util.extensions.visible
 import kotlinx.android.synthetic.main.fragment_countdown.*
 import org.koin.android.ext.android.inject
 
@@ -51,7 +53,7 @@ class CountdownFragment : Fragment(), CountdownView {
     override fun showStudyTimeCountdown(studyTime: Hour, addDay: Boolean) {
 
         studyTimeTextView.text =
-                getString(R.string.countdown_view_study_time, studyTime.getString())
+            getString(R.string.countdown_view_study_time, studyTime.getString())
 
         var remainingTime = studyTime.getCalendarForToday().time.time - System.currentTimeMillis()
 
@@ -144,12 +146,16 @@ class CountdownFragment : Fragment(), CountdownView {
         }
     }
 
+    override fun handleFailure(failure: Failure) {
+        context?.toast(getString(R.string.generic_error))
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is CountdownListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement CountdownListener")
+            throw RuntimeException("$context must implement CountdownListener")
         }
     }
 

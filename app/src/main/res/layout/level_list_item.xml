@@ -11,7 +11,7 @@
     app:cardCornerRadius="@dimen/cardview_radius"
     app:cardElevation="@dimen/cardview_elevation">
 
-    <com.mrebollob.leitnerbox.util.view.SquareRelativeLayout
+    <com.mrebollob.leitnerbox.presentation.views.SquareRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -32,5 +32,5 @@
             android:textColor="@color/level_2"
             android:textSize="@dimen/font_larger"
             tools:text="1" />
-    </com.mrebollob.leitnerbox.util.view.SquareRelativeLayout>
+    </com.mrebollob.leitnerbox.presentation.views.SquareRelativeLayout>
 </android.support.v7.widget.CardView>

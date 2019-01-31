@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.util.extensions
+package com.mrebollob.leitnerbox.domain.extension
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

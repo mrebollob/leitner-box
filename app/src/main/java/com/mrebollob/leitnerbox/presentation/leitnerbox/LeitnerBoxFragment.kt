@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.leitnerbox.adapter.LevelsAdapter
 import kotlinx.android.synthetic.main.fragment_leitner_box.*
@@ -66,6 +68,10 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     override fun onDayCompleted() {
         listener?.onDayCompleted()
+    }
+
+    override fun handleFailure(failure: Failure) {
+        context?.toast(getString(R.string.generic_error))
     }
 
     override fun onAttach(context: Context) {

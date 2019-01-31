@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:background="@color/divider" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingItemView
             android:id="@+id/sourceCodeView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_height="1dp"
             android:background="@color/divider" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingItemView
             android:id="@+id/appVersionView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_height="1dp"
             android:background="@color/divider" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingItemView
             android:id="@+id/tutorialView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_height="1dp"
             android:background="@color/divider" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingItemView
             android:id="@+id/recommendedReadingView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:layout_height="1dp"
             android:background="@color/divider" />
 
-        <com.mrebollob.leitnerbox.util.view.SettingItemView
+        <com.mrebollob.leitnerbox.presentation.views.SettingItemView
             android:id="@+id/licenseView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

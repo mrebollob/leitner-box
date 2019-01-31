@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginEnd="@dimen/spacing_normal">
 
-        <com.mrebollob.leitnerbox.util.view.CircleProgressView
+        <com.mrebollob.leitnerbox.presentation.views.CircleProgressView
             android:id="@+id/circleProgressView"
             android:layout_width="300dp"
             android:layout_height="300dp"

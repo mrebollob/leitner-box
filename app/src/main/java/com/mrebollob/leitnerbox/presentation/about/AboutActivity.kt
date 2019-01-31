@@ -8,7 +8,7 @@ import com.mrebollob.leitnerbox.BuildConfig
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
-import com.mrebollob.leitnerbox.util.extensions.loadCustomTabs
+import com.mrebollob.leitnerbox.domain.extension.loadCustomTabs
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject

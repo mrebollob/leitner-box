@@ -1,20 +1,18 @@
 package com.mrebollob.leitnerbox.presentation.main
 
 
-import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.interactor.GetNotificationEnable
+import com.mrebollob.leitnerbox.domain.interactor.GetStudyTime
+import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
-import com.mrebollob.leitnerbox.domain.repository.Repository
-import com.mrebollob.leitnerbox.domain.usecase.getNotificationEnable
-import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
-import com.mrebollob.leitnerbox.domain.usecase.isFirstStart
-import com.mrebollob.leitnerbox.domain.usecase.setFirstStart
 import com.mrebollob.leitnerbox.presentation.Presenter
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.mrebollob.leitnerbox.presentation.View
 
 class MainPresenter(
-    private val executor: Executor,
-    private val repository: Repository
+    private val getStudyTime: GetStudyTime,
+    private val getNotificationEnabled: GetNotificationEnable,
+    private val firstStartHandler: FirstStartHandler
 ) : Presenter<MainView> {
 
     private var view: MainView? = null
@@ -22,31 +20,46 @@ class MainPresenter(
     override fun attachView(view: MainView) {
         this.view = view
 
-        GlobalScope.launch(context = executor.main) {
-            if (isFirstStart(repository)) {
-                setFirstStart(repository, false)
-                view.goToIntroScreen()
-            } else {
-                view.showCountdownView(false)
-            }
+        handleFirstStart()
+    }
+
+    private fun handleFirstStart() {
+        if (firstStartHandler.isFirstStart()) {
+            firstStartHandler.saveFirstStart()
+            view?.goToIntroScreen()
+        } else {
+            view?.showCountdownView(false)
         }
     }
 
-    fun refreshConfig() {
-        GlobalScope.launch(context = executor.main) {
-            val isEnable = getNotificationEnable(repository)
-            if (isEnable) {
-                val studyHour = getStudyTime(repository)
-                view?.initNotification(studyHour)
-            } else {
-                view?.cancelNextNotification()
-            }
+    fun refreshConfig() =
+        getNotificationEnabled(UseCase.None()) {
+            it.either(
+                ::handleFailure,
+                ::handleNotificationEnabled
+            )
+        }
+
+    private fun handleNotificationEnabled(isEnable: Boolean) {
+        if (isEnable) {
+            loadStudyTime()
+        } else {
+            view?.cancelNextNotification()
         }
     }
 
-    override fun detachView() {
+    private fun loadStudyTime() =
+        getStudyTime(UseCase.None()) {
+            it.either(
+                ::handleFailure,
+                ::handleStudyTime
+            )
+        }
 
+    private fun handleStudyTime(studyHour: Hour) {
+        view?.initNotification(studyHour)
     }
+
 
     fun onSettingsClick() {
         view?.goToSettingsScreen()
@@ -63,9 +76,13 @@ class MainPresenter(
     fun onDayCompleted() {
         view?.showCountdownView(true)
     }
+
+    private fun handleFailure(failure: Failure) {
+        view?.handleFailure(failure)
+    }
 }
 
-interface MainView {
+interface MainView : View {
     fun showLeitnerView()
     fun showCountdownView(withAnimation: Boolean)
     fun goToIntroScreen()

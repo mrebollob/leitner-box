@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -54,6 +56,10 @@ class SettingsActivity : BaseActivity(), SettingsView {
     override fun showNotificationEnable(isEnable: Boolean) {
         notificationHourView.setSettingEnabled(isEnable)
         notificationEnableView.setValue(isEnable)
+    }
+
+    override fun handleFailure(failure: Failure) {
+        toast(getString(R.string.generic_error))
     }
 
     companion object Navigator {

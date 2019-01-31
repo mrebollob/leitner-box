@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.model.Level
-import com.mrebollob.leitnerbox.util.extensions.inflate
+import com.mrebollob.leitnerbox.domain.extension.inflate
 import kotlin.properties.Delegates
 
 class LevelsAdapter : RecyclerView.Adapter<LevelViewHolder>() {

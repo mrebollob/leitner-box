@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.util.extensions
+package com.mrebollob.leitnerbox.domain.extension
 
 import com.mrebollob.leitnerbox.domain.model.Hour
 import java.util.*

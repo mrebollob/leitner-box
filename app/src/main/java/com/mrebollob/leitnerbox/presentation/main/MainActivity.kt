@@ -9,6 +9,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
+import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
+import com.mrebollob.leitnerbox.domain.extension.replaceFragment
+import com.mrebollob.leitnerbox.domain.extension.replaceFragmentWithAnimation
+import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
@@ -18,10 +24,6 @@ import com.mrebollob.leitnerbox.presentation.countdown.CountdownFragment
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
-import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
-import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
-import com.mrebollob.leitnerbox.util.extensions.replaceFragment
-import com.mrebollob.leitnerbox.util.extensions.replaceFragmentWithAnimation
 import org.koin.android.ext.android.inject
 
 
@@ -138,5 +140,9 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
 
         val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.cancel(notificationPendingIntent)
+    }
+
+    override fun handleFailure(failure: Failure) {
+        toast(getString(R.string.generic_error))
     }
 }

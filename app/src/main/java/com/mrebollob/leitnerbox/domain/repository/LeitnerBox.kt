@@ -1,7 +1,8 @@
-package com.mrebollob.leitnerbox.domain
+package com.mrebollob.leitnerbox.domain.repository
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.model.Level
 
 private const val LEVELS_COUNT = 7
@@ -20,7 +21,7 @@ class LeitnerBox(private val gson: Gson) {
 	[2,1],	[3,1],	[6,2,1],[5,1], [4,2,1],	[3,1],	[2,1],	[1]
     ]"""
 
-    fun getLevelsForDay(day: Int): List<Level> {
+    fun getLevelsForDay(day: LeitnerDay): List<Level> {
 
         val levels = mutableListOf<Level>()
 
@@ -29,7 +30,7 @@ class LeitnerBox(private val gson: Gson) {
                 Level(
                     index,
                     "$index",
-                    isActive(index, day, getLevelList(day))
+                    isActive(index, day.dayNumber, getLevelList(day.dayNumber))
                 )
             )
         }
