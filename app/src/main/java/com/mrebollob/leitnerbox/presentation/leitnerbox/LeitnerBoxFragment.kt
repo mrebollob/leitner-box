@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.toast
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.leitnerbox.adapter.LevelsAdapter
 import kotlinx.android.synthetic.main.fragment_leitner_box.*
@@ -19,6 +20,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
     val presenter: LeitnerBoxPresenter by inject()
     private var listener: LeitnerBoxFragmentListener? = null
     private val levelsAdapter = LevelsAdapter()
+    private var currentDay = LeitnerDay.empty()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +42,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
 
     private fun initUI() {
         levelsListView.adapter = levelsAdapter
-        doneButton.setOnClickListener { presenter.onDayCompletedClick() }
+        doneButton.setOnClickListener { presenter.onDayCompletedClick(LeitnerDay(currentDay.dayNumber)) }
     }
 
     override fun showFirstDayTitle() {
@@ -48,8 +50,9 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         levelsTextView.text = getString(R.string.leitner_view_first_day_info)
     }
 
-    override fun showCurrentNumberDay(currentDay: Int) {
-        dayTextView.text = getString(R.string.main_view_day_number, currentDay)
+    override fun showCurrentNumberDay(day: LeitnerDay) {
+        this.currentDay = day
+        dayTextView.text = getString(R.string.main_view_day_number, day.dayNumber)
     }
 
     override fun showLevelsToReview(levels: List<Level>) {
@@ -79,7 +82,7 @@ class LeitnerBoxFragment : Fragment(), LeitnerBoxView {
         if (context is LeitnerBoxFragmentListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement LeitnerBoxFragmentListener")
+            throw RuntimeException("$context must implement LeitnerBoxFragmentListener")
         }
     }
 

@@ -10,6 +10,6 @@ data class LeitnerDay(
     val dayNumber: Int = Math.max(0, number)
 
     companion object {
-        fun empty() = LeitnerDay(Int.empty())
+        fun empty() = LeitnerDay(Int.empty(), Date(0))
     }
 }

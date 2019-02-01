@@ -1,7 +1,9 @@
 package com.mrebollob.leitnerbox.domain.interactor
 
 import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.extension.getDaysBetween
 import com.mrebollob.leitnerbox.domain.functional.Either
+import com.mrebollob.leitnerbox.domain.functional.map
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.repository.Repository
 import java.util.*
@@ -27,8 +29,10 @@ class CheckDayDayCompleted constructor(private val repository: Repository) :
 
     override suspend fun run(params: Params): Either<Failure, Boolean> {
 
-        return Either.Right(false)
+        return repository.getCurrentDay().map {
+            it.created.getDaysBetween(params.today) <= 0
+        }
     }
 
-    data class Params(val day: Date)
+    data class Params(val today: Date)
 }

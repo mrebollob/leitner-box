@@ -9,6 +9,7 @@ import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.presentation.Presenter
 import com.mrebollob.leitnerbox.presentation.View
+import timber.log.Timber
 
 class LeitnerBoxPresenter(
     private val getCurrentDay: GetCurrentDay,
@@ -17,7 +18,6 @@ class LeitnerBoxPresenter(
 ) : Presenter<LeitnerBoxView> {
 
     private var view: LeitnerBoxView? = null
-    private var currentDay = LeitnerDay(0)
 
     override fun attachView(view: LeitnerBoxView) {
         this.view = view
@@ -35,13 +35,11 @@ class LeitnerBoxPresenter(
 
     private fun handleCurrentDay(day: LeitnerDay) {
 
-        this.currentDay = day
-
         if (day.dayNumber == 0) {
             view?.showFirstDayTitle()
 
         } else {
-            view?.showCurrentNumberDay(day.dayNumber)
+            view?.showCurrentNumberDay(day)
             getDayLevels(GetDayLevels.Params(day)) {
                 it.either(
                     ::handleFailure,
@@ -56,8 +54,8 @@ class LeitnerBoxPresenter(
         view?.showLevelsToReview(levels)
     }
 
-    fun onDayCompletedClick() {
-        saveDayCompleted(SaveDayCompleted.Params(currentDay)) {
+    fun onDayCompletedClick(day: LeitnerDay) {
+        saveDayCompleted(SaveDayCompleted.Params(day)) {
             it.either(
                 ::handleFailure,
                 ::handleDayCompleted
@@ -66,6 +64,7 @@ class LeitnerBoxPresenter(
     }
 
     private fun handleDayCompleted(day: LeitnerDay) {
+        Timber.d("Day completed: $day")
         view?.onDayCompleted()
     }
 
@@ -76,7 +75,7 @@ class LeitnerBoxPresenter(
 
 interface LeitnerBoxView : View {
     fun showFirstDayTitle()
-    fun showCurrentNumberDay(currentDay: Int)
+    fun showCurrentNumberDay(day: LeitnerDay)
     fun showLevelsToReview(levels: List<Level>)
     fun showLevels(levels: List<Level>)
     fun onDayCompleted()
