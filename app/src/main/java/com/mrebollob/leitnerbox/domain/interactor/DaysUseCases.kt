@@ -23,6 +23,14 @@ class SaveDayCompleted constructor(private val repository: Repository) :
     data class Params(val day: LeitnerDay)
 }
 
+class SaveCurrentDay constructor(private val repository: Repository) :
+    UseCase<LeitnerDay, SaveCurrentDay.Params>() {
+
+    override suspend fun run(params: Params) =
+        repository.saveCurrentDay(params.day)
+
+    data class Params(val day: LeitnerDay)
+}
 
 class CheckDayDayCompleted constructor(private val repository: Repository) :
     UseCase<Boolean, CheckDayDayCompleted.Params>() {

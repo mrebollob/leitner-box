@@ -11,6 +11,8 @@ interface Repository {
 
     suspend fun saveDayCompleted(day: LeitnerDay): Either<Failure, LeitnerDay>
 
+    suspend fun saveCurrentDay(day: LeitnerDay): Either<Failure, LeitnerDay>
+
     suspend fun saveStudyTime(hour: Hour): Either<Failure, Hour>
 
     suspend fun getStudyTime(): Either<Failure, Hour>

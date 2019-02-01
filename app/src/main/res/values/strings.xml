@@ -18,10 +18,10 @@
     <string name="intro_descripcion_2">Lorem fistrum a gramenawer al ataquerl llevame al sircoo llevame al sircoo quietooor diodenoo quietooor pupita fistro.</string>
 
     <string name="settings">Settings</string>
-    <string name="settings_start_date">Start date</string>
     <string name="settings_general_title">General</string>
+    <string name="settings_current_day_title">Current day</string>
+    <string name="settings_current_day_dialog_title">Choose your current day</string>
     <string name="settings_notification_title">Notifications</string>
-    <string name="settings_levels">Levels</string>
     <string name="settings_notification_study_time">Study hour</string>
     <string name="settings_notification_enable_title">Enable notifications</string>
     <string name="settings_notification_enable_subTitle">Study reminders notifications</string>

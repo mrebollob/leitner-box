@@ -48,6 +48,8 @@ val mainModule = module {
 
     factory {
         SettingsPresenter(
+            getCurrentDay = get(),
+            saveCurrentDay = get(),
             getStudyTime = get(),
             saveStudyTime = get(),
             getNotificationEnabled = get(),

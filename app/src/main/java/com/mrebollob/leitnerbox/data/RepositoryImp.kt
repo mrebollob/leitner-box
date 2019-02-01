@@ -44,6 +44,14 @@ class RepositoryImp(context: Context, private val gson: Gson) : Repository {
         return Either.Right(day)
     }
 
+    override suspend fun saveCurrentDay(day: LeitnerDay): Either<Failure, LeitnerDay> {
+        sharedPreferences.edit()
+            .putString(LAST_DAY_COMPLETED_KEY, gson.toJson(day.copy(number = day.dayNumber - 1)))
+            .apply()
+
+        return Either.Right(day)
+    }
+
     override suspend fun getStudyTime(): Either<Failure, Hour> {
         return try {
             val jsonHour = sharedPreferences.getString(STUDY_TIME_KEY, "")
