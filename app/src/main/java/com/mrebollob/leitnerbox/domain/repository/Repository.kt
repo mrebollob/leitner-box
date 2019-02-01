@@ -1,32 +1,23 @@
 package com.mrebollob.leitnerbox.domain.repository
 
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.functional.Either
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
-import java.util.*
 
 interface Repository {
 
-    suspend fun isFirstStart(): Boolean
+    suspend fun getCurrentDay(): Either<Failure, LeitnerDay>
 
-    suspend fun setFirstStart(isFirstStart: Boolean)
+    suspend fun saveDayCompleted(day: LeitnerDay): Either<Failure, LeitnerDay>
 
-    suspend fun saveStartDate(startDate: Date)
+    suspend fun saveCurrentDay(day: LeitnerDay): Either<Failure, LeitnerDay>
 
-    suspend fun getStartDate(): Date
+    suspend fun saveStudyTime(hour: Hour): Either<Failure, Hour>
 
-    suspend fun saveStudyTime(hour: Hour)
+    suspend fun getStudyTime(): Either<Failure, Hour>
 
-    suspend fun getStudyTime(): Hour
+    suspend fun saveNotificationEnable(isEnable: Boolean): Either<Failure, Boolean>
 
-    suspend fun saveNotificationEnable(enable: Boolean)
-
-    suspend fun getNotificationEnable(): Boolean
-
-    suspend fun saveLevelsCount(levelsCount: Int)
-
-    suspend fun getLevelsCount(): Int
-
-    suspend fun getLastDayCompleted(): LeitnerDay
-
-    suspend fun saveLastDayCompleted(day: LeitnerDay)
+    suspend fun isNotificationEnabled(): Either<Failure, Boolean>
 }

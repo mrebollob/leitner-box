@@ -2,8 +2,8 @@ package com.mrebollob.leitnerbox
 
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.repository.Repository
-import com.mrebollob.leitnerbox.domain.usecase.isTodayCompleted
-import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
+import com.mrebollob.leitnerbox.domain.interactor.isTodayCompleted
+import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.runBlocking

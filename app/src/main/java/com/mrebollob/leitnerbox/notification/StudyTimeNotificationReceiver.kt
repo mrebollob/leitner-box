@@ -13,14 +13,14 @@ import android.graphics.Color
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import com.mrebollob.leitnerbox.R
-import com.mrebollob.leitnerbox.domain.executor.Executor
+import com.mrebollob.leitnerbox.domain.exception.Failure
+import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
+import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
+import com.mrebollob.leitnerbox.domain.interactor.GetStudyTime
+import com.mrebollob.leitnerbox.domain.interactor.UseCase
+import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.repository.Repository
-import com.mrebollob.leitnerbox.domain.usecase.getStudyTime
 import com.mrebollob.leitnerbox.presentation.main.MainActivity
-import com.mrebollob.leitnerbox.util.extensions.ONE_DAY_MILLIS
-import com.mrebollob.leitnerbox.util.extensions.getCalendarForToday
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.core.KoinContext
 import org.koin.standalone.StandAloneContext
 import timber.log.Timber
@@ -28,20 +28,32 @@ import java.util.*
 
 class StudyTimeNotificationReceiver : BroadcastReceiver() {
 
-    val executor = (StandAloneContext.koinContext as KoinContext).get<Executor>()
     val repository = (StandAloneContext.koinContext as KoinContext).get<Repository>()
+    private val getStudyTime = GetStudyTime(repository)
+    @Volatile
+    private lateinit var context: Context
 
     override fun onReceive(context: Context, intent: Intent) {
+        this.context = context
 
-
-        GlobalScope.launch(context = executor.main) {
-
-            val studyTime = getStudyTime(repository).getCalendarForToday()
-
-            createNotificationChannel(context)
-            showNotification(context, "Titulo de notificación", "Contenido")
-            setNextDayNotification(context, studyTime)
+        getStudyTime(UseCase.None()) {
+            it.either(
+                ::handleFailure,
+                ::handleStudyTime
+            )
         }
+    }
+
+    private fun handleStudyTime(studyHour: Hour) {
+        val studyTime = studyHour.getCalendarForToday()
+
+        createNotificationChannel(context)
+        showNotification(
+            context,
+            context.getString(R.string.notification_title),
+            context.getString(R.string.notification_content)
+        )
+        setNextDayNotification(context, studyTime)
     }
 
     private fun showNotification(context: Context, title: String, content: String) {
@@ -76,6 +88,11 @@ class StudyTimeNotificationReceiver : BroadcastReceiver() {
 
         notificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build())
     }
+
+    private fun handleFailure(failure: Failure) {
+        Timber.e("Notification error: $failure")
+    }
+
 
     companion object {
 

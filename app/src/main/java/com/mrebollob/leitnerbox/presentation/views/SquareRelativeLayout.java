@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.util.view;
+package com.mrebollob.leitnerbox.presentation.views;
 
 
 import android.annotation.TargetApi;

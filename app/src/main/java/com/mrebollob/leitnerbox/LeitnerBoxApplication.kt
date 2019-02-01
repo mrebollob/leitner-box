@@ -4,6 +4,7 @@ import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.core.CrashlyticsCore
+import com.mrebollob.leitnerbox.di.interactorModule
 import com.mrebollob.leitnerbox.di.mainModule
 import io.fabric.sdk.android.Fabric
 import io.github.inflationx.calligraphy3.CalligraphyConfig
@@ -18,7 +19,7 @@ class LeitnerBoxApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(this, listOf(mainModule))
+        startKoin(this, listOf(mainModule, interactorModule))
         iniCalligraphy()
         initializeCrashlytics()
 

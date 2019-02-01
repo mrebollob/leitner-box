@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.util.view
+package com.mrebollob.leitnerbox.presentation.views
 
 import android.content.Context
 import android.support.v4.content.ContextCompat

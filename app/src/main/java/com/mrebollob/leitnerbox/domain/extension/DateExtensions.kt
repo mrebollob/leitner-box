@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.util.extensions
+package com.mrebollob.leitnerbox.domain.extension
 
 import com.mrebollob.leitnerbox.domain.model.Hour
 import java.util.*
@@ -32,20 +32,4 @@ fun Hour.getCalendarForToday(): Calendar {
     calendar.set(Calendar.MINUTE, this.minute)
     calendar.set(Calendar.SECOND, 0)
     return calendar
-}
-
-fun Date.getDaysSinceUnix(): Int = with(this) {
-    val todayCalendar = Calendar.getInstance()
-    todayCalendar.time = this
-    todayCalendar.set(HOUR, 0)
-    todayCalendar.set(HOUR, 0)
-
-    val secondsInMilli: Long = 1000
-    val minutesInMilli = secondsInMilli * 60
-    val hoursInMilli = minutesInMilli * 60
-    val daysInMilli = hoursInMilli * 24
-
-    val elapsedDays = this.time / daysInMilli
-
-    return elapsedDays.toInt()
 }

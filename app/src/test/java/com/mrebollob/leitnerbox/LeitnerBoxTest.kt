@@ -1,7 +1,7 @@
 package com.mrebollob.leitnerbox
 
 import com.google.gson.Gson
-import com.mrebollob.leitnerbox.domain.LeitnerBox
+import com.mrebollob.leitnerbox.domain.repository.LeitnerBox
 import org.junit.Assert
 import org.junit.Test
 
