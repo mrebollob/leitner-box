@@ -3,14 +3,15 @@ package com.mrebollob.leitnerbox.presentation.main
 
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.interactor.GetNotificationEnable
-import com.mrebollob.leitnerbox.domain.interactor.GetStudyTime
 import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.presentation.Presenter
 import com.mrebollob.leitnerbox.presentation.View
+import com.mrebollob.leitnerbox.presentation.splash.FirstStartHandler
 
+@Deprecated("Use view model")
 class MainPresenter(
-    private val getStudyTime: GetStudyTime,
+//    private val getStudyTime: GetStudyTime,
     private val getNotificationEnabled: GetNotificationEnable,
     private val firstStartHandler: FirstStartHandler
 ) : Presenter<MainView> {
@@ -42,19 +43,11 @@ class MainPresenter(
 
     private fun handleNotificationEnabled(isEnable: Boolean) {
         if (isEnable) {
-            loadStudyTime()
+//            loadStudyTime()
         } else {
             view?.cancelNextNotification()
         }
     }
-
-    private fun loadStudyTime() =
-        getStudyTime(UseCase.None()) {
-            it.either(
-                ::handleFailure,
-                ::handleStudyTime
-            )
-        }
 
     private fun handleStudyTime(studyHour: Hour) {
         view?.initNotification(studyHour)

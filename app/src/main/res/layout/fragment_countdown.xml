@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/countDownView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:background="@color/primary"
-    tools:context=".presentation.countdown.CountdownFragment">
+    tools:context=".presentation.main.countdown.CountdownFragment">
 
     <FrameLayout
+        android:id="@+id/countdownView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginEnd="@dimen/spacing_normal">
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:visibility="gone">
 
         <com.mrebollob.leitnerbox.presentation.views.CircleProgressView
             android:id="@+id/circleProgressView"
@@ -60,7 +61,26 @@
         </LinearLayout>
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <FrameLayout
+        android:id="@+id/firstDayView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_normal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:gravity="center"
+            android:text="Empieza con tu primer día"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_larger" />
+
+    </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/showLeitnerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,4 +88,4 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_start"
         app:backgroundTint="@color/show_leitner_button_color_enabled" />
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

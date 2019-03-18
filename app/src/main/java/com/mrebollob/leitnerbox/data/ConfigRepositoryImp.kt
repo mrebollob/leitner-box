@@ -7,11 +7,13 @@ import com.mrebollob.leitnerbox.domain.functional.Either
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.repository.ConfigRepository
+import java.util.*
 
 class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepository {
 
     companion object {
-        private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"
+        private const val NEXT_STUDY_TIME_KEY = "NEXT_STUDY_TIME_KEY"
+        private const val STUDY_HOUR_KEY = "STUDY_HOUR_KEY"
         private const val NOTIFICATION_ENABLE_KEY = "NOTIFICATION_ENABLE_KEY"
         private const val LAST_DAY_COMPLETED_KEY = "LAST_DAY_COMPLETED_KEY"
     }
@@ -52,9 +54,27 @@ class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepo
         return Either.Right(day)
     }
 
-    override suspend fun getStudyTime(): Either<Failure, Hour> {
+    override suspend fun getNextStudyTime(): Either<Failure, Date> {
+        val studyTime = sharedPreferences.getLong(NEXT_STUDY_TIME_KEY, 0)
+
+        return if (studyTime != 0L) {
+            Either.Right(Date(studyTime))
+        } else {
+            Either.Left(Failure.EmptyData)
+        }
+    }
+
+    override suspend fun saveNextStudyTime(studyTime: Date): Either<Failure, Date> {
+        sharedPreferences.edit()
+            .putLong(NEXT_STUDY_TIME_KEY, studyTime.time)
+            .apply()
+
+        return Either.Right(studyTime)
+    }
+
+    override suspend fun getStudyHour(): Either<Failure, Hour> {
         return try {
-            val jsonHour = sharedPreferences.getString(STUDY_TIME_KEY, "")
+            val jsonHour = sharedPreferences.getString(STUDY_HOUR_KEY, "")
             val hour = if (jsonHour.isNullOrEmpty()) {
                 Hour.default()
             } else {
@@ -64,14 +84,14 @@ class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepo
             Either.Right(hour)
 
         } catch (exception: Throwable) {
-            sharedPreferences.edit().remove(STUDY_TIME_KEY)
+            sharedPreferences.edit().remove(STUDY_HOUR_KEY)
             Either.Left(Failure.EmptyData)
         }
     }
 
-    override suspend fun saveStudyTime(hour: Hour): Either<Failure, Hour> {
+    override suspend fun saveStudyHour(hour: Hour): Either<Failure, Hour> {
         sharedPreferences.edit()
-            .putString(STUDY_TIME_KEY, gson.toJson(hour))
+            .putString(STUDY_HOUR_KEY, gson.toJson(hour))
             .apply()
 
         return Either.Right(hour)

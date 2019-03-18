@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.main
+package com.mrebollob.leitnerbox.presentation.splash
 
 import android.content.Context
 
