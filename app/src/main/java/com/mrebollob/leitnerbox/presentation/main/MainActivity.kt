@@ -8,39 +8,44 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
+import com.mrebollob.leitnerbox.domain.extension.failure
 import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
-import com.mrebollob.leitnerbox.domain.extension.replaceFragment
-import com.mrebollob.leitnerbox.domain.extension.replaceFragmentWithAnimation
+import com.mrebollob.leitnerbox.domain.extension.observe
 import com.mrebollob.leitnerbox.domain.extension.toast
+import com.mrebollob.leitnerbox.domain.extension.viewModel
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
-import com.mrebollob.leitnerbox.presentation.BaseActivity
-import com.mrebollob.leitnerbox.presentation.about.AboutActivity
-import com.mrebollob.leitnerbox.presentation.countdown.CountdownFragment
-import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
-import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
-import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
+import com.mrebollob.leitnerbox.presentation.platform.BaseActivity
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
 
-class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFragmentListener,
-    CountdownFragment.CountdownListener {
+class MainActivity : BaseActivity(), HasSupportFragmentInjector {
 
-//    val presenter: MainPresenter
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    private lateinit var mainViewModel: MainViewModel
+
+    override fun layoutId(): Int = R.layout.activity_main
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-//        presenter.attachView(this)
-    }
+        mainViewModel = viewModel(viewModelFactory) {
+            observe(studyTime, ::handleStudyTime)
+            failure(failure, ::handleError)
+        }
 
-    override fun onResume() {
-        super.onResume()
-//        presenter.refreshConfig()
+        mainViewModel.init()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -64,43 +69,11 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
         }
     }
 
-    override fun showLeitnerView() {
-        val fragment = LeitnerBoxFragment.newInstance()
-        replaceFragmentWithAnimation(fragment, R.id.container)
+    private fun handleStudyTime(studyTime: Hour?) {
+        toast("studyTime: $studyTime")
     }
 
-    override fun onDayCompleted() {
-//        presenter.onDayCompleted()
-    }
-
-    override fun showCountdownView(withAnimation: Boolean) {
-        val fragment = CountdownFragment.newInstance()
-
-        if (withAnimation) {
-            replaceFragmentWithAnimation(fragment, R.id.container)
-        } else {
-            replaceFragment(fragment, R.id.container)
-        }
-    }
-
-    override fun onGoToLeitnerBoxScreenClick() {
-//        presenter.onShowLeitnerBoxClick()
-    }
-
-    override fun goToIntroScreen() {
-        IntroActivity.open(this)
-        finish()
-    }
-
-    override fun goToSettingsScreen() {
-        SettingsActivity.open(this)
-    }
-
-    override fun goToAboutScreen() {
-        AboutActivity.open(this)
-    }
-
-    override fun initNotification(studyHour: Hour) {
+    private fun initNotification(studyHour: Hour) {
 
         val studyTime = studyHour.getCalendarForToday()
 
@@ -128,7 +101,7 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
         }
     }
 
-    override fun cancelNextNotification() {
+    private fun cancelNextNotification() {
         val notificationIntent = Intent(this, StudyTimeNotificationReceiver::class.java)
         val notificationPendingIntent = PendingIntent.getBroadcast(
             this,
@@ -141,7 +114,15 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
         am.cancel(notificationPendingIntent)
     }
 
-    override fun handleFailure(failure: Failure) {
+    private fun handleError(failure: Failure?) {
         toast(getString(R.string.generic_error))
+    }
+
+    companion object Navigator {
+
+        fun open(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 }

@@ -24,4 +24,6 @@
     <color name="level_7">#ff9800</color>
     <color name="level_8">#795548</color>
     <color name="level_9">#607d8b</color>
+
+    <color name="black_20a">#20000000</color>
 </resources>

@@ -6,9 +6,9 @@ import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.functional.Either
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
-import com.mrebollob.leitnerbox.domain.repository.Repository
+import com.mrebollob.leitnerbox.domain.repository.ConfigRepository
 
-class LeitnerRepositoryImpOld(context: Context, private val gson: Gson) : Repository {
+class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepository {
 
     companion object {
         private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"

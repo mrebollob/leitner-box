@@ -1,10 +1,9 @@
 package com.mrebollob.leitnerbox
 
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
-import com.mrebollob.leitnerbox.domain.repository.Repository
+import com.mrebollob.leitnerbox.domain.repository.ConfigRepository
 import com.mrebollob.leitnerbox.domain.interactor.isTodayCompleted
 import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
-import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -38,7 +37,7 @@ class UseCasesTest {
         assertEquals(true, result)
     }
 
-    private fun getRepository(): Repository {
+    private fun getRepository(): ConfigRepository {
 
         return mock {
             onBlocking { getLastDayCompleted() } doReturn LeitnerDay(1, Date(ONE_DAY_MILLIS))

@@ -1,11 +1,15 @@
 package com.mrebollob.leitnerbox.di.module
 
 
+import android.app.Application
+import com.google.gson.Gson
 import com.mrebollob.leitnerbox.BuildConfig
+import com.mrebollob.leitnerbox.data.ConfigRepositoryImp
 import com.mrebollob.leitnerbox.data.LeitnerRepositoryImp
 import com.mrebollob.leitnerbox.data.api.LeitnerBoxApiService
 import com.mrebollob.leitnerbox.data.utils.NetworkHandler
 import com.mrebollob.leitnerbox.di.annotation.BaseUrl
+import com.mrebollob.leitnerbox.domain.repository.ConfigRepository
 import com.mrebollob.leitnerbox.domain.repository.LeitnerRepository
 import dagger.Module
 import dagger.Provides
@@ -17,6 +21,12 @@ import javax.inject.Singleton
 
 @Module
 class ApiModule {
+
+    @Provides
+    @Singleton
+    fun provideConfigRepository(
+        context: Application, gson: Gson
+    ): ConfigRepository = ConfigRepositoryImp(context, gson)
 
     @Provides
     @Singleton

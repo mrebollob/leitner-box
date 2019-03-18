@@ -5,17 +5,17 @@ import com.mrebollob.leitnerbox.domain.extension.getDaysBetween
 import com.mrebollob.leitnerbox.domain.functional.Either
 import com.mrebollob.leitnerbox.domain.functional.map
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
-import com.mrebollob.leitnerbox.domain.repository.Repository
+import com.mrebollob.leitnerbox.domain.repository.ConfigRepository
 import java.util.*
 
 
-class GetCurrentDay constructor(private val repository: Repository) :
+class GetCurrentDay constructor(private val repository: ConfigRepository) :
     UseCase<LeitnerDay, UseCase.None>() {
 
     override suspend fun run(params: None) = repository.getCurrentDay()
 }
 
-class SaveDayCompleted constructor(private val repository: Repository) :
+class SaveDayCompleted constructor(private val repository: ConfigRepository) :
     UseCase<LeitnerDay, SaveDayCompleted.Params>() {
 
     override suspend fun run(params: Params) = repository.saveDayCompleted(params.day)
@@ -23,7 +23,7 @@ class SaveDayCompleted constructor(private val repository: Repository) :
     data class Params(val day: LeitnerDay)
 }
 
-class SaveCurrentDay constructor(private val repository: Repository) :
+class SaveCurrentDay constructor(private val repository: ConfigRepository) :
     UseCase<LeitnerDay, SaveCurrentDay.Params>() {
 
     override suspend fun run(params: Params) =
@@ -32,7 +32,7 @@ class SaveCurrentDay constructor(private val repository: Repository) :
     data class Params(val day: LeitnerDay)
 }
 
-class CheckDayDayCompleted constructor(private val repository: Repository) :
+class CheckDayDayCompleted constructor(private val repository: ConfigRepository) :
     UseCase<Boolean, CheckDayDayCompleted.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Boolean> {

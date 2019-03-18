@@ -23,7 +23,7 @@ import java.util.*
 
 class StudyTimeNotificationReceiver : BroadcastReceiver() {
 
-    //    val repository = (StandAloneContext.koinContext as KoinContext).get<Repository>()
+    //    val repository = (StandAloneContext.koinContext as KoinContext).get<ConfigRepository>()
 //    private val getStudyTime = GetStudyTime(repository)
     @Volatile
     private lateinit var context: Context

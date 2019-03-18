@@ -8,13 +8,13 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
 ) : BaseViewModel() {
 
-    var success: MutableLiveData<Boolean> = MutableLiveData()
+    var isFirstStart: MutableLiveData<Boolean> = MutableLiveData()
 
     fun init() {
 
         Handler().postDelayed(
             {
-                success.value = true
+                isFirstStart.value = false
             },
             3000
         )

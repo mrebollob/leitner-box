@@ -7,6 +7,7 @@ import com.mrebollob.leitnerbox.domain.extension.failure
 import com.mrebollob.leitnerbox.domain.extension.observe
 import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.extension.viewModel
+import com.mrebollob.leitnerbox.presentation.main.MainActivity
 import com.mrebollob.leitnerbox.presentation.platform.BaseActivity
 
 
@@ -19,24 +20,23 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         splashViewModel = viewModel(viewModelFactory) {
-            observe(success, ::renderResult)
+            observe(isFirstStart, ::renderResult)
             failure(failure, ::handleError)
         }
 
         splashViewModel.init()
     }
 
-    private fun renderResult(loadingFinished: Boolean?) {
-
+    private fun renderResult(isFirstStart: Boolean?) {
         initApp()
     }
 
     private fun initApp() {
-//        MainActivity.open(this)
-//        finish()
+        MainActivity.open(this)
+        finish()
     }
 
     private fun handleError(failure: Failure?) {
-        toast("Durisimo ErRoR!!")
+        toast("Error!!")
     }
 }

@@ -5,7 +5,7 @@ import com.mrebollob.leitnerbox.domain.functional.Either
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 
-interface Repository {
+interface ConfigRepository {
 
     suspend fun getCurrentDay(): Either<Failure, LeitnerDay>
 
