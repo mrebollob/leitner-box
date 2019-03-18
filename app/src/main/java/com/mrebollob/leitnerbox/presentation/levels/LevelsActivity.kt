@@ -9,7 +9,7 @@ import com.mrebollob.leitnerbox.domain.extension.failure
 import com.mrebollob.leitnerbox.domain.extension.observe
 import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.extension.viewModel
-import com.mrebollob.leitnerbox.domain.model.Level
+import com.mrebollob.leitnerbox.domain.model.Homework
 import com.mrebollob.leitnerbox.presentation.levels.adapter.LevelsAdapter
 import com.mrebollob.leitnerbox.presentation.platform.BaseActivity
 import kotlinx.android.synthetic.main.activity_levels.*
@@ -24,24 +24,23 @@ class LevelsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         levelsViewModel = viewModel(viewModelFactory) {
-            observe(levels, ::handleLevels)
+            observe(homework, ::handleHomework)
             failure(failure, ::handleError)
         }
 
+        levelsListView.adapter = levelsAdapter
         levelsViewModel.setDay(2)
     }
 
-    private fun handleLevels(levels: Level?) {
-        levels ?: return
+    private fun handleHomework(homework: Homework?) {
+        homework ?: return
 
-        toast("Tengo levels ${levels.day}")
+        levelsAdapter.levels = homework.levels
 
-//        levelsAdapter.levels = levels
-
-        val names = levels.levels.map { it.toString() }.reversed()
+        val names = homework.levels.map { it.name }
             .reduce { acc, string -> "$acc, $string" }
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
-        dayTextView.text = getString(R.string.main_view_day_number, levels.day)
+        dayTextView.text = getString(R.string.main_view_day_number, homework.day)
     }
 
     private fun handleError(failure: Failure?) {

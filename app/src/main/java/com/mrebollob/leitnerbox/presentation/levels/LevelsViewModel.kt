@@ -1,24 +1,24 @@
 package com.mrebollob.leitnerbox.presentation.levels
 
 import androidx.lifecycle.MutableLiveData
-import com.mrebollob.leitnerbox.domain.interactor.GetDayLevels
-import com.mrebollob.leitnerbox.domain.model.Level
+import com.mrebollob.leitnerbox.domain.interactor.GetHomework
+import com.mrebollob.leitnerbox.domain.model.Homework
 import com.mrebollob.leitnerbox.presentation.platform.BaseViewModel
 import javax.inject.Inject
 
 class LevelsViewModel @Inject constructor(
-    private val getDayLevels: GetDayLevels
+    private val getHomework: GetHomework
 ) : BaseViewModel() {
 
-    var levels: MutableLiveData<Level> = MutableLiveData()
+    var homework: MutableLiveData<Homework> = MutableLiveData()
 
     fun setDay(day: Int) {
-        getDayLevels(GetDayLevels.Params(day)) {
-            it.either(::handleFailure, ::handleLevels)
+        getHomework(GetHomework.Params(day)) {
+            it.either(::handleFailure, ::handleHomework)
         }
     }
 
-    private fun handleLevels(levels: Level) {
-        this.levels.value = levels
+    private fun handleHomework(homework: Homework) {
+        this.homework.value = homework
     }
 }

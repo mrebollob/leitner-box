@@ -2,17 +2,15 @@ package com.mrebollob.leitnerbox.domain.interactor
 
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.functional.Either
-import com.mrebollob.leitnerbox.domain.model.Level
+import com.mrebollob.leitnerbox.domain.model.Homework
 import com.mrebollob.leitnerbox.domain.model.Question
 import com.mrebollob.leitnerbox.domain.repository.LeitnerRepository
 import javax.inject.Inject
 
-class GetDayLevels @Inject constructor(private val repository: LeitnerRepository) :
-    UseCase<Level, GetDayLevels.Params>() {
+class GetHomework @Inject constructor(private val repository: LeitnerRepository) :
+    UseCase<Homework, GetHomework.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, Level> {
-        return repository.levels(params.day)
-    }
+    override suspend fun run(params: Params) = repository.homework(params.day)
 
     data class Params(val day: Int)
 }

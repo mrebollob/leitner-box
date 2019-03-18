@@ -5,7 +5,7 @@ import com.mrebollob.leitnerbox.data.entity.LevelEntity
 import com.mrebollob.leitnerbox.data.utils.NetworkHandler
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.functional.Either
-import com.mrebollob.leitnerbox.domain.model.Level
+import com.mrebollob.leitnerbox.domain.model.Homework
 import com.mrebollob.leitnerbox.domain.model.Question
 import com.mrebollob.leitnerbox.domain.repository.LeitnerRepository
 import retrofit2.Call
@@ -16,11 +16,12 @@ class LeitnerRepositoryImp(
 ) : LeitnerRepository {
 
 
-    override suspend fun levels(day: Int): Either<Failure, Level> {
+    override suspend fun homework(day: Int): Either<Failure, Homework> {
+
         return when (networkHandler.isConnected) {
             true -> request(
                 wibleApiService.levels(day),
-                { it.toLevel() },
+                { it.toHomework() },
                 LevelEntity.empty()
             )
             false -> Either.Left(Failure.NetworkConnection)
