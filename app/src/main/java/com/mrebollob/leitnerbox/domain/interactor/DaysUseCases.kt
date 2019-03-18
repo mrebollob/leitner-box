@@ -7,9 +7,10 @@ import com.mrebollob.leitnerbox.domain.functional.map
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.repository.ConfigRepository
 import java.util.*
+import javax.inject.Inject
 
 
-class GetCurrentDay constructor(private val repository: ConfigRepository) :
+class GetCurrentDay @Inject constructor(private val repository: ConfigRepository) :
     UseCase<LeitnerDay, UseCase.None>() {
 
     override suspend fun run(params: None) = repository.getCurrentDay()

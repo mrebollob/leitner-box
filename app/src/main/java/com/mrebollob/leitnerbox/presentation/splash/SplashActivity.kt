@@ -37,6 +37,6 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun handleError(failure: Failure?) {
-        toast("Error!!")
+        toast(getString(R.string.generic_error))
     }
 }

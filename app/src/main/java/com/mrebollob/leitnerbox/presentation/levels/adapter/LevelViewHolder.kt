@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.leitnerbox.adapter
+package com.mrebollob.leitnerbox.presentation.levels.adapter
 
 import android.content.Context
 import android.view.View

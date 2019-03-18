@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.leitnerbox.adapter
+package com.mrebollob.leitnerbox.presentation.levels.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

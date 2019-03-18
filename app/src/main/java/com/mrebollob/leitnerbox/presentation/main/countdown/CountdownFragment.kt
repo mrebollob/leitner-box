@@ -10,9 +10,11 @@ import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.failure
 import com.mrebollob.leitnerbox.domain.extension.gone
 import com.mrebollob.leitnerbox.domain.extension.observe
+import com.mrebollob.leitnerbox.domain.extension.snack
 import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.extension.viewModel
 import com.mrebollob.leitnerbox.domain.extension.visible
+import com.mrebollob.leitnerbox.presentation.levels.LevelsActivity
 import com.mrebollob.leitnerbox.presentation.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_countdown.*
 import java.util.*
@@ -107,7 +109,7 @@ class CountdownFragment : BaseFragment() {
         }
 
         showLeitnerButton.setOnClickListener {
-            context?.toast("Hola")
+            LevelsActivity.open(it.context)
         }
     }
 
@@ -117,6 +119,15 @@ class CountdownFragment : BaseFragment() {
                 ContextCompat.getColor(
                     it,
                     R.color.show_leitner_button_color_disabled
+                )
+            )
+        }
+
+        showLeitnerButton.setOnClickListener {
+            it.snack(
+                getString(
+                    R.string.countdown_view_advance_time_error,
+                    STUDY_HOUR_THRESHOLD
                 )
             )
         }
@@ -142,6 +153,8 @@ class CountdownFragment : BaseFragment() {
     }
 
     companion object {
+
+        private const val STUDY_HOUR_THRESHOLD = 6
 
         @JvmStatic
         fun newInstance() = CountdownFragment()

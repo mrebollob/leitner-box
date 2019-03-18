@@ -5,8 +5,9 @@ import com.mrebollob.leitnerbox.domain.functional.Either
 import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.model.Question
 import com.mrebollob.leitnerbox.domain.repository.LeitnerRepository
+import javax.inject.Inject
 
-class GetDayLevels constructor(private val repository: LeitnerRepository) :
+class GetDayLevels @Inject constructor(private val repository: LeitnerRepository) :
     UseCase<Level, GetDayLevels.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Level> {
@@ -16,7 +17,7 @@ class GetDayLevels constructor(private val repository: LeitnerRepository) :
     data class Params(val day: Int)
 }
 
-class GetQuestions constructor(private val repository: LeitnerRepository) :
+class GetQuestions @Inject constructor(private val repository: LeitnerRepository) :
     UseCase<List<Question>, GetQuestions.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, List<Question>> {
