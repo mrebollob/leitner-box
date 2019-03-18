@@ -3,10 +3,9 @@ package com.mrebollob.leitnerbox.presentation.intro
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.WindowManager
-import com.github.paolorotolo.appintro.AppIntro
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.github.paolorotolo.appintro.AppIntro2
 import com.github.paolorotolo.appintro.AppIntroFragment
 import com.github.paolorotolo.appintro.model.SliderPage

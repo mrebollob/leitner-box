@@ -2,9 +2,8 @@ package com.mrebollob.leitnerbox.presentation
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
-
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {

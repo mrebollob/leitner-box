@@ -11,23 +11,17 @@ import android.preference.PreferenceManager
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
-import com.mrebollob.leitnerbox.domain.interactor.GetNotificationEnable
-import com.mrebollob.leitnerbox.domain.interactor.GetStudyTime
-import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
-import com.mrebollob.leitnerbox.domain.repository.Repository
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.CURRENT_NOTIFICATION_KEY
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
-import org.koin.core.KoinContext
-import org.koin.standalone.StandAloneContext
 import timber.log.Timber
 import java.util.*
 
 class StudyTimeNotificationHelper : BroadcastReceiver() {
 
-    private val repository = (StandAloneContext.koinContext as KoinContext).get<Repository>()
-    private val getStudyTime = GetStudyTime(repository)
-    private val getNotificationEnabled = GetNotificationEnable(repository)
+//    private val repository = (StandAloneContext.koinContext as KoinContext).get<Repository>()
+//    private val getStudyTime = GetStudyTime(repository)
+//    private val getNotificationEnabled = GetNotificationEnable(repository)
     @Volatile
     private lateinit var context: Context
 
@@ -35,22 +29,22 @@ class StudyTimeNotificationHelper : BroadcastReceiver() {
         Timber.d("Device booted, broadcast received, setting bedtime notification")
         this.context = context
 
-        getNotificationEnabled(UseCase.None()) {
-            it.either(
-                ::handleFailure,
-                ::handleNotificationEnabled
-            )
-        }
+//        getNotificationEnabled(UseCase.None()) {
+//            it.either(
+//                ::handleFailure,
+//                ::handleNotificationEnabled
+//            )
+//        }
     }
 
     private fun handleNotificationEnabled(isEnable: Boolean) {
         if (isEnable) {
-            getStudyTime(UseCase.None()) {
-                it.either(
-                    ::handleFailure,
-                    ::handleStudyTime
-                )
-            }
+//            getStudyTime(UseCase.None()) {
+//                it.either(
+//                    ::handleFailure,
+//                    ::handleStudyTime
+//                )
+//            }
         }
     }
 

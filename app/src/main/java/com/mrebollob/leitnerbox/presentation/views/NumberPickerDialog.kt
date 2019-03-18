@@ -3,8 +3,8 @@ package com.mrebollob.leitnerbox.presentation.views
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.widget.NumberPicker
+import androidx.fragment.app.DialogFragment
 import com.mrebollob.leitnerbox.R
 import kotlin.properties.Delegates
 

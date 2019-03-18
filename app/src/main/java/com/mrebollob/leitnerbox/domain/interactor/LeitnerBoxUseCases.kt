@@ -2,16 +2,28 @@ package com.mrebollob.leitnerbox.domain.interactor
 
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.functional.Either
-import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.model.Level
-import com.mrebollob.leitnerbox.domain.repository.LeitnerBox
+import com.mrebollob.leitnerbox.domain.model.Question
+import com.mrebollob.leitnerbox.domain.repository.LeitnerRepository
 
-class GetDayLevels constructor(private val leitnerBox: LeitnerBox) :
-    UseCase<List<Level>, GetDayLevels.Params>() {
+class GetDayLevels constructor(private val repository: LeitnerRepository) :
+    UseCase<Level, GetDayLevels.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, List<Level>> {
-        return Either.Right(leitnerBox.getLevelsForDay(params.day))
+    override suspend fun run(params: Params): Either<Failure, Level> {
+        return repository.levels(params.day)
     }
 
-    data class Params(val day: LeitnerDay)
+    data class Params(val day: Int)
 }
+
+class GetQuestions constructor(private val repository: LeitnerRepository) :
+    UseCase<List<Question>, GetQuestions.Params>() {
+
+    override suspend fun run(params: Params): Either<Failure, List<Question>> {
+        return repository.questions(params.level)
+    }
+
+    data class Params(val level: Int)
+}
+
+

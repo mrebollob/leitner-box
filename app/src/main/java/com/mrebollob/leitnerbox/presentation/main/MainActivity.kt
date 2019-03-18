@@ -24,24 +24,23 @@ import com.mrebollob.leitnerbox.presentation.countdown.CountdownFragment
 import com.mrebollob.leitnerbox.presentation.intro.IntroActivity
 import com.mrebollob.leitnerbox.presentation.leitnerbox.LeitnerBoxFragment
 import com.mrebollob.leitnerbox.presentation.settings.SettingsActivity
-import org.koin.android.ext.android.inject
 
 
 class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFragmentListener,
     CountdownFragment.CountdownListener {
 
-    val presenter: MainPresenter by inject()
+//    val presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter.attachView(this)
+//        presenter.attachView(this)
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.refreshConfig()
+//        presenter.refreshConfig()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,11 +51,11 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.navigate_to_settings -> {
-                presenter.onSettingsClick()
+//                presenter.onSettingsClick()
                 true
             }
             R.id.navigate_to_about -> {
-                presenter.onAboutClick()
+//                presenter.onAboutClick()
                 true
             }
             else -> {
@@ -71,7 +70,7 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     }
 
     override fun onDayCompleted() {
-        presenter.onDayCompleted()
+//        presenter.onDayCompleted()
     }
 
     override fun showCountdownView(withAnimation: Boolean) {
@@ -85,7 +84,7 @@ class MainActivity : BaseActivity(), MainView, LeitnerBoxFragment.LeitnerBoxFrag
     }
 
     override fun onGoToLeitnerBoxScreenClick() {
-        presenter.onShowLeitnerBoxClick()
+//        presenter.onShowLeitnerBoxClick()
     }
 
     override fun goToIntroScreen() {

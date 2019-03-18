@@ -1,16 +1,16 @@
 package com.mrebollob.leitnerbox.presentation.leitnerbox.adapter
 
 import android.content.Context
-import android.support.annotation.ColorInt
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.mrebollob.leitnerbox.R
-import com.mrebollob.leitnerbox.domain.model.Level
 import com.mrebollob.leitnerbox.domain.extension.gone
 import com.mrebollob.leitnerbox.domain.extension.visible
+import com.mrebollob.leitnerbox.domain.model.Level
 
 class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -21,9 +21,9 @@ class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun render(level: Level) {
         val color = getBackgroundColor(level)
 
-        levelName.text = level.name
+//        levelName.text = level.name
         levelCard.setCardBackgroundColor(color)
-        funShowActive(level.active, color)
+//        funShowActive(level.active, color)
     }
 
     private fun funShowActive(active: Boolean, @ColorInt color: Int) {
@@ -38,7 +38,7 @@ class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     @ColorInt
     fun getBackgroundColor(level: Level): Int {
-        return when (level.name) {
+        return when (level.day.toString()) {
             "1" -> ContextCompat.getColor(getContext(), R.color.level_1)
             "2" -> ContextCompat.getColor(getContext(), R.color.level_2)
             "3" -> ContextCompat.getColor(getContext(), R.color.level_3)

@@ -1,10 +1,14 @@
 package com.mrebollob.leitnerbox.domain.extension
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.mrebollob.leitnerbox.R
+import com.mrebollob.leitnerbox.presentation.platform.BaseFragment
 
 /*
     From https://medium.com/thoughts-overflow/how-to-add-a-fragment-in-kotlin-way-73203c5a450b
@@ -33,4 +37,13 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
 
 fun AppCompatActivity.replaceFragmentWithAnimation(fragment: Fragment, frameId: Int) {
     supportFragmentManager.inTransactionWithAnimation { replace(frameId, fragment) }
+}
+
+inline fun <reified T : ViewModel> BaseFragment.viewModel(
+    factory: ViewModelProvider.Factory,
+    body: T.() -> Unit
+): T {
+    val vm = ViewModelProviders.of(this, factory)[T::class.java]
+    vm.body()
+    return vm
 }

@@ -1,11 +1,11 @@
 package com.mrebollob.leitnerbox.presentation.views
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.mrebollob.leitnerbox.R
 
 class SettingItemView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {

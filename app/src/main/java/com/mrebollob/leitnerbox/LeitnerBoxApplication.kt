@@ -1,31 +1,32 @@
 package com.mrebollob.leitnerbox
 
+import android.app.Activity
 import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.core.CrashlyticsCore
-import com.mrebollob.leitnerbox.di.interactorModule
-import com.mrebollob.leitnerbox.di.mainModule
+import com.mrebollob.leitnerbox.di.component.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import io.fabric.sdk.android.Fabric
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
-import org.koin.android.ext.android.startKoin
 import timber.log.Timber
-import timber.log.Timber.DebugTree
+import javax.inject.Inject
 
-class LeitnerBoxApplication : Application() {
+class LeitnerBoxApplication : Application(), HasActivityInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
-
-        startKoin(this, listOf(mainModule, interactorModule))
+        initDagger()
         iniCalligraphy()
+        initTimber()
         initializeCrashlytics()
-
-        if (BuildConfig.DEBUG) {
-            Timber.plant(DebugTree())
-        }
     }
 
     private fun initializeCrashlytics() {
@@ -50,6 +51,20 @@ class LeitnerBoxApplication : Application() {
         Crashlytics.setString("BUILD_TIME", BuildConfig.BUILD_TIME)
     }
 
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
+
+    private fun initDagger() {
+        DaggerAppComponent
+            .builder()
+            .application(this)
+            .build()
+            .inject(this)
+    }
+
     private fun iniCalligraphy() {
         ViewPump.init(
             ViewPump.builder()
@@ -63,6 +78,7 @@ class LeitnerBoxApplication : Application() {
                 )
                 .build()
         )
-
     }
+
+    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
 }

@@ -13,51 +13,49 @@ import com.mrebollob.leitnerbox.presentation.BaseActivity
 import com.mrebollob.leitnerbox.presentation.views.NumberPickerDialog
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.koin.android.ext.android.inject
-import java.util.*
 
 
 class SettingsActivity : BaseActivity(), SettingsView {
 
-    val presenter: SettingsPresenter by inject()
+//    val presenter: SettingsPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
         initUI()
-        presenter.attachView(this)
+//        presenter.attachView(this)
     }
 
     private fun initUI() {
         initToolbar()
-        currentDayView.setOnClickListener { presenter.onSetCurrentDayClick() }
-        notificationHourView.setOnClickListener { presenter.onSetNotificationHourClick() }
-        notificationEnableView.setOnCheckedChangeListener { isEnable ->
-            presenter.onNotificationEnableClick(isEnable)
-        }
+//        currentDayView.setOnClickListener { presenter.onSetCurrentDayClick() }
+//        notificationHourView.setOnClickListener { presenter.onSetNotificationHourClick() }
+//        notificationEnableView.setOnCheckedChangeListener { isEnable ->
+//            presenter.onNotificationEnableClick(isEnable)
+//        }
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setDisplayShowHomeEnabled(true)
+//        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun showDaySelector(day: LeitnerDay) {
         val numberPickerDialog = NumberPickerDialog()
         numberPickerDialog.dayValue = day.dayNumber
         numberPickerDialog.listener = { value ->
-            presenter.onSetCurrentDay(LeitnerDay(value, Date(0)))
+            //            presenter.onSetCurrentDay(LeitnerDay(value, Date(0)))
         }
-        numberPickerDialog.show(supportFragmentManager, "number_picker")
+//        numberPickerDialog.show(supportFragmentManager, "number_picker")
     }
 
     override fun showTimeSelector(hour: Hour) {
         val timePickerDialog =
             TimePickerDialog(this, { _, hourOfDay, minute ->
-                presenter.onSetStudyTime(Hour(hourOfDay, minute))
+                //                presenter.onSetStudyTime(Hour(hourOfDay, minute))
             }, hour.hour, hour.minute, true)
         timePickerDialog.show()
     }

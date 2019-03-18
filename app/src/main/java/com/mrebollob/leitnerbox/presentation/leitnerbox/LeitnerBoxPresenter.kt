@@ -40,7 +40,7 @@ class LeitnerBoxPresenter(
 
         } else {
             view?.showCurrentNumberDay(day)
-            getDayLevels(GetDayLevels.Params(day)) {
+            getDayLevels(GetDayLevels.Params(day.dayNumber)) {
                 it.either(
                     ::handleFailure,
                     ::handleDayLevels
@@ -49,9 +49,9 @@ class LeitnerBoxPresenter(
         }
     }
 
-    private fun handleDayLevels(levels: List<Level>) {
-        view?.showLevels(levels)
-        view?.showLevelsToReview(levels)
+    private fun handleDayLevels(levels: Level) {
+//        view?.showLevels(levels)
+//        view?.showLevelsToReview(levels)
     }
 
     fun onDayCompletedClick(day: LeitnerDay) {

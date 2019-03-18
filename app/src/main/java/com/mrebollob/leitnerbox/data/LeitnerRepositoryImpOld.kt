@@ -8,7 +8,7 @@ import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.domain.repository.Repository
 
-class RepositoryImp(context: Context, private val gson: Gson) : Repository {
+class LeitnerRepositoryImpOld(context: Context, private val gson: Gson) : Repository {
 
     companion object {
         private const val STUDY_TIME_KEY = "STUDY_TIME_KEY"
