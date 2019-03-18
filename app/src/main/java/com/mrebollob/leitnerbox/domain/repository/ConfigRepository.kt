@@ -8,11 +8,9 @@ import java.util.*
 
 interface ConfigRepository {
 
-    suspend fun getCurrentDay(): Either<Failure, LeitnerDay>
+    suspend fun completedDay(): Either<Failure, LeitnerDay>
 
-    suspend fun saveDayCompleted(day: LeitnerDay): Either<Failure, LeitnerDay>
-
-    suspend fun saveCurrentDay(day: LeitnerDay): Either<Failure, LeitnerDay>
+    suspend fun saveCompletedDay(day: LeitnerDay): Either<Failure, LeitnerDay>
 
     suspend fun getNextStudyTime(): Either<Failure, Date>
 

@@ -5,7 +5,7 @@ import java.util.*
 
 data class LeitnerDay(
     private val number: Int,
-    val created: Date = Date()
+    val created: Date
 ) {
     val dayNumber: Int = Math.max(0, number)
 

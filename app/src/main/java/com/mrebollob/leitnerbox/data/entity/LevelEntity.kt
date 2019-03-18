@@ -14,7 +14,7 @@ data class LevelEntity(
         val hoLevels = mutableListOf<Level>()
 
         levels.forEach {
-            hoLevels.add(Level("level_$it", "$it", it))
+            hoLevels.add(Level("level_$it", "$it", -1, it))
         }
 
         return Homework(day, hoLevels)

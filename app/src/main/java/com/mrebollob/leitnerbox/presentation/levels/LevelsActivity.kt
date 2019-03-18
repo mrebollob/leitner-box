@@ -10,14 +10,17 @@ import com.mrebollob.leitnerbox.domain.extension.observe
 import com.mrebollob.leitnerbox.domain.extension.toast
 import com.mrebollob.leitnerbox.domain.extension.viewModel
 import com.mrebollob.leitnerbox.domain.model.Homework
+import com.mrebollob.leitnerbox.domain.model.LeitnerDay
 import com.mrebollob.leitnerbox.presentation.levels.adapter.LevelsAdapter
 import com.mrebollob.leitnerbox.presentation.platform.BaseActivity
 import kotlinx.android.synthetic.main.activity_levels.*
+import java.util.*
 
 class LevelsActivity : BaseActivity() {
 
     private lateinit var levelsViewModel: LevelsViewModel
     private val levelsAdapter = LevelsAdapter()
+    private var currentDay = -1
 
     override fun layoutId() = R.layout.activity_levels
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +32,18 @@ class LevelsActivity : BaseActivity() {
         }
 
         levelsListView.adapter = levelsAdapter
-        levelsViewModel.setDay(2)
+
+        doneButton.setOnClickListener {
+
+            levelsViewModel.setCompletedDay(LeitnerDay(currentDay, Date()))
+        }
+        levelsViewModel.init()
     }
 
     private fun handleHomework(homework: Homework?) {
         homework ?: return
 
+        currentDay = homework.day
         levelsAdapter.levels = homework.levels
 
         val names = homework.levels.map { it.name }

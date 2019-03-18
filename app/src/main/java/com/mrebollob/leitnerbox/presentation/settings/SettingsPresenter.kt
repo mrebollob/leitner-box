@@ -1,9 +1,7 @@
 package com.mrebollob.leitnerbox.presentation.settings
 
 import com.mrebollob.leitnerbox.domain.exception.Failure
-import com.mrebollob.leitnerbox.domain.interactor.GetCurrentDay
 import com.mrebollob.leitnerbox.domain.interactor.GetNotificationEnable
-import com.mrebollob.leitnerbox.domain.interactor.SaveCurrentDay
 import com.mrebollob.leitnerbox.domain.interactor.SaveNotificationEnable
 import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
@@ -12,8 +10,8 @@ import com.mrebollob.leitnerbox.presentation.Presenter
 import com.mrebollob.leitnerbox.presentation.View
 
 class SettingsPresenter(
-    private val getCurrentDay: GetCurrentDay,
-    private val saveCurrentDay: SaveCurrentDay,
+//    private val getCurrentDay: GetCurrentDay,
+//    private val saveCurrentDay: SaveCurrentDay,
 //    private val getStudyTime: GetStudyTime,
 //    private val saveStudyTime: SaveStudyTime,
     private val getNotificationEnabled: GetNotificationEnable,
@@ -21,24 +19,24 @@ class SettingsPresenter(
 ) : Presenter<SettingsView> {
 
     private var view: SettingsView? = null
-    private var currentDay = LeitnerDay.empty()
+//    private var currentDay = LeitnerDay.empty()
     private var studyTime = Hour.empty()
 
     override fun attachView(view: SettingsView) {
         this.view = view
 
-        loadCurrentDay()
+//        loadCurrentDay()
 //        loadStudyTime()
         loadNotificationEnabled()
     }
 
-    private fun loadCurrentDay() =
-        getCurrentDay(UseCase.None()) {
-            it.either(
-                ::handleFailure,
-                ::handleCurrentDay
-            )
-        }
+//    private fun loadCurrentDay() =
+//        getCurrentDay(UseCase.None()) {
+//            it.either(
+//                ::handleFailure,
+//                ::handleCurrentDay
+//            )
+//        }
 
 //    private fun loadStudyTime() =
 //        getStudyTime(UseCase.None()) {
@@ -57,7 +55,7 @@ class SettingsPresenter(
         }
 
     private fun handleCurrentDay(day: LeitnerDay) {
-        this.currentDay = day
+//        this.currentDay = day
         view?.showCurrentDay(day)
     }
 
@@ -72,20 +70,20 @@ class SettingsPresenter(
     }
 
     fun onSetCurrentDayClick() {
-        view?.showDaySelector(currentDay)
+//        view?.showDaySelector(currentDay)
     }
 
     fun onSetNotificationHourClick() {
         view?.showTimeSelector(studyTime)
     }
 
-    fun onSetCurrentDay(day: LeitnerDay) =
-        saveCurrentDay(SaveCurrentDay.Params(day)) {
-            it.either(
-                ::handleFailure,
-                ::handleCurrentDay
-            )
-        }
+//    fun onSetCurrentDay(day: LeitnerDay) =
+//        saveCurrentDay(SaveCurrentDay.Params(day)) {
+//            it.either(
+//                ::handleFailure,
+//                ::handleCurrentDay
+//            )
+//        }
 
 //    fun onSetStudyTime(hour: Hour) =
 //        saveStudyTime(SaveStudyTime.Params(hour)) {

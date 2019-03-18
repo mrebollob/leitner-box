@@ -8,5 +8,6 @@ data class Homework(
 data class Level(
     val id: String,
     val name: String,
+    val cardsCount: Int,
     val value: Int
 )

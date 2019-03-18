@@ -15,40 +15,31 @@ class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepo
         private const val NEXT_STUDY_TIME_KEY = "NEXT_STUDY_TIME_KEY"
         private const val STUDY_HOUR_KEY = "STUDY_HOUR_KEY"
         private const val NOTIFICATION_ENABLE_KEY = "NOTIFICATION_ENABLE_KEY"
-        private const val LAST_DAY_COMPLETED_KEY = "LAST_DAY_COMPLETED_KEY"
+        private const val COMPLETED_DAY_KEY = "COMPLETED_DAY_KEY"
     }
 
     private val sharedPreferences = context.getSharedPreferences("leitnerbox", Context.MODE_PRIVATE)
 
-    override suspend fun getCurrentDay(): Either<Failure, LeitnerDay> {
-
+    override suspend fun completedDay(): Either<Failure, LeitnerDay> {
         return try {
-            val jsonDay = sharedPreferences.getString(LAST_DAY_COMPLETED_KEY, "")
+            val jsonDay = sharedPreferences.getString(COMPLETED_DAY_KEY, "")
 
             if (jsonDay.isNullOrEmpty()) {
                 Either.Right(LeitnerDay.empty())
             } else {
                 val completedDay = gson.fromJson(jsonDay, LeitnerDay::class.java)
-                Either.Right(completedDay.copy(number = completedDay.dayNumber + 1))
+                Either.Right(completedDay)
             }
 
         } catch (exception: Throwable) {
-            sharedPreferences.edit().remove(LAST_DAY_COMPLETED_KEY)
-            Either.Left(Failure.EmptyData)
+            sharedPreferences.edit().remove(COMPLETED_DAY_KEY)
+            Either.Right(LeitnerDay.empty())
         }
     }
 
-    override suspend fun saveDayCompleted(day: LeitnerDay): Either<Failure, LeitnerDay> {
+    override suspend fun saveCompletedDay(day: LeitnerDay): Either<Failure, LeitnerDay> {
         sharedPreferences.edit()
-            .putString(LAST_DAY_COMPLETED_KEY, gson.toJson(day))
-            .apply()
-
-        return Either.Right(day)
-    }
-
-    override suspend fun saveCurrentDay(day: LeitnerDay): Either<Failure, LeitnerDay> {
-        sharedPreferences.edit()
-            .putString(LAST_DAY_COMPLETED_KEY, gson.toJson(day.copy(number = day.dayNumber - 1)))
+            .putString(COMPLETED_DAY_KEY, gson.toJson(day))
             .apply()
 
         return Either.Right(day)
