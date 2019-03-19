@@ -8,6 +8,8 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.mrebollob.leitnerbox.R
 
 import timber.log.Timber
 
@@ -41,7 +43,7 @@ class CircleProgressView @JvmOverloads constructor(
             if (currentValue in 0..3600) {
                 mCurrentValue = currentValue
                 this.mCurrentRadian =
-                        ((currentValue / 60.0f).toDouble() * 2.0 * Math.PI / 60).toFloat()
+                    ((currentValue / 60.0f).toDouble() * 2.0 * Math.PI / 60).toFloat()
                 invalidate()
             }
         }
@@ -80,14 +82,15 @@ class CircleProgressView @JvmOverloads constructor(
         mHighlightLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-        mCirclePaint!!.color = DEFAULT_CIRCLE_COLOR
+        mCirclePaint!!.color = ContextCompat.getColor(context, R.color.countdown_circle_color)
         mCirclePaint!!.style = Paint.Style.STROKE
         mCirclePaint!!.strokeWidth = mCircleStrokeWidth
 
-        mLinePaint!!.color = DEFAULT_LINE_COLOR
+        mLinePaint!!.color = ContextCompat.getColor(context, R.color.countdown_line_color)
         mLinePaint!!.strokeWidth = mLineWidth
 
-        mHighlightLinePaint!!.color = DEFAULT_HIGHLIGHT_LINE_COLOR
+        mHighlightLinePaint!!.color =
+            ContextCompat.getColor(context, R.color.countdown_highlight_color)
         mHighlightLinePaint!!.strokeWidth = mLineWidth
     }
 
@@ -194,9 +197,5 @@ class CircleProgressView @JvmOverloads constructor(
         private const val DEFAULT_LINE_WIDTH = 0.5f
         private const val DEFAULT_CIRCLE_BUTTON_RADIUS = 15f
         private const val DEFAULT_CIRCLE_STROKE_WIDTH = 1f
-
-        private const val DEFAULT_CIRCLE_COLOR = -0x161d27
-        private const val DEFAULT_LINE_COLOR = -0x161d27
-        private const val DEFAULT_HIGHLIGHT_LINE_COLOR = -0x973a29
     }
 }

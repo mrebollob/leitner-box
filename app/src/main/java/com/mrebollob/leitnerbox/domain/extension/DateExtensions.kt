@@ -1,8 +1,10 @@
 package com.mrebollob.leitnerbox.domain.extension
 
 import com.mrebollob.leitnerbox.domain.model.Hour
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.HOUR
+import java.util.Calendar.MINUTE
 
 
 const val ONE_DAY_MILLIS: Long = 86400000
@@ -11,7 +13,7 @@ fun Date.getDaysBetween(endDate: Date): Int = with(this) {
     val todayCalendar = Calendar.getInstance()
     todayCalendar.time = this
     todayCalendar.set(HOUR, 0)
-    todayCalendar.set(HOUR, 0)
+    todayCalendar.set(MINUTE, 0)
 
 
     val different = endDate.time - this.time
@@ -32,4 +34,9 @@ fun Hour.getCalendarForToday(): Calendar {
     calendar.set(Calendar.MINUTE, this.minute)
     calendar.set(Calendar.SECOND, 0)
     return calendar
+}
+
+fun Date.getStringHour(): String {
+    val df = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return df.format(this)
 }

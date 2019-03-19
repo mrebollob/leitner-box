@@ -38,6 +38,9 @@ class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepo
     }
 
     override suspend fun saveCompletedDay(day: LeitnerDay): Either<Failure, LeitnerDay> {
+
+        updateNextStudyTime()
+
         sharedPreferences.edit()
             .putString(COMPLETED_DAY_KEY, gson.toJson(day))
             .apply()
@@ -53,14 +56,6 @@ class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepo
         } else {
             Either.Left(Failure.EmptyData)
         }
-    }
-
-    override suspend fun saveNextStudyTime(studyTime: Date): Either<Failure, Date> {
-        sharedPreferences.edit()
-            .putLong(NEXT_STUDY_TIME_KEY, studyTime.time)
-            .apply()
-
-        return Either.Right(studyTime)
     }
 
     override suspend fun getStudyHour(): Either<Failure, Hour> {
@@ -104,5 +99,33 @@ class ConfigRepositoryImp(context: Context, private val gson: Gson) : ConfigRepo
             sharedPreferences.edit().remove(NOTIFICATION_ENABLE_KEY)
             Either.Left(Failure.EmptyData)
         }
+    }
+
+
+    private suspend fun updateNextStudyTime() {
+
+        getStudyHour().either({
+
+            val studyTime = Calendar.getInstance()
+            studyTime.set(Calendar.HOUR_OF_DAY, 22)
+            studyTime.set(Calendar.MINUTE, 0)
+            studyTime.set(Calendar.SECOND, 0)
+            studyTime.add(Calendar.DAY_OF_MONTH, 1)
+
+            sharedPreferences.edit()
+                .putLong(NEXT_STUDY_TIME_KEY, studyTime.time.time)
+                .apply()
+        }, {
+
+            val studyTime = Calendar.getInstance()
+            studyTime.set(Calendar.HOUR_OF_DAY, it.hour)
+            studyTime.set(Calendar.MINUTE, it.minute)
+            studyTime.set(Calendar.SECOND, 0)
+            studyTime.add(Calendar.DAY_OF_MONTH, 1)
+
+            sharedPreferences.edit()
+                .putLong(NEXT_STUDY_TIME_KEY, studyTime.time.time)
+                .apply()
+        })
     }
 }

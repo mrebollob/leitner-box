@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.failure
+import com.mrebollob.leitnerbox.domain.extension.getStringHour
 import com.mrebollob.leitnerbox.domain.extension.gone
 import com.mrebollob.leitnerbox.domain.extension.observe
 import com.mrebollob.leitnerbox.domain.extension.snack
@@ -33,63 +34,80 @@ class CountdownFragment : BaseFragment() {
             observe(studyTime, ::handleStudyTime)
             failure(failure, ::handleError)
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
         countdownViewModel.init()
     }
 
     private fun handleStudyTime(studyTime: Date?) {
         studyTime ?: return
 
-//        studyTimeTextView.text =
-//            getString(R.string.countdown_view_study_time, studyTime.getString())
+        countdownView.visible()
+        firstDayView.gone()
+        setLeitnerButtonEnabled()
 
-        var remainingTime = studyTime.time - System.currentTimeMillis()
+        studyTimeTextView.text =
+            getString(
+                R.string.countdown_view_study_time,
+                studyTime.getStringHour()
+            )
 
+        val remainingTime = studyTime.time - System.currentTimeMillis()
         timer = object : CountDownTimer(remainingTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-
-                if (!isAdded) {
-                    return
-                }
-
-                val seconds = millisUntilFinished / 1000
-                val hours = seconds / 3600
-                val minutes = ((seconds - hours * 3600) / 60) + 1
-                updateCircleProgressView(seconds.toInt())
-
-                val res = resources
-//                hoursTextView?.apply {
-//                    text = res.getQuantityString(
-//                        R.plurals.hour_format,
-//                        hours.toInt(), hours
-//                    )
-//                }
-//
-//                minutesTextView?.apply {
-//                    visible()
-//                    text = res.getQuantityString(
-//                        R.plurals.minute_format,
-//                        minutes.toInt(), minutes
-//                    )
-//                }
+                updateCountDownView(millisUntilFinished)
             }
 
             override fun onFinish() {
-                updateCircleProgressView(0)
-
-//                hoursTextView?.apply {
-//                    text = getString(R.string.countdown_view_completed_time)
-//                }
-//
-//                minutesTextView?.apply {
-//                    gone()
-//                }
+                updateCountDownView(0)
             }
         }.start()
     }
 
     private fun updateCountDownView(millisUntilFinished: Long) {
 
+        if (millisUntilFinished > 0) {
+
+            val seconds = millisUntilFinished / 1000
+            val hours = seconds / 3600
+            val minutes = ((seconds - hours * 3600) / 60) + 1
+            updateCircleProgressView(seconds.toInt())
+
+
+            if (hours < STUDY_HOUR_THRESHOLD) {
+                setLeitnerButtonEnabled()
+            } else {
+                setLeitnerButtonDisabled()
+            }
+
+            val res = resources
+            hoursTextView?.apply {
+                text = res.getQuantityString(
+                    R.plurals.hour_format,
+                    hours.toInt(), hours
+                )
+            }
+
+            minutesTextView?.apply {
+                visible()
+                text = res.getQuantityString(
+                    R.plurals.minute_format,
+                    minutes.toInt(), minutes
+                )
+            }
+
+        } else {
+            updateCircleProgressView(0)
+            hoursTextView?.apply {
+                text = getString(R.string.countdown_view_completed_time)
+            }
+
+            minutesTextView?.apply {
+                gone()
+            }
+        }
     }
 
     private fun showFirstDay() {
@@ -135,9 +153,9 @@ class CountdownFragment : BaseFragment() {
 
     private fun updateCircleProgressView(secondsUntilFinished: Int) {
         val value = (86400 - secondsUntilFinished) / 24
-//        circleProgressView?.apply {
-//            currentValue = value
-//        }
+        circleProgressView?.apply {
+            currentValue = value
+        }
     }
 
     private fun handleError(failure: Failure?) {

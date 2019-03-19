@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginEnd="@dimen/spacing_normal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.mrebollob.leitnerbox.presentation.views.CircleProgressView
             android:id="@+id/circleProgressView"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
                 android:gravity="center"
-                android:textColor="@color/white_text"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/font_large"
                 tools:text="@string/main_view_levels_to_review" />
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
                 android:gravity="center"
-                android:textColor="@color/white_text"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/font_normal"
                 tools:text="@string/main_view_levels_to_review" />
 
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
                 android:gravity="center"
-                android:textColor="@color/white_text"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/font_small"
                 tools:text="@string/main_view_levels_to_review" />
         </LinearLayout>

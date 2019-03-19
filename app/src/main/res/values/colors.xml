@@ -25,5 +25,9 @@
     <color name="level_8">#795548</color>
     <color name="level_9">#607d8b</color>
 
+    <color name="countdown_circle_color">#212121</color>
+    <color name="countdown_line_color">#212121</color>
+    <color name="countdown_highlight_color">#2196F3</color>
+
     <color name="black_20a">#20000000</color>
 </resources>

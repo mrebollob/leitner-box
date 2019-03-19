@@ -28,13 +28,13 @@ class LevelsActivity : BaseActivity() {
 
         levelsViewModel = viewModel(viewModelFactory) {
             observe(homework, ::handleHomework)
+            observe(completedDay, ::handleCompletedDay)
             failure(failure, ::handleError)
         }
 
         levelsListView.adapter = levelsAdapter
 
         doneButton.setOnClickListener {
-
             levelsViewModel.setCompletedDay(LeitnerDay(currentDay, Date()))
         }
         levelsViewModel.init()
@@ -50,6 +50,10 @@ class LevelsActivity : BaseActivity() {
             .reduce { acc, string -> "$acc, $string" }
         levelsTextView.text = getString(R.string.main_view_levels_to_review, names)
         dayTextView.text = getString(R.string.main_view_day_number, homework.day)
+    }
+
+    private fun handleCompletedDay(day: LeitnerDay?) {
+        finish()
     }
 
     private fun handleError(failure: Failure?) {

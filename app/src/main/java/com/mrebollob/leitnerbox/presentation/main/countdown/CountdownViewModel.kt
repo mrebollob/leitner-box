@@ -14,7 +14,6 @@ class CountdownViewModel @Inject constructor(
     var studyTime: MutableLiveData<Date> = MutableLiveData()
 
     fun init() {
-
         getNextStudyTime(UseCase.None()) {
             it.either(::handleFailure, ::handleStudyTime)
         }

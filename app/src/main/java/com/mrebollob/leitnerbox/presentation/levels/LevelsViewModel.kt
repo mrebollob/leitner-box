@@ -17,6 +17,7 @@ class LevelsViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var homework: MutableLiveData<Homework> = MutableLiveData()
+    var completedDay: MutableLiveData<LeitnerDay> = MutableLiveData()
 
     fun init() {
         getCompletedDay(UseCase.None()) {
@@ -30,8 +31,8 @@ class LevelsViewModel @Inject constructor(
         }
     }
 
-    private fun handleCompletedDay(leitnerDay: LeitnerDay) {
-
+    private fun handleCompletedDay(day: LeitnerDay) {
+        this.completedDay.value = day
     }
 
     private fun handleLeitnerDay(leitnerDay: LeitnerDay) {
