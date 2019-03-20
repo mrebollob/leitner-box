@@ -14,6 +14,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), HasSupportFragmentInjector {
@@ -29,6 +30,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
 
         navigate(CountdownFragment.newInstance())
         initNavigation()
+        initToolbar()
     }
 
     private fun initNavigation() {
@@ -49,6 +51,10 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
             }
             false
         }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
     }
 
     companion object Navigator {

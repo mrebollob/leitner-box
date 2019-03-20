@@ -37,10 +37,10 @@ class SettingsActivity : BaseActivity(), SettingsView {
     }
 
     private fun initToolbar() {
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setDisplayShowHomeEnabled(true)
-//        toolbar.setNavigationOnClickListener { onBackPressed() }
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun showDaySelector(day: LeitnerDay) {

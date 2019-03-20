@@ -36,10 +36,10 @@ class AboutActivity : BaseActivity(), AboutView {
     }
 
     private fun initToolbar() {
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setDisplayShowHomeEnabled(true)
-//        toolbar.setNavigationOnClickListener { onBackPressed() }
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun openWebViewScreen(url: String) {

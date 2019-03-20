@@ -2,13 +2,13 @@ package com.mrebollob.leitnerbox.presentation.platform
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.AndroidInjection
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import javax.inject.Inject
 
-abstract class BaseActivity : FragmentActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
