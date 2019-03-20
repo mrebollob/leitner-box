@@ -5,7 +5,6 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
@@ -16,30 +15,31 @@ import com.mrebollob.leitnerbox.R
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
+import com.mrebollob.leitnerbox.domain.interactor.GetStudyHour
+import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.presentation.main.MainActivity
+import dagger.android.DaggerBroadcastReceiver
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
-class StudyTimeNotificationReceiver : BroadcastReceiver() {
+class StudyTimeNotificationReceiver : DaggerBroadcastReceiver() {
 
-    //    val repository = (StandAloneContext.koinContext as KoinContext).get<ConfigRepository>()
-//    private val getStudyTime = GetStudyTime(repository)
-    @Volatile
-    private lateinit var context: Context
+    @Inject
+    lateinit var getStudyTime: GetStudyHour
 
     override fun onReceive(context: Context, intent: Intent) {
-        this.context = context
+        super.onReceive(context, intent)
 
-//        getStudyTime(UseCase.None()) {
-//            it.either(
-//                ::handleFailure,
-//                ::handleStudyTime
-//            )
-//        }
+        getStudyTime(UseCase.None()) {
+            it.either(
+                ::handleFailure
+            ) { handleStudyTime(context, it) }
+        }
     }
 
-    private fun handleStudyTime(studyHour: Hour) {
+    private fun handleStudyTime(context: Context, studyHour: Hour) {
         val studyTime = studyHour.getCalendarForToday()
 
         createNotificationChannel(context)

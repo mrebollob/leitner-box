@@ -2,7 +2,6 @@ package com.mrebollob.leitnerbox.notification
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
@@ -11,44 +10,47 @@ import android.preference.PreferenceManager
 import com.mrebollob.leitnerbox.domain.exception.Failure
 import com.mrebollob.leitnerbox.domain.extension.ONE_DAY_MILLIS
 import com.mrebollob.leitnerbox.domain.extension.getCalendarForToday
+import com.mrebollob.leitnerbox.domain.interactor.GetNotificationEnable
+import com.mrebollob.leitnerbox.domain.interactor.GetStudyHour
+import com.mrebollob.leitnerbox.domain.interactor.UseCase
 import com.mrebollob.leitnerbox.domain.model.Hour
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.CURRENT_NOTIFICATION_KEY
 import com.mrebollob.leitnerbox.notification.StudyTimeNotificationReceiver.Companion.FIRST_NOTIFICATION_ALARM_REQUEST_CODE
+import dagger.android.DaggerBroadcastReceiver
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
-class StudyTimeNotificationHelper : BroadcastReceiver() {
+class StudyTimeNotificationHelper : DaggerBroadcastReceiver() {
 
-//    private val repository = (StandAloneContext.koinContext as KoinContext).get<ConfigRepository>()
-//    private val getStudyTime = GetStudyTime(repository)
-//    private val getNotificationEnabled = GetNotificationEnable(repository)
-    @Volatile
-    private lateinit var context: Context
+    @Inject
+    lateinit var getNotificationEnabled: GetNotificationEnable
+    @Inject
+    lateinit var getStudyHour: GetStudyHour
+
 
     override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
         Timber.d("Device booted, broadcast received, setting bedtime notification")
-        this.context = context
 
-//        getNotificationEnabled(UseCase.None()) {
-//            it.either(
-//                ::handleFailure,
-//                ::handleNotificationEnabled
-//            )
-//        }
-    }
-
-    private fun handleNotificationEnabled(isEnable: Boolean) {
-        if (isEnable) {
-//            getStudyTime(UseCase.None()) {
-//                it.either(
-//                    ::handleFailure,
-//                    ::handleStudyTime
-//                )
-//            }
+        getNotificationEnabled(UseCase.None()) {
+            it.either(
+                ::handleFailure
+            ) { handleNotificationEnabled(context, it) }
         }
     }
 
-    private fun handleStudyTime(studyHour: Hour) {
+    private fun handleNotificationEnabled(context: Context, isEnable: Boolean) {
+        if (isEnable) {
+            getStudyHour(UseCase.None()) {
+                it.either(
+                    ::handleFailure
+                ) { handleStudyHour(context, it) }
+            }
+        }
+    }
+
+    private fun handleStudyHour(context: Context, studyHour: Hour) {
         val studyTime = studyHour.getCalendarForToday()
 
         if (studyTime.timeInMillis < System.currentTimeMillis()) {
