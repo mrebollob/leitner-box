@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mrebollob.leitnerbox.di.ViewModelFactory
 import com.mrebollob.leitnerbox.di.annotation.ViewModelKey
 import com.mrebollob.leitnerbox.presentation.levels.LevelsViewModel
-import com.mrebollob.leitnerbox.presentation.main.countdown.CountdownViewModel
+import com.mrebollob.leitnerbox.presentation.main.home.CountdownViewModel
 import com.mrebollob.leitnerbox.presentation.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module

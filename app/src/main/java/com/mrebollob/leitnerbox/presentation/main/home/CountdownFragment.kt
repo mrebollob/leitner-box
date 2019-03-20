@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.main.countdown
+package com.mrebollob.leitnerbox.presentation.main.home
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -29,6 +29,9 @@ class CountdownFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        countdownView.gone()
+        firstDayView.gone()
 
         countdownViewModel = viewModel(viewModelFactory) {
             observe(studyTime, ::handleStudyTime)

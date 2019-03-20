@@ -1,4 +1,4 @@
-package com.mrebollob.leitnerbox.presentation.main.countdown
+package com.mrebollob.leitnerbox.presentation.main.home
 
 import androidx.lifecycle.MutableLiveData
 import com.mrebollob.leitnerbox.domain.interactor.GetNextStudyTime
