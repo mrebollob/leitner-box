@@ -30,6 +30,7 @@ class CountdownFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.title = ""
         countdownView.gone()
         firstDayView.gone()
 

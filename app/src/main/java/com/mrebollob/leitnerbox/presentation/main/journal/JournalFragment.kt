@@ -12,6 +12,7 @@ class JournalFragment : BaseFragment() {
     override fun layoutId(): Int = R.layout.fragment_journal
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setTitle(R.string.title_journal)
     }
 
     private fun handleError(failure: Failure?) {

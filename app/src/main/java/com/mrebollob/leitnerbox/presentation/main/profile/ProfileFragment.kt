@@ -44,6 +44,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setTitle(R.string.title_profile)
     }
 
     private fun handleError(failure: Failure?) {
